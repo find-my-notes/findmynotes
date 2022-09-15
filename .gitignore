@@ -1,0 +1,11 @@
+files
+backend/migrations
+backend/__pycache__
+FindMyNotes/__pycache__
+FindMyNotes/env.py
+test
+dependencies
+.vscode
+fmnenv
+*/__pycache__
+*/test.*

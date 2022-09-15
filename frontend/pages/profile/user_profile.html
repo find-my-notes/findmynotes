@@ -1,0 +1,176 @@
+{% extends "base_template.html" %}
+
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+
+
+{% block style-links %}
+<link rel="stylesheet" href="{% static 'CSS/profile/temp.css' %}">
+<link rel="stylesheet" href="{% static 'CSS/profile/pdf.css' %}">
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,0,200" />
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+{% endblock style-links %}
+
+
+
+
+{% block content %}
+<div class="profile-body">
+    <div class="profile-container grid">
+        <div class="user-personal-container flex flex-column">
+            <div class="user-profile-photo"
+                style="background-image: url('{% static 'media/images/profile/user.jpg' %}')"
+                >
+            </div>
+            <div class="username flex">{{name}}</div>
+        </div>
+        <div class="user-mode-switch grid">
+            <button class="user-actions user-actions-active" id="myscans_button">
+                My scans
+            </button>
+            <button class="user-actions" id="bookmarks_button">
+                Bookmarks
+            </button>
+            <button class="user-actions" id="more_button">
+                More details
+            </button>
+        </div>
+        <div class="user-stats grid">
+            <div class="user-stats-data">
+                <h2>0</h2>
+                <h4>Followers</h4>
+            </div>
+            <div class="user-stats-data">
+                <h2>{{total_likes}}</h2>
+                <h4>Likes</h4>
+            </div>
+        </div>
+        <div class="user-total-uploads">
+            <div class="head">Total uploads</div>
+            <div class="data">{{total_uploads}}</div>
+        </div>
+        <div class="user-bookmarks">
+            <div class="head">Total bookmarks</div>
+            <div class="data">{{total_bookmarked}}</div>
+        </div>
+        <div class="similar-profiles">
+            <div class="head">Similar Profiles</div>
+            <div class="profiles-container">
+                <button class="profile flex">
+                    <div class="thumb-container flex">
+                        <div class="thumb"></div>
+                    </div>
+                    <div class="uname flex">Tanmay Arsania</div>
+                </button>
+                <button class="profile flex">
+                    <div class="thumb-container flex">
+                        <div class="thumb"></div>
+                    </div>
+                    <div class="uname flex">Tanmay Arsania</div>
+                </button>
+                <button class="profile flex">
+                    <div class="thumb-container flex">
+                        <div class="thumb"></div>
+                    </div>
+                    <div class="uname flex">Tanmay Arsania</div>
+                </button>
+                <button class="profile flex">
+                    <div class="thumb-container flex">
+                        <div class="thumb"></div>
+                    </div>
+                    <div class="uname flex">Tanmay Arsania</div>
+                </button>
+                <button class="profile flex">
+                    <div class="thumb-container flex">
+                        <div class="thumb"></div>
+                    </div>
+                    <div class="uname flex">Tanmay Arsania</div>
+                </button>
+            </div>
+        </div>
+        <div class="user-bio">
+            <div class="head">Bio</div>
+            <div class="user-bio-text">{{user_bio}}</div>
+        </div>
+        <div class="user-uploads user-uploads-active grid">
+            <div class="head">My PDFs</div>
+            <div class="pdf-container">
+                {% include 'pages/profile/pdf.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'javascript/temp.js' %}"></script>
+
+<script>
+    let x = document.querySelectorAll("#menucon")
+    let y = document.querySelectorAll("#options")
+    let z = document.querySelectorAll("#cross")
+    let fav = document.querySelectorAll("#favorite")
+    let com = document.querySelectorAll("#comment")
+    let desc = document.querySelectorAll("#desc")
+    let description = document.querySelectorAll("#description")
+    let descon = document.querySelectorAll("#descon")
+    let tp = document.querySelectorAll("#tp")
+    let bookmark = document.querySelectorAll("#bookmark")
+
+
+    let favcount = 0, comcount = 0, descount = 0;
+
+    for (let i = 0; i < x.length; i++) {
+        x[i].onclick = function () {
+            y[i].classList.remove('hide')
+            x[i].classList.add('hide')
+        }
+    }
+
+    for (let i = 0; i < x.length; i++) {
+        z[i].onclick = function () {
+            y[i].classList.add('hide')
+            x[i].classList.remove('hide')
+        }
+    }
+
+
+    for (let i = 0; i < bookmark.length; i++) {
+        bookmark[i].onclick = function () {
+            bookmark[i].classList.toggle("active-bookmark");
+        }
+    }
+
+    for (let i = 0; i < fav.length; i++) {
+        fav[i].onclick = function () {
+            fav[i].classList.toggle("material-symbols-rounded");
+            fav[i].classList.toggle("fav");
+        }
+    }
+
+    for (let i = 0; i < com.length; i++) {
+        com[i].onclick = function () {
+            com[i].classList.toggle("material-symbols-rounded");
+        }
+    }
+
+    for (let i = 0; i < descon.length; i++) {
+        descon[i].onclick = function () {
+            if (descon[i].innerHTML === "more_horiz") {
+                descon[i].innerHTML = "close";
+            } else {
+                descon[i].innerHTML = "more_horiz";
+            }
+            tp[i].classList.toggle('tp')
+            desc[i].classList.toggle('dfull')
+            description[i].classList.toggle('full')
+            description[i].classList.toggle('description')
+
+        }
+    }
+</script>
+{% endblock scripts %}

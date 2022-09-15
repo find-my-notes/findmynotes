@@ -1,0 +1,239 @@
+/* Google Font CDN Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+.pdf-body {
+    font-family: "Poppins", sans-serif;
+}
+
+.pdf-card {
+    /* width: 220px; */
+    grid-column: span 1;
+    /* box-shadow:0px 1px 10px 0px rgba(0, 0, 0, 0.02),0px 0px 0px 1px rgba(27, 31, 35, 0.15); */
+    /* box-shadow:0px 0px 1vh rgba(0, 60, 113, 0.649); */
+    border: 1.5px solid var(--t9);
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    position: relative;
+    background-color: #fff;
+}
+
+.pdf-card:hover {
+    border: 2px solid var(--bc2);
+}
+
+.pdf-card .card-name {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pdf-card .card-name .name-card {
+    overflow-y: hidden;
+    display: inline;
+    width: 100%;
+    height: 28px;
+    overflow-y: scroll;
+}
+
+.pdf-card .card-name .text {
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 0;
+    width: max-content;
+    text-decoration: none;
+    color: black;
+}
+
+/* ::-webkit-scrollbar{
+    width: 5px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-thumb{
+    background-color: rgba(0, 0, 0, 0.17);
+    border-radius: 50px; 
+  }
+  ::-webkit-scrollbar-thumb:hover{
+    background-color: rgba(0, 255, 255, 0.304);
+  }   */
+.pdf-card .card-name .menucon {
+    width: 15px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.pdf-card .card-name .options {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 80px;
+    right: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pdf-card .card-name .options i {
+    font-size: 15px;
+    position: absolute;
+    right: 2px;
+    margin-top: 4px;
+}
+
+.pdf-card .card-name .options p {
+    font-size: 11px;
+    margin-left: 5px;
+    font-weight: 600;
+    margin: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.pdf-card .card-name .options p:hover {
+    background-color: rgba(209, 209, 209, 0.312);
+    border-radius: 10px;
+}
+
+.pdf-card .image {
+    height: 200px;
+    /* background-color: rgb(0, 174, 254); */
+    border-radius: 10px;
+    box-shadow: 0 0 1vh 0.3vh rgba(0, 33, 62, 0.81) inset;
+
+}
+
+.pdf-card .image img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.pdf-card .details .like {
+    font-size: 10px;
+    font-weight: 600;
+    margin-top: 4px;
+    margin-bottom: 2px;
+}
+
+.pdf-card .details .upldby {
+    font-size: 10px;
+    font-weight: 600;
+    margin-top: 0px;
+    margin-bottom: 2px;
+
+}
+
+.pdf-card .details .upldby-name {
+    font-size: 11px;
+    font-weight: 800;
+    margin-top: 8px;
+    margin-bottom: 2px;
+
+
+}
+
+.pdf-card .details .tp {
+    margin-bottom: 19px;
+}
+
+.pdf-card .details .desc {
+    display: flex;
+}
+
+.pdf-card .details .dfull {
+    display: flex;
+    position: absolute;
+    background-color: white;
+    height: 60px;
+    width: 230px;
+    bottom: 35px;
+}
+
+.pdf-card .details .description {
+    font-size: 10px;
+    font-weight: 500;
+    margin-top: 0px;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+
+
+}
+
+.pdf-card .details .full {
+    font-size: 10px;
+    font-weight: 500;
+    margin-top: 0px;
+    margin-bottom: 2px;
+    white-space: normal;
+    overflow-x: scroll;
+
+}
+
+.pdf-card .details .full::-webkit-scrollbar {
+    width: 3px;
+    height: 0px;
+}
+
+.pdf-card .details .descon {
+    width: 18px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+
+.pdf-card .icons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.pdf-card .button .pdf {
+    font-size: 10px;
+    font-weight: 600;
+    margin-bottom: 0px;
+
+}
+
+.pdf-card .icons i img {
+    width: 20px;
+
+}
+
+.pdf-card .icons .fav {
+    color: red;
+}
+
+.pdf-card .bookmark {
+    position: absolute;
+    top: 0;
+    right: 40px;
+    color: rgb(213, 243, 249);
+    width: 0;
+    height: 0;
+    border-top: 20px solid;
+    border-right: 8px solid;
+    border-bottom: 8px solid rgba(0, 0, 0, 0);
+    border-left: 8px solid;
+    z-index: 50;
+    cursor: pointer;
+    transition: 0.2s ease-in;
+}
+
+.pdf-card .active-bookmark {
+    color: rgba(0, 119, 255);
+    border-top: 30px solid;
+
+}
+
+.truncate {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
