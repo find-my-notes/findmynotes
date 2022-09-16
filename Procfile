@@ -1,1 +1,3 @@
-web: gunicorn FindMyNotes.wsgi --log-file -
+web: gunicorn findmynotes.wsgi:application --log-file - --log-level debug
+python manage.py collectstatic --noinput
+manage.py migrate
