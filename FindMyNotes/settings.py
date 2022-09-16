@@ -73,8 +73,8 @@ DATABASES = {
         'NAME': 'sql6520272',
         'USER':'2NiBuzcQ5Y',
         'PASSWORD':'609275b668bb9af61692def2564c806649071a37a8ad57d1bb253289befa6810',
-        'HOST':'sql6.freemysqlhosting.net',
-        'PORT':'3306',
+        # 'HOST':'sql6.freemysqlhosting.net',
+        # 'PORT':'3306',
     }
 }
 
