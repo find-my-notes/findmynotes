@@ -68,7 +68,7 @@ WSGI_APPLICATION = 'FindMyNotes.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'd5h3ukrnbapp6q',
         'USER':'grwvbkqlzgdqfp',
         'PASSWORD':'609275b668bb9af61692def2564c806649071a37a8ad57d1bb253289befa6810',
