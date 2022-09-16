@@ -1,6 +1,3 @@
-import io
-from pprint import pprint
-from re import search
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from  django.contrib import messages
@@ -12,17 +9,7 @@ import random
 from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 from django.core.mail import send_mail
-import cv2
-import pytesseract
-import os
-from cv2 import COLOR_BGR2RGB
-from pdf2image import convert_from_bytes
-from pdf2image.exceptions import (
-    PDFInfoNotInstalledError,
-    PDFPageCountError,
-    PDFSyntaxError
-)
-pytesseract.pytesseract.tesseract_cmd = 'D:\\Rishabh\\Projects\\FMN\\find-my-notes\\FindMyNotes\\dependencies\\Tesseract-OCR\\tesseract.exe'
+
 
 def Context(request):
     user_id = request.session.get("user_unique_id")
@@ -437,7 +424,6 @@ def upload_page(request):
             print(type(file))
             print(type(file.read()))
             print(type(str(file.read())))
-            pdfToImage(file)
             file_type = request.POST['file_type']
             file_description = request.POST['description']
             print(file_description)
@@ -461,10 +447,6 @@ def upload_page(request):
             print("error uploading file:",err)
 
     return render(request,"pages/upload/old_upload.html",context)
-
-
-def pdfToImage(pdf):
-        pass
 
 def logout(request):
     request.session.flush()
