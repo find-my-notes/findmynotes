@@ -9,9 +9,9 @@
 
 import os
 from django.core.wsgi import get_wsgi_application
+from whitenoise import DjangoWhiteNoise
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "FindMyNotes.settings")
 
-from whitenoise.django import DjangoWhiteNoise
 
 application = DjangoWhiteNoise(get_wsgi_application())
