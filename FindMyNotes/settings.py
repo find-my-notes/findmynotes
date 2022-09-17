@@ -4,6 +4,8 @@ import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -13,7 +15,8 @@ SECRET_KEY = 'django-insecure-@filae!@p#_l3b7m$7gu)*w8pdr)+req@xinx$$bt_je^&k8@g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['find-my-note.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['find-my-note.herokuapp.com']
+
 
 # Application definition
 
@@ -25,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'backend',
+    # 'livereload',
 ]
 
 MIDDLEWARE = [
@@ -36,6 +40,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'FindMyNotes.urls'
@@ -65,7 +70,7 @@ WSGI_APPLICATION = 'FindMyNotes.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3'
     }
 }
 
