@@ -37,7 +37,7 @@
 
                     <span>
                         <div>
-                            <a class="file-title" href="/files/{{file.file_url}}" target="_blank">{{file.file_title}}</a>
+                            <a class="file-title" href="/media/{{file.file_url}}" target="_blank">{{file.file_title}}</a>
                         </div>
                         <div>
                             
@@ -81,7 +81,7 @@
 
                         <!-- Download Button -->
                         <button title="Download">
-                            <a href="/files/{{file.file_url}}" download="{{file.file_url}}"><i class="fa fa-floppy-o fa-2x"></i></a>
+                            <a href="/media/{{file.file_url}}" download="{{file.file_url}}"><i class="fa fa-floppy-o fa-2x"></i></a>
                         </button>
                     </div>
 
@@ -99,14 +99,14 @@
 {% if file.file_type == "image" %}
     <div class="img-card" onmouseover="showDescription(this)" onmouseout="hideDescription(this)">
         <div class="img-content bg-">
-            <img src="/files/{{file.file_url}}" />
+            <img src="/media/{{file.file_url}}" />
         </div>
         <div class="img-card-container">
             <span>
 
                 <div class="img-card-1-row">
                     <div class="title-div">
-                        <a class="file-title" href="/files/{{file.file_url}}" target="_blank">
+                        <a class="file-title" href="/media/{{file.file_url}}" target="_blank">
                             {{file.file_title}}
                         </a>
                     </div>
@@ -138,7 +138,7 @@
 
 
                         <button title="Download">
-                            <a href="/files/{{file.file_url}}" download="{{file.file_url}}"><i class="fa fa-floppy-o fa-2x"></i></a>
+                            <a href="/media/{{file.file_url}}" download="{{file.file_url}}"><i class="fa fa-floppy-o fa-2x"></i></a>
                         </button>
 
                     </div>
