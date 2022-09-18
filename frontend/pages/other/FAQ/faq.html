@@ -1,45 +1,122 @@
 {% extends "base_template.html" %}
+
 {% load static %}
 
+{% block title %}Profile{% endblock %}
+
 {% block style-links %}
-
-<link rel="stylesheet" href=" {% static 'CSS/faq.css' %} ">
-
+<link rel="stylesheet" href="{% static 'CSS/other/faq/faq.css' %}">
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {% endblock style-links %}
 
-{% block  content %}
-             
-<section>
-    <h2 class="title">FAQs</h2>
-    <div class="faq">
-        <div class="question">
-            <h3>what is javascript ?</h3>
-            <svg width="15" height="10" viewbox="0 0 42 25">
-                <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecap="round">
-            </svg>
+{% block content %}
+<div class="faqMainContainer">
+    <section>
+        <h2 class="title">
+            <b>FAQs</b>
+        </h2>
+        <!--1-->
+        <div class="faq">
+            <div class="question">
+                <h3>To upload the notes, which document formats are accepted?</h3>
+                <!-- <svg width="35" height="20" viewbox="0 0 42 25">
+                    <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecap="round">
+                </svg> -->
+                <span class="material-symbols-outlined">
+                    expand_more
+                </span>
+            </div>
+            <div class="answer">
+                <p>You can upload notes in the pdf format.</p>
+            </div>
         </div>
-        <div class="answer">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id nulla architecto obcaecati labore laborum quis molestiae dolorem, minus commodi. Ipsum porro non velit voluptatibus esse!</p>
+        <!--2-->
+        <div class="faq">
+            <div class="question">
+                <h3> Can there be offline access notes?</h3>
+                <span class="material-symbols-outlined">
+                    expand_more
+                </span>
+            </div>
+            <div class="answer">
+                <p>Yes, the notes will be accessible for the offline mode.
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="faq">
-        <div class="question">
-            <h3>what is javascript ?</h3>
-            <svg width="15" height="10" viewbox="0 0 42 25">
-                <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecap="round">
-            </svg>
+        <!--3-->
+        <div class="faq">
+            <div class="question">
+                <h3>Are there any qualifications required for becoming a user?</h3>
+                <span class="material-symbols-outlined">
+                    expand_more
+                </span>
+            </div>
+            <div class="answer">
+                <p>No,there are no qualifications required for becoming a user.
+                </p>
+            </div>
         </div>
-        <div class="answer">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id nulla architecto obcaecati labore laborum quis molestiae dolorem, minus commodi. Ipsum porro non velit voluptatibus esse!</p>
+        <!--4-->
+        <div class="faq">
+            <div class="question">
+                <h3> Can we have notes of other degree courses rather than engineering?</h3>
+                <span class="material-symbols-outlined">
+                    expand_more
+                </span>
+            </div>
+            <div class="answer">
+                <p>No,you cannot upload the notes of other degree courses rather than engineering.
+                </p>
+            </div>
         </div>
-    </div>
+        <!--5-->
+        <div class="faq">
+            <div class="question">
+                <h3> Can I upload my handwritten notes?</h3>
+                <span class="material-symbols-outlined">
+                    expand_more
+                </span>
+            </div>
+            <div class="answer">
+                <p>Yes,you can upload the handwritten notes as long as they are well written, precise, neat and to the
+                    point.
+                </p>
+            </div>
+        </div>
+        <!--6-->
+        <div class="faq">
+            <div class="question">
+                <h3>Does the website contain notes just for core branches or for all the branches ?</h3>
+                <span class="material-symbols-outlined">
+                    expand_more
+                </span>
+            </div>
+            <div class="answer">
+                <p>Yes,it contains notes for all the branches of engineering
+                </p>
+            </div>
+        </div>
+        <!--7-->
+        <div class="faq">
+            <div class="question">
+                <h3>How much time does it take to upload the notes?</h3>
+                <span class="material-symbols-outlined">
+                    expand_more
+                </span>
+            </div>
+            <div class="answer">
+                <p>The uploading process is very fast and by the time you have finished your queries through the FAQs
+                    the notes will be uploaded.</p>
+            </div>
+        </div>
 
-</section>
-
+    </section>
+</div>
 {% endblock content %}
-
-
 
 {% block scripts %}
 <script src="{% static 'javascript/faq.js' %}"></Script>
-{% endblock scripts %}   
+{% endblock scripts %}
