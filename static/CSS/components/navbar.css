@@ -30,7 +30,8 @@ nav .links {
 
 nav .logo img {
     position: absolute;
-    width: 90%;
+    height: 200%;
+    object-fit: contain;
     top: 0;
     bottom: 0;
     right: 0;
@@ -226,9 +227,8 @@ nav .nav-links-options>a {
     }
 
     nav .logo img {
-        width: 100%;
         max-width: 300px;
-        margin-left: 10px;
+        margin-left: 20px;
     }
 
     .display-on-small-screen {
