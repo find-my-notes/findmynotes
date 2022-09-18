@@ -5,4 +5,5 @@
 .main-body-container {
     padding: 8vh 0 0 0;
     /* border: 2px solid; */
+    min-height: 90vh;
 }
