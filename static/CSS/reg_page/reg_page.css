@@ -1,5 +1,4 @@
 .main-body-container{
-  min-height: 105vh;
   width: 100%;
   height: 90vh;
   background-image: url(../../media/images/loginAndsignup/LS.jpg);
@@ -19,12 +18,12 @@
 .container .content{
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 20px 0px;
 }
 
 /* right-side */
-.container .content .right-side{
+/* .container .content .right-side{
   width: 30%;
   height: 100%;
   display: flex;
@@ -59,12 +58,12 @@
   font-weight: 500;
   width: 230px;
 }
-
+ */
 
 
 
 /* center */
-.center-line{
+/* .center-line{
   height: 100%;
   display: flex;
   align-items: center;
@@ -91,11 +90,11 @@
   margin: auto;
   z-index: -1;
   
-}
+} */
 
 /* left */
 .container .content .left-side{
-  width: 50%;
+  width: 90%;
   margin: 0px 30px;
 }
 .content .left-side .topic-text{
@@ -222,12 +221,12 @@
  .container .content .left-side{
    width: 95%;
  }
- .container .content .center-line{
+ /* .container .content .center-line{
   margin-top: 30px;
  }
  .container .content .line{
   transform: rotate(90deg);
- }
+ } */
 }
 @media (max-width:1200px){
   .container{

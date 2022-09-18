@@ -6,7 +6,7 @@ footer {
     background:white;
 	box-shadow: 0 -5px 10px rgba(164, 164, 164, 0.129);
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
     align-items:bottom;
     bottom: 0;
     flex-wrap: wrap;
