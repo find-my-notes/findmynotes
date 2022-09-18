@@ -254,6 +254,9 @@
 	min-height: 70vh;
 	background-color: var(--bg-1);
 }
+.everything-you-need{
+	padding: 0 0 30px 0;
+}
 .everything-you-need h2 {
 	padding: 30px 0;
 	text-align: center;
@@ -304,5 +307,8 @@
 	}
 	.center-div-everything-yk{
 		height:100%
+	}
+	.everything-yk-icon{
+		border: solid var(--color-3) 1px;
 	}
 }
