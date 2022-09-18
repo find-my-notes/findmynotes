@@ -6,55 +6,63 @@
 <link rel="stylesheet" href="{% static 'CSS/other/contact/contact.css' %}">
 
 {% endblock style-links %}
-   
 
 
-{% block  content %}
-             
+
+{% block content %}
+
 
 <div class="container">
-    <div class="content">
-      <div class="left-side">
-        <div class="address details">
-          <i class="fas fa-map-marker-alt"></i>
-          <div class="topic">Address</div>
-          <div class="text-one">VCET,</div>
-          <div class="text-two">near vasai station.</div>
-        </div>
-        <div class="phone details">
-          <i class="fas fa-phone-alt"></i>
-          <div class="topic">Phone</div>
-          <div class="text-one">+91 9999999999</div>
-        </div>
-        <div class="email details">
-          <i class="fas fa-envelope"></i>
-          <div class="topic">Email</div>
-          <div class="text-one">abcd@gmail.com</div>
-        </div>
+  <div class="content">
+    <div class="left-side">
+      <div class="address details">
+        <i class="fas fa-map-marker-alt"></i>
+        <div class="topic">Address</div>
+        <div class="text-one">VCET,</div>
+        <div class="text-two">K.T. Marg, Vartak College Campus Vasai Road, Vasai-Virar, Maharashtra 401202</div>
       </div>
-      <div class="right-side">
-        <div class="topic-text">Contact US</div>
-        <p>We're here to help and answer any questions you might have.</p>
-        <p>We look forward to hearing from you :)</p>
-      <form action="#">
+      <div class="phone details">
+        <i class="fas fa-phone-alt"></i>
+        <div class="topic">Phone</div>
+        <a href="tel:+91 9987990097">
+          <div class="text-one">+91 99879 90097</div>
+        </a>
+        <a href="tel:+91 9764935361">
+          <div class="text-one">+91 97649 35361</div>
+        </a>
+      </div>
+      <div class="email details">
+        <i class="fas fa-envelope"></i>
+        <div class="topic">Email</div>
+        <a href="mailto:findmynotes2022@gmail.com" target="_blank">
+          <div class="text-one">findmynotes2022@gmail.com</div>
+        </a>
+      </div>
+    </div>
+    <div class="right-side">
+      <div class="topic-text">Contact US</div>
+      <p>Need Something? The FMN SQUAD is here to help!!</p>
+      <p>Feel Free to Contact Us :)</p>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="input-box">
-          <input type="text" placeholder="Enter your name">
+          <input type="text" placeholder="Enter your name" name="name" required>
         </div>
         <div class="input-box">
-          <input type="text" placeholder="Enter your email">
+          <input type="text" placeholder="Enter your email" name="email" required>
         </div>
         <div class="input-box message-box">
-          <textarea placeholder="Enter your message"></textarea>
+          <textarea placeholder="Enter your message" name="message" required></textarea>
         </div>
         <div class="button">
-          <input type="button" value="SUBMIT" >
+          <input type="submit" class="simple-bttn" value="SUBMIT">
         </div>
       </form>
     </div>
-    </div>
   </div>
+</div>
 
-     
+
 
 {% endblock content %}
 
@@ -62,4 +70,4 @@
 
 {% block scripts %}
 
-{% endblock scripts %}   
+{% endblock scripts %}

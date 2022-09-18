@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from  django.contrib import messages
-from backend.models import bookmarked_files, file_likes, file_upload, reported_file, searched_file, user_details
+from backend.models import bookmarked_files, file_likes, file_upload, reported_file, searched_file, user_details,contact_us
 from django.template.loader import render_to_string 
 from django.utils.html import strip_tags
 from django.core.mail import EmailMultiAlternatives
@@ -9,6 +9,7 @@ import random
 from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 from django.core.mail import send_mail
+
 
 
 def Context(request):
@@ -135,14 +136,31 @@ def about(request):
     }   
     return render(request,'pages/other/about/aboutus.html',context)
 
+def team(request):
+    return render(request, "pages/other/about/team.html",Context(request))
+
 def contact(request):
     user_id = request.session.get("user_unique_id")
     context = {
         'current_user': user_id
     }
-    return render(request,'pages/other/contact/contact.html',context)
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        message = request.POST['message']
+        try:
+            contact_me = contact_us.objects.create(
+                name=name,
+                email=email,
+                message=message
+            )
+            contact_me.save()
+            messages.success(request,"Message sent successfully! You will be replied soon.")
 
-
+        except Exception as err:
+            messages.error(request,"Unable to send message, try again later")
+            print(err)
+    return render(request, 'pages/other/contact/contact.html', context)
 
 
 # login & signup backend

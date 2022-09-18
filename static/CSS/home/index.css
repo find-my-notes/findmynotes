@@ -131,7 +131,7 @@
 	animation: floating 2s ease infinite;
 }
 
-.quotes {
+/* .quotes {
 	background-color: var(--color-4);
 }
 
@@ -173,77 +173,11 @@
 	font-family: 'Redressed', cursive;
 	margin: 0;
 }
-
-.total-books-record {
-	background-color: var(--theme-color-1);
-}
-
-.total-books-record .container {
-	padding: 25px 15px;
-}
-
-.total-books-record .container .title h2 {
-	color: #1f1f1fe5;
-	text-align: center;
-	font-size: 42px;
-}
-
-.total-books-record .container .title p {
-	line-height: 20px;
-	font-size: 22px;
-	text-align: center;
-	font-family: 'Nunito', sans-serif;
-}
-
-.total-books-record .container .sub-container {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-pack: distribute;
-	justify-content: space-around;
-	margin-top: 40px;
-}
-
-.total-books-record .container .sub-container h3 {
-	font-size: 36px;
-	/* color: #6bc98f; */
-	font-family: 'Nunito', sans-serif;
-	text-align: center;
-	margin: 0;
-}
-
-.total-books-record .container .sub-container p {
-	text-align: center;
-	color: #4e657e;
-	font-size: 20px;
-}
-
+*/
 @media (max-width: 768px) {
-	.total-books-record .container .title h2 {
-		font-size: 30px;
-	}
-	.total-books-record .container .title p {
-		font-size: 18px;
-		text-align: center;
-	}
-	.total-books-record .container .sub-container {
-		-webkit-box-orient: vertical;
-		-webkit-box-direction: normal;
-		-ms-flex-direction: column;
-		flex-direction: column;
-		-webkit-box-align: center;
-		-ms-flex-align: center;
-		align-items: center;
-	}
-	.total-books-record .container .sub-container div {
-		padding-top: 30px;
-	}
-	.total-books-record .container .sub-container h3 {
-		font-size: 30px;
-	}
-	.quotes .container h3 {
+	/* .quotes .container h3 {
 		font-size: 32px;
-	}
+	} */
 	.banner {
 		padding: 50px 15px;
 		max-height: -webkit-fit-content;
@@ -314,13 +248,12 @@
 	}
 }
 
-/* everything you need to know sectiion  */
+/* everything you need to know - last sectiion  */
 .center-div-everything-yk{
 	display: grid;
-	height: 70vh;
-	background-color: white
+	min-height: 70vh;
+	background-color: var(--bg-1);
 }
-
 .everything-you-need h2 {
 	padding: 30px 0;
 	text-align: center;

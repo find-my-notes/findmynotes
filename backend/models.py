@@ -147,3 +147,12 @@ class reported_file(models.Model):
     class Meta:
         db_table = "reported_file"
         unique_together = ('user_posted','user_reported_issue','file')
+
+class contact_us(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=30,null=False)
+    email = models.CharField(max_length=50,null = False)
+    message = models.CharField(max_length=30,null=False,default=None)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        db_table = "contact_us"

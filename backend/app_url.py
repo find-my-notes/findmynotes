@@ -29,6 +29,7 @@ urlpatterns = [
     
     path('contact', views.contact , name="contact"),
     path('about', views.about,name="about"),
+    path('team', views.team,name="team"),
     path('faq', views.faq,name="faq"),
 
     path('adminfeed', admin_view.adminfeed , name="adminfeed"),

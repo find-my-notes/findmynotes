@@ -3,37 +3,39 @@
 
 {% block style-links %}
 
-    <link rel="stylesheet" href="{% static 'CSS/other/about/about.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'CSS/other/about/team.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'CSS/other/about/about.css' %}" type="text/css">
 
 {% endblock style-links %}
-   
 
 
-{% block  content %}
-             
 
- <!-- section 1 - AboutUs summary  -->
- <div class="new-section section-1">
+{% block content %}
+
+
+<!-- section 1 - AboutUs summary  -->
+<div class="new-section section-1">
     <div class="section-head">
         <h2>About Us</h2>
     </div>
     <div class="section-grid-2 justify-center">
         <div class="section-left">
-            <img class="section-image" src="{% static 'media/svg/other/about/about_main.svg' %}" alt="" >
+            <img class="section-image" src="{% static 'media/svg/other/about/about_main.svg' %}" alt="">
         </div>
         <div class="section-right section-grid-text">
             <div class="section-content">
                 <p>
-                    Because your planning is not always perfect, you need to be able to study 
-                    whenever, wherever. Just read your notes one last time on your tablet or 
+                    Because your planning is not always perfect, you need to be able to study
+                    whenever, wherever. Just read your notes one last time on your tablet or
                     phone while you're on the go. <br><br>
-                    <ul class="pl-3px">
-                        <li>The next era of online learning begins today! Visit our Help Center.</li>
-                        <li>Take the first step toward a successful career. </li>
-                        <li>Structure Effective study material is structured study material. </li>
-                    </ul>
+                <ul class="pl-3px">
+                    <li>A network for learners to access the Chamber of Notes with millions of
+                        members worldwide</li>
+                    <li>Get Millions of Notes with one tap for Free </li>
+                    <li>Structure Effective study material is structured study material. </li>
+                </ul>
 
-                </p><br/>
+                </p><br />
                 <button class="simple-bttn learn-more-bttn"><a href="#section-3">Learn More</a></button>
             </div>
         </div>
@@ -42,68 +44,70 @@
 
 <!-- Section 2 - Why Us -->
 <div class="new-section section-2">
-        <div class="section-head">
-            <h2>Why Us?</h2>
-        </div>
-        <div class="section-grid-2">
-            <div class="section-left section-grid-text">
-                <div class="section-content">
-                    <p>
-                        "FIND MY NOTES" is a Smarter Study Platform that brings the right 
-                        and smart Techniques, principles and study resources to get studies done. From 
-                        Droppers to Toppers. 
-                        The Best Study material shared by your fellow Students, Organized in one place. 
-                        You can still have your study materials and prepare for your Semester via our 
-                        Brand new App
-                    </p>
-                </div>
-            </div>
-            <div class="section-right">
-                <img class="section-image" src="{% static 'media/svg/other/about/purpose_main.svg' %}" alt="" >
+    <div class="section-head">
+        <h2>Why Us?</h2>
+    </div>
+    <div class="section-grid-2">
+        <div class="section-left section-grid-text">
+            <div class="section-content">
+                <p>
+                    "FIND MY NOTES" is a Smarter Study Platform that brings the right
+                    and smart Techniques, principles and study resources to get studies done.
+                    FindMyNotes is a social media for your notes and materials.
+                    The Best Study material shared by your fellow Students, organized in one place.
+                </p>
             </div>
         </div>
+        <div class="section-right">
+            <img class="section-image" src="{% static 'media/svg/other/about/purpose_main.svg' %}" alt="">
+        </div>
+    </div>
 </div>
 
 <!-- Section 3 - mission and vision -->
 
 <div class="new-section section-3" id="section-3">
-        <div class="section-head">
-            <h2>Mission & Vision</h2>
+    <div class="section-head">
+        <h2>Mission & Vision</h2>
+    </div>
+    <div class="section-grid-2">
+        <div class="section-left">
+            <img class="section-image" src="{% static 'media/svg/other/about/mobile_learning.svg' %}" />
         </div>
-        <div class="section-grid-2">
-            <div class="section-left">
-                <img class="section-image" src="{% static 'media/svg/other/about/mobile_learning.svg' %}" />
+        <div class="section-right section-grid-text">
+            <div class="section-content mission-vision-text">
+                <div class="vision">
+                    <div>
+                        <h2 class=" mission-vision-text-head">
+                            <span  class="section-icon"><i class="fa fa-eye"></i></span> Our Vision
+                        </h2>
+                    </div>
+                    <div class="">
+                        As a mission-driven organization, we're relentlessly pursuing our vision of a world 
+                        where every learner can access education to unlock their potential, without the 
+                        barriers of cost or location
+                    </div>
+                </div>
+                <div class="">
+                    As a mission-driven organization, we're relentlessly pursuing our vision of a world
+                    where every learner can access education to unlock their potential, without the
+                    barriers of cost or location.
+                </div>
             </div>
-            <div class="section-right section-grid-text">
-                <div class="section-content mission-vision-text">
-                    <div class="vision">
-                        <div>
-                            <h2>
-                                <span  class="section-icon"><i class="fa fa-eye"></i></span> Our Vision
-                            </h2>
-                        </div>
-                        <div class="">
-                            As a mission-driven organization, we're relentlessly pursuing our vision of a world 
-                            where every learner can access education to unlock their potential, without the 
-                            barriers of cost or location
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="mission">
-                        <div>
-                            <h2><span  class="section-icon"><i class="fa fa-bullseye"></i></span> Our Mission</h2>
-                        </div>
-                        <div class="">
-                            Our mission is to provide a comprehensive, easy-to-use, Notes and Study material 
-                            and full-text database of education research and information for educators, 
-                            researchers, and the fellow students.
-                        </div>
-                    </div>
+            <br />
+            <div class="mission">
+                <div>
+                    <h2 class=" mission-vision-text-head"><span class="section-icon"><i class="fa fa-bullseye"></i></span> Our Mission</h2>
+                </div>
+                <div class="">
+                    Our mission is to provide a comprehensive, easy-to-use, Notes and Study material
+                    and full-text database of education research and information for educators,
+                    researchers, and the fellow students.
                 </div>
             </div>
         </div>
+    </div>
 </div>
-
 
 <!-- Section 4 - Our Team -->
 
@@ -111,60 +115,100 @@
     <div class="section-head">
         <h2>Our Team</h2>
     </div>
-    
-    <div class="profile-cards">
 
+    <div class="aboutprofile">
+
+
+        <!-- <div class="card">
+            <div class="card-img">
+                <img src="{% static 'media/images/team/Rishabh_FMN.jpeg' %}" alt="" width="300px" height="300px">
+            </div>
+            <div class="person-name card-text">
+                <h3>Rishabh Nahar</h3>
+            </div>
+            <div class="card-text card-sub-text truncate-line-1 color-1">
+                <p>Co-Founder</p>
+            </div>
+            <div>
+                <a href="https://github.com/rishabh-nahar" target="_blank" rel="noopener noreferrer"><button
+                        class="simple-bttn-2 card-bttn">Show Profile</button></a>
+            </div>
+        </div> -->
         
-        <div class="card">
+        <div class="column">
+            <div class="team">
+                <div class="team-img">
+                    <img src="{% static 'media/images/team/Rishabh_FMN.jpeg' %}" alt="" width="300px" height="300px">
+
+                </div>
+                <div class="team-content">
+                    <h2>Rishabh Nahar</h2>
+                    <h3>CEO & Co-Founder</h3>
+                    <p>Frontend,Backend,Operations</p>
+                    <h4>rishabhpnahar@gmail.com</h4>
+                </div>
+                <div class="team-social">
+                    <!-- <a href="https://www.facebook.com/profile.php?id=100009314028539" class="social-fb" target="_blank"> <i class="fa fa-facebook"></i></a> -->
+                    <a href="https://www.linkedin.com/in/aditya-trivedi-b99586211/" class="social-li" target="_blank">
+                        <i class="fa fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/aditya.trivedi17/" class="social-in" target="_blank"> <i
+                            class="fa fa-instagram"></i></a>
+                    <!-- <a href="https://www.youtube.com/channel/UChVzP7gNOlkymoo000Y9_6Q" class="social-yt" target="_blank"> <i class="fa fa-youtube"></i></a> -->
+                    <a href="https://github.com/rishabh-nahar" class="social-git" target="_blank"> <i
+                            class="fa fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="card">
             <div class="card-img">
-                <img src="{% static 'media/images/other/about/profile.jpg' %}" alt="" width="300px">
+                <img src="{% static 'media/images/team/Aditya_FMN.jpg' %}" alt="" width="300px" height="300px">
             </div>
             <div class="person-name card-text">
-                <h3>Rishabh Nahar</h3>
+                <h3>Aditya Trivedi</h3>
             </div>
             <div class="card-text card-sub-text">
-                <p>UI, Backend</p>
+                <p>Co-Founder</p>
             </div>
             <div>
-                <button class="simple-bttn-2 card-bttn">Show Profile</button>
+                <a href="https://github.com/Yuvadi29" target="_blank" rel="noopener noreferrer"><button
+                        class="simple-bttn-2 card-bttn">Show Profile</button></a>
+            </div>
+        </div> -->
+
+        <div class="column">
+            <div class="team">
+                <div class="team-img">
+                    <img src="{% static 'media/images/team/Aditya_FMN.jpg' %}" alt="" width="300px" height="300px">
+
+                </div>
+                <div class="team-content">
+                    <h2>Aditya Trivedi</h2>
+                    <p>CEO & Co-Founder</p>
+                    <h3>Frontend,Backend,Content Management,Operations</h3>
+                    <h4>adityatrivedi612@gmail.com</h4>
+                </div>
+                <div class="team-social">
+                    <!-- <a href="https://www.facebook.com/profile.php?id=100009314028539" class="social-fb" target="_blank"> <i class="fa fa-facebook"></i></a> -->
+                    <a href="https://www.linkedin.com/in/aditya-trivedi-b99586211/" class="social-li" target="_blank">
+                        <i class="fa fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/aditya.trivedi17/" class="social-in" target="_blank"> <i
+                            class="fa fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/channel/UChVzP7gNOlkymoo000Y9_6Q" class="social-yt"
+                        target="_blank"> <i class="fa fa-youtube"></i></a>
+                    <a href="https://github.com/Yuvadi29" class="social-git" target="_blank"> <i
+                            class="fa fa-github"></i></a>
+                </div>
             </div>
         </div>
 
-
-        <div class="card">
-            <div class="card-img">
-                <img src="{% static 'media/images/other/about/profile.jpg' %}" alt="" width="300px">
-            </div>
-            <div class="person-name card-text">
-                <h3>Rishabh Nahar</h3>
-            </div>
-            <div class="card-text card-sub-text">
-                <p>UI, Backend</p>
-            </div>
-            <div>
-                <button class="simple-bttn-2 card-bttn">Show Profile</button>
-            </div>
+        <!-- <div class="show-all-div  show-all-team">
+            <a class="simple-bttn-2 .col-white" href="">Show all &nbsp;<i class="fa fa-arrow-right"></a>
+        </div> -->
+        <div class="showall">
+            <a href="/team"><img src="https://img.icons8.com/flat-round/64/000000/arrow--v1.png" /></a>
         </div>
-
-        <div class="card">
-            <div class="card-img">
-                <img src="{% static 'media/images/other/about/profile.jpg' %}" alt="" width="300px">
-            </div>
-            <div class="person-name card-text">
-                <h3>Rishabh Nahar</h3>
-            </div>
-            <div class="card-text card-sub-text">
-                <p>UI, Backend</p>
-            </div>
-            <div>
-                <button class="simple-bttn-2 card-bttn">Show Profile</button>
-            </div>
-        </div>
-
-        <div class="show-all-div  show-all-team">
-            <!-- <a class="simple-bttn-2 .col-white" href="">Show all &nbsp;<i class="fa fa-arrow-right"></a> -->
-        </div>
-
 
     </div>
 
@@ -174,8 +218,6 @@
 
 {% endblock content %}
 
-
-
 {% block scripts %}
 
-{% endblock scripts %}   
+{% endblock scripts %}  
