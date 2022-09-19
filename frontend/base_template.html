@@ -37,13 +37,13 @@
 </head>
 
 <body>
-
+    <div id="top"></div>
     <div id="sidebar">
         {% block navbar %}
         {% include 'components/navbar.html'%}
         {% endblock navbar %}
     </div>
-
+    
     <div class="main-body-container">
         {% block  content %}
              
@@ -53,7 +53,13 @@
     {% block scripts %}
     {% endblock scripts %}
 
-
+    {% block back-to-top %}
+    <button class="back-to-top">
+        <a href="#top">
+            <img src="{% static 'media/svg/icons/expand_more.svg' %}" >
+        </a>
+    </button>
+    {% endblock back-to-top %}
     <div class="footer">
         {% block footer %}
         {% include 'components/footer.html'%}

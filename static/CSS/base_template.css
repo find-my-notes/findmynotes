@@ -1,3 +1,7 @@
+*{
+    transition: 0.3s;
+    scroll-behavior: smooth !important;
+}
 #sidebar {
     z-index: 10;
 }
@@ -6,4 +10,26 @@
     padding: 8vh 0 0 0;
     /* border: 2px solid; */
     min-height: 90vh;
+}
+.back-to-top{
+    transform: rotate(180deg);
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    z-index: 999;
+    background-color: var(--bc4);
+    color: var(--white);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.back-to-top:hover{
+    background-color: var(--bc5);
+}
+.back-to-top img{
+    filter: invert(100%);
+    transform: translateY(2px);
 }
