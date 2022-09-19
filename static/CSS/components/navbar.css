@@ -214,11 +214,6 @@ nav .nav-links-options>a {
     background-color: white;
     color: var(--color-3);
 }
-
-.display-on-small-screen {
-    display: none;
-}
-
 @media (max-width: 1200px) {
     nav {
         top: 0;
@@ -230,19 +225,9 @@ nav .nav-links-options>a {
         max-width: 300px;
         margin-left: 20px;
     }
-
-    .display-on-small-screen {
-        display: initial;
-    }
-
-    .hide-on-small-screen {
-        display: none;
-    }
-
     .search-box {
         display: none;
     }
-
     .nav-links-container .user-profile .dropdown-links {
         min-width: 15vw;
     }

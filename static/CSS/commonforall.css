@@ -93,7 +93,19 @@ body::-webkit-scrollbar {
 ::-webkit-scrollbar-thumb {
     background: #3d3d3d52;
     border-radius: 10px;
-  }
+}
+.display-on-small-screen {
+    display: none !important;
+}
+@media (max-width: 1200px) {
+    
+    .display-on-small-screen {
+        display: initial !important;
+    }
+    .hide-on-small-screen{
+        display: none !important;
+    }
+}
 /* ====================  flex and grid  ====================   */
 
 .flex {
