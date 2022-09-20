@@ -41,10 +41,10 @@
         <div class="nav-links-container">
 
             <div class="user-links flex ">
-                    <div class="nav-links hide-on-small-screen"><a href="/"><img class="nav-img" src="{% static 'media/svg/icons/home.svg' %}" /></a></div>
+                    <div class="nav-links hide-on-small-screen" title="Home"><a href="/"><img class="nav-img" src="{% static 'media/svg/icons/home.svg' %}" /></a></div>
                 {% if current_user == None %}
-                    <div class="nav-links hide-on-small-screen"><a href="/about"><i class="fa fa-info "></i></a></div>
-                    <div class="nav-links hide-on-small-screen"><a href="/contact"><i class="fa fa-headset"></i></a></div>
+                    <div class="nav-links hide-on-small-screen" title="About"><a href="/about"><img class="nav-img" src="{% static 'media/svg/icons/info_black.svg' %}" /></i></a></div>
+                    <div class="nav-links hide-on-small-screen" title="Contact"><a href="/contact"><i class="fa fa-headset"></i></a></div>
                 {% else %}
                     <!-- <div class="nav-links"><a href=""><i class="fa fa-bell"></i></a></div> -->
                     <div class="nav-links hide-on-small-screen"><a href="/upload_page"><img class="nav-img" src="{% static 'media/svg/icons/publish.svg' %}" /></i></a></div>
@@ -123,12 +123,14 @@
         {% if current_user == None %}
             <a href="/about">
                 <div class="links" title="About Us">
-                    <i class="fa fa-info"></i>
+                    <img class="nav-img" src="{% static 'media/svg/icons/info_black.svg' %}" alt="">
+                    <!-- <i class="fa fa-info"></i> -->
                     <div class="font-size-12">About</div>
                 </div>
             </a>
             <a href="/contact">
-                <div class="links" title="Contact Us"><i class="fa fa-headset"></i>
+                <div class="links" title="Contact Us">
+                    <i class="fa fa-headset"></i>
                     <div class="font-size-12">Contact</div>
                 </div>
             </a>

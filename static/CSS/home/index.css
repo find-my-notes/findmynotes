@@ -37,6 +37,8 @@
 
 .banner {
 	background-color: var(--theme-color-1);
+	background-image: url("../../media/images/home/banner.webp");
+	background-attachment: fixed;
 	max-width: 100%;
 }
 
@@ -68,8 +70,7 @@
 	/* opacity: 0; */
 }
 .banner .container .left h1 {
-	font-family: helvetica, arial;
-	color: black;
+	color: var(--bc2);
 }
 .banner .container .left .text span:nth-child(1) span:nth-child(1){
 	display: inline-block;
