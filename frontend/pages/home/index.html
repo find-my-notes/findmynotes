@@ -51,7 +51,10 @@
                   </span>
                </h1>
                {% if current_user == None %}
-               <a href="/loginpage"><button>Login</button></a>
+               <span class="flex gap-3">
+                  <a href="/signuppage"><button class="fmn-bttn-2">signup</button></a>
+                  <a href="/loginpage"><button class="fmn-bttn-1">Login</button></a>
+               </span>
                {% else %}
                <a href="/about"><button class="fmn-bttn-3">Explore Us</button></a>
                {% endif %}
