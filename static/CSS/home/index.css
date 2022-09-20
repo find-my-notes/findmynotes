@@ -101,9 +101,6 @@
 	position: relative;
 	border: none;
 	font-family: 'Nunito', sans-serif;
-	color: white;
-	background-color:var(--color-1);
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.263);
 	border-radius: 3px;
 	font-weight: bold;
 	font-size: 20px;

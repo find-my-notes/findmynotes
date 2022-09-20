@@ -244,67 +244,71 @@ def otp_page(request):
     return render(request,"pages/other/otp/otp_page.html")
 
 
-def searchPage(request,category='',query=''):
-
+def searchPage(request):
     user_id = request.session.get("user_unique_id")
     username = request.session.get("username")
+    context= Context(request)
 
+    #Get query from url
+    category = str(request.GET.get('category'))
+    query = str(request.GET.get('search_query'))
+    print("searched Query:",query)
     name = ''
     if username != None:
         user_detail = user_details.objects.get(Q(pk = user_id))
         user_is_admin = user_detail.is_admin
         name = user_detail.first_name 
 
-    context= Context(request)
-    
+        #initializing variable
+        resources = ""
 
-    if category != '' and query != '':
-        search_query = query
-        # print(search_query)
-        resources = file_upload.objects.filter(Q(description = search_query) | Q(file_title = search_query))
-        context['resultFor'] = "Search Result for: "+query
-        # creating list of liked files in search result bu user
+        if category != '' and query != 'None':
+            resources = file_upload.objects.filter(Q(description__iexact = query) | Q(file_title__iexact = query))
+            context['resultFor'] = "Search Result for: "+ str(query)
+            print(resources)
+        else:
+            searched_file_query = searched_file.objects.filter(Q(user_id = user_id))[0:3]
+            if searched_file_query.count() != 0:
+                context['resultFor'] = "Recomended"
+                searched_file_name = []
+                for file in searched_file_query:
+                    searched_file_name.append(file.query)
+                    print(searched_file_name)
+                resources = file_upload.objects.filter( Q(description__in = searched_file_name) | Q(file_title__in = searched_file_name) )
+            else:
+                context['resultFor'] = "Nothing to show"
+        liked_resources = file_likes.objects.filter(Q(user = user_id),Q(file__in = resources))
+        liked_by_user = []
+        for dataset in liked_resources:
+            if dataset.pk not in liked_by_user:
+                liked_by_user.append(dataset.file.pk)
+        bookmarked_resources = bookmarked_files.objects.filter(Q(user = user_id),Q(file__in = resources))
+        # creating list of bookmarked files in search result bu user
+        bookmarked_by_user = []
+        for dataset in bookmarked_resources:
+            if dataset.pk not in bookmarked_by_user:
+                bookmarked_by_user.append(dataset.file.pk)
+        context['all_resources'] = resources
+        context['liked_by_user'] = liked_by_user
+        context['bookmarked_by_user'] = bookmarked_by_user
+        print("--",context['all_resources'])
+        return render(request,"pages/search/search_page.html",context)
     else:
-        context['resultFor'] = "Recomended"
-        searched_file_query = searched_file.objects.filter(Q(user_id = user_id))
-        searched_file_name = []
-        for file in searched_file_query:
-            searched_file_name.append(file.query)
-            print(searched_file_name)
-        resources = file_upload.objects.filter( Q(description__in = searched_file_name) | Q(file_title__in = searched_file_name) )
-    
-    liked_resources = file_likes.objects.filter(Q(user = user_id),Q(file__in = resources))
-    liked_by_user = []
-    for dataset in liked_resources:
-        if dataset.pk not in liked_by_user:
-            liked_by_user.append(dataset.file.pk)
-
-
-    bookmarked_resources = bookmarked_files.objects.filter(Q(user = user_id),Q(file__in = resources))
-
-    # creating list of bookmarked files in search result bu user
-    bookmarked_by_user = []
-    for dataset in bookmarked_resources:
-        if dataset.pk not in bookmarked_by_user:
-            bookmarked_by_user.append(dataset.file.pk)
-
-    
-    context['all_resources'] = resources
-    context['liked_by_user'] = liked_by_user
-    context['bookmarked_by_user'] = bookmarked_by_user
-    
-        
-        # print("--",context['resources'])
-    return render(request,"pages/search/search_page.html",context)
+        return redirect(loginpage)
 
 def search_store(request):
     context = Context(request)
-    search_file_query = searched_file.objects.create(
-        user_id = user_details.objects.get(unique_id = context['current_user']),
-        query = request.GET['searched_query']
-    )
-    search_file_query.save()
-    print("Search file stores")
+    try:
+        search_file_query = searched_file.objects.create(
+            user_id = user_details.objects.get(unique_id = context['current_user']),
+            query = request.GET['searched_query']
+        )
+        search_file_query.save()
+        return HttpResponse("Search query stored")
+    except Exception as err:
+        print("error storing in db:",err)
+        return HttpResponse("failed...")
+
 
 def file_like(request):
     user_id = request.session.get("user_unique_id")

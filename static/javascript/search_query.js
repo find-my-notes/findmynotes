@@ -18,7 +18,7 @@ function searchQuery(search_query_value) {
         catch (err) {
             alert("Error: " + err)
         }
-        window.open("/searchPage/1/"+search_query, "_self")
+        window.open("/searchPage?search_query="+search_query, "_self")
     }
 }
 function triggerEnter(search_query_value){

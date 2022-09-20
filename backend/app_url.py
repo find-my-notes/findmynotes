@@ -7,7 +7,6 @@ urlpatterns = [
     # Pages
     path('', views.home,name="home"),
     
-    path('searchPage/<int:category>/<slug:query>/', views.searchPage,name="searchPage"),
     path('searchPage', views.searchPage,name="search_page"),
     path('search_store', views.search_store,name="search_store"),
 

@@ -168,51 +168,29 @@ nav .nav-links-container {
     border-radius: 100px;
     transition: 0.3s;
 }
-
 .nav-links-container .user-links .nav-links a:hover::after {
     transform: scale(1);
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.166) */
 }
-
 .fa-home:hover::after {
     position: relative;
     width: 100%;
 
 }
-
 .nav-links-container .login-signup-container {
     height: 8vh;
     min-height: var(--body-start-position);
     column-gap: 3%;
 }
-
 nav .nav-links-options>a {
     padding: 7px 2vw;
     white-space: nowrap;
 }
-
 .nav-links-container .login-signup-container button {
     padding: 10px 20px;
     border-radius: 3px;
     font-size: 17px;
     border: 1px solid var(--color-3);
-}
-
-.login {
-    background-color: var(--color-3);
-    color: white;
-    border: var(--color-3);
-    border-radius: 3px;
-    transition: 2s;
-}
-
-.login a {
-    color: white;
-}
-
-.signup {
-    background-color: white;
-    color: var(--color-3);
 }
 @media (max-width: 1200px) {
     nav {

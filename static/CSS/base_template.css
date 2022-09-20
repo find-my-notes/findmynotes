@@ -27,7 +27,8 @@
     justify-content: center;
 }
 .back-to-top:hover{
-    background-color: var(--bc5);
+    background-color: var(--bc3);
+    transform: scale(1.1) rotate(180deg);
 }
 .back-to-top img{
     filter: invert(100%);
