@@ -27,11 +27,11 @@
                     {{ message }}
                 {% endfor %}
             </div>
-            <form method="post">
+            <form method="post" id="reg_form" onsubmit="return getEmail()">
                 {% csrf_token %}
                 <div class="input-box input1">
-                    <input type="text" placeholder="First Name" name="firstname" style="width: 48%;" min-length="3" max-length="30" required>
-                    <input type="text" placeholder="Last Name" name="lastname" style="width: 48%;"  min-length="3" max-length="30"  required>
+                    <input type="text" pattern="^\S+$" placeholder="First Name" name="firstname" style="width: 48%;" min-length="3" max-length="30" required>
+                    <input type="text" pattern="^\S+$" placeholder="Last Name" name="lastname" style="width: 48%;"  min-length="3" max-length="30"  required>
                 </div>
                 <div class="input-box input1">
                     <select id="select" name="gender" style="width: 48%;" required>
@@ -40,29 +40,30 @@
                         <option value="Female">Female</option>
                         <option value="Others">Others</option>
                     </select>
-                    <input type="date" id="input_date" onchange="dateLimits()" name="dob" placeholder="Date Of Birth" min="01-01-2000" style="width: 48%;"  required>
+                    <input type="date" id="input_date" onchange="dateLimits()" name="dob" pattern="^\S+$" placeholder="Date Of Birth" min="01-01-2000" style="width: 48%;"  required>
                 </div>
                 <div class="input-box">
-                    <input type="text" name="mail" placeholder="Email" required>
+                    <input type="text" name="mail" minlength="24" id="email_input" onchange="getEmail(this)" placeholder="Email" required>
+                    <p class="imp-field" id="warning_text"></p>
                 </div>
                 <div class="input-box">
-                    <input type="number" name="phone" placeholder="Mobile no." required>
+                    <input type="number" name="phone" pattern="^\S+$" placeholder="Mobile no." minlength="10" required>
                 </div>
                 <div class="input-box">
-                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="text" name="username" pattern="^\S+$" placeholder="Username" required>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="password" id="pass_input" placeholder="Password" required>
+                    <input type="password" name="password" id="pass_input" minlength="8" maxlength="30" pattern="^\S+$" placeholder="Password" required>
                     <div class="middle">
-                        <p class="show">
+                        <p class="show font-size-14">
                             <input class="check" onclick="showPass(this)" type="checkbox">
                             Show Password
                         </p>
-                        <!-- <p><a href="" type="reset">RESET?</a></p> -->
+                        <!-- <p><a href="" class="underline color-1 font-size-14" type="reset">Reset</a></p> -->
                     </div>
                     </div>
                 <div class="button">
-                    <input type="submit" value="REGISTER">
+                    <input type="submit" id="register_bttn" disabled="true" value="REGISTER">
                 </div>
                 <div class="middle-text">
                     <p>Already have an Account?</p>
@@ -101,7 +102,7 @@
 
     <script>
         
-        function showPass(checkbox){
+    function showPass(checkbox){
         var password_inp = document.getElementById('pass_input')
         if(checkbox.checked){
             password_inp.type = "text"
@@ -110,6 +111,24 @@
             password_inp.type = "password"
         }
     }
+    function getEmail(){
+        email_field = document.getElementById("email_input")
+        get_email = email_field.value;
+        valid_email = get_email.includes("@vcet.edu.in")
+        if(!valid_email){
+            document.getElementById("register_bttn").disabled = true;
+            alert("Only VCET students can register for now")
+            email_field.style.borderColor = "red"
+            return false
+        }
+        else{
+            document.getElementById("register_bttn").disabled = false;
+            document.getElementById("warning_text").innerHTML = ""
+            email_field.style.borderColor = "green";
+            return true
+        }
+    }
+    
     </script>
 
 

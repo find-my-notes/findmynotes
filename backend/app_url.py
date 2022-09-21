@@ -19,6 +19,7 @@ urlpatterns = [
     path('upload_page', views.upload_page,name="upload_page"),
 
     path('loginpage', views.loginpage , name="loginpage"),
+    path('forgetPassword', views.forgetPassword , name="forgetPassword"),
     path('logout', views.logout , name="logout"),
 
     path('signuppage', views.signuppage , name="signuppage"),

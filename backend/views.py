@@ -72,29 +72,38 @@ def loginpage(request):
         password = request.POST['password']
         print(username,password)
         try:
-            validate_userid = user_details.objects.get(Q(username = username),Q(password = password))
+            validate_userid = user_details.objects.get((Q(username__iexact = username)|Q(username__iexact = username)),Q(password = password))
             user_unique_id = validate_userid.pk
             print(validate_userid)
             user_is_active = validate_userid.is_active
-            request.session['user_unique_id'] = user_unique_id
-            request.session['username'] = username
-            context={
-                    'username':username,
-                    'user_unique_id':user_unique_id
-                    }
             if(user_is_active):
-                return redirect("/",args=context)
+                request.session['user_unique_id'] = user_unique_id
+                request.session['username'] = username
+                return redirect("/",args=Context(request))
             else:
                 try:
-                    mailer("Verify your account","send otp",[validate_userid.mail])
-                    return redirect("/otp_page")
+                    print(validate_userid)
+                    mailer(request,"Verify your account","send otp",[validate_userid.mail])
+                    request.session["new_user"] = username
+                    request.session["new_user_id"] = user_unique_id
+                    return redirect(otp_page)
                 except Exception as e:
                     print(e)
         except:
             messages.error(request,"Invalid credentials")
     return render(request,'pages/login_page/login_page.html')
 
+def forgetPassword(request):
+    user_credentials = request.GET.get('user_credentials')
+    try:
+        getUserCred = user_details.objects.get(Q(username__iexact = user_credentials) | Q(mail = user_credentials))
+        user_mail = getUserCred.mail
+        password = getUserCred.password
+        mailer(request,"Your password",password,[user_mail])
 
+    except Exception as err:
+        print("user not found:",err)
+        messages.error(request,"Please enter valid username or email")
 
 def mailer(request,subject,content,mail_to):
     if content == 'send otp':
@@ -109,6 +118,15 @@ def mailer(request,subject,content,mail_to):
             fail_silently=False,
         )
         return random_num
+    else:
+        send_mail(
+            subject,
+            content,
+            'FindMyNotes',
+            mail_to,
+            fail_silently=False,
+        )
+        return HttpResponse("Check your mail")
 
 
 
@@ -203,7 +221,7 @@ def signuppage(request):
             # We will load the html content first
             random_num = random.randint(1000,9999)
 
-            html_content = render_to_string("pages/other/mail_template/emailtemplate.html", {'name': first_name ,'otp':random_num })
+            html_content = render_to_string("pages/other/mail_template/email_con.html", {'name': first_name ,'otp':random_num })
 
             # html content jo load karenge usme se HTML tags nikal denge
             text_content = strip_tags(html_content)

@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@filae!@p#_l3b7m$7gu)*w8pdr)+req@xinx$$bt_je^&k8@g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -76,11 +76,11 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'project_fmn',
+#         'NAME': 'findmynotes',
 #         'USER':'root',
-#         'PASSWORD':'',
-#         # 'HOST':'localhost',
-#         # 'PORT':'3306',
+#         'PASSWORD':'rishadi@1234',
+#         'HOST':'103.134.7.137',
+#         'PORT':'1433',
 #     }
 # }
 
