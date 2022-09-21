@@ -72,7 +72,7 @@ def loginpage(request):
         password = request.POST['password']
         print(username,password)
         try:
-            validate_userid = user_details.objects.get((Q(username__iexact = username)|Q(username__iexact = username)),Q(password = password))
+            validate_userid = user_details.objects.get((Q(username__iexact = username) or Q(username__iexact = username)),Q(password = password))
             user_unique_id = validate_userid.pk
             print(validate_userid)
             user_is_active = validate_userid.is_active
@@ -94,16 +94,19 @@ def loginpage(request):
     return render(request,'pages/login_page/login_page.html')
 
 def forgetPassword(request):
-    user_credentials = request.GET.get('user_credentials')
+
+    user_credentials = request.GET.get('user_credentials',None)
+    print(user_credentials)
     try:
-        getUserCred = user_details.objects.get(Q(username__iexact = user_credentials) | Q(mail = user_credentials))
+        getUserCred = user_details.objects.get(Q(username__iexact = user_credentials) or Q(mail = user_credentials))
         user_mail = getUserCred.mail
         password = getUserCred.password
         mailer(request,"Your password",password,[user_mail])
-
+        messages.error(request,"Please check your mail")
     except Exception as err:
         print("user not found:",err)
         messages.error(request,"Please enter valid username or email")
+    return redirect(loginpage)
 
 def mailer(request,subject,content,mail_to):
     if content == 'send otp':
@@ -119,6 +122,7 @@ def mailer(request,subject,content,mail_to):
         )
         return random_num
     else:
+        print("sending mail")
         send_mail(
             subject,
             content,
@@ -126,7 +130,7 @@ def mailer(request,subject,content,mail_to):
             mail_to,
             fail_silently=False,
         )
-        return HttpResponse("Check your mail")
+        return mail_to
 
 
 
@@ -221,7 +225,7 @@ def signuppage(request):
             # We will load the html content first
             random_num = random.randint(1000,9999)
 
-            html_content = render_to_string("pages/other/mail_template/email_con.html", {'name': first_name ,'otp':random_num })
+            html_content = render_to_string("pages/other/mail_template/emailtemplate.html", {'name': first_name ,'otp':random_num })
 
             # html content jo load karenge usme se HTML tags nikal denge
             text_content = strip_tags(html_content)
@@ -487,6 +491,12 @@ def upload_page(request):
             print("error uploading file:",err)
 
     return render(request,"pages/upload/old_upload.html",context)
+
+
+
+def error_404_view(request, exception):
+    return HttpResponse("404 Not found")
+
 
 def logout(request):
     request.session.flush()
