@@ -1,1 +1,1 @@
-web gunicorn FindMyNotes.wsgi --log-file -
+web: gunicorn FindMyNotes.wsgi --log-file -

@@ -10,9 +10,6 @@ from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 from django.core.mail import send_mail
 
-
-
-
 def Context(request):
     user_id = request.session.get("user_unique_id")
     username = request.session.get("username")
@@ -284,8 +281,7 @@ def searchPage(request):
         for file in searched_file_query:
             searched_file_name.append(file.query)
             print(searched_file_name)
-        resources = file_upload.objects.filter(
-            Q(description__in=searched_file_name) | Q(file_title__in=searched_file_name))
+            resources = file_upload.objects.filter((Q(description__icontains = searched_file_name) | Q(file_title__icontains =searched_file_name) | Q(file_name__icontains =searched_file_name) | Q(tags__icontains =searched_file_name)) and (Q(is_verified = True)))
 
     liked_resources = file_likes.objects.filter(
         Q(user=user_id), Q(file__in=resources))

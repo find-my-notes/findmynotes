@@ -7,9 +7,4 @@ dependencies
 .vscode
 fmnenv
 */__pycache__
-<<<<<<< HEAD
 */test.*
-=======
-*/test.*
-virtualfmn
->>>>>>> e98b2e53da5a36adf6f2ab8cc90b8db469b9c203
