@@ -22,7 +22,7 @@
 .upload-form form{
     display: grid;
     grid-template-columns: auto;
-    gap:1vw;
+    gap:10px;
     justify-content: center;
 }
 .browse-file-bttn-div{
@@ -40,14 +40,13 @@
 }
 .upload-form input:not([type=checkbox]){
     height:40px;
-    width:500px;
     border: 1px solid var(--bc1);
     border-radius: 3px;
     padding: 0 15px;
 }
 @media (max-width: 768px) {
     .upload-form input{
-        width: 95vw;
+        /* width: 95vw; */
         max-width: 500px
     }
 }
