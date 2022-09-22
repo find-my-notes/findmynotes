@@ -63,7 +63,6 @@ footer p
     display: inline-block;
     width: 40px;
     height: 40px;
-    background: #222;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,14 +70,14 @@ footer p
     text-decoration: none;
     border-radius: 4px;
 }
-.sci li .fa-link-twitter:hover
+.sci li .fa-link-twitter
 {
     background: #1DA1f2;
 } 
-.sci li .fa-link-instagram:hover{
+.sci li .fa-link-instagram{
     background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
 }
-.sci li .fa-link-facebook:hover
+.sci li .fa-link-facebook
 {
     background: #385490;
 } 

@@ -33,7 +33,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,7 +76,7 @@ DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'findmynotes',
-#         'USER':'root',
+#         'USER':'fmn',
 #         'PASSWORD':'rishadi@1234',
 #         'HOST':'103.134.7.137',
 #         'PORT':'1433',
@@ -119,13 +118,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    BASE_DIR / "static",
+    'static',
 ]
 STATIC_URL = 'static/'
-STATIC_ROOT =  os.path.join(BASE_DIR,'staticfiles/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/files/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'files/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'files/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

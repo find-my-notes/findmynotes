@@ -23,10 +23,14 @@
     <div class="profile-container grid">
         <div class="user-personal-container flex flex-column">
             <div class="user-profile-photo"
-                style="background-image: url('{% static 'media/images/profile/user.jpg' %}')"
-                >
+                style="background-image: url('{% static 'media/images/profile/profile.png' %}')">
             </div>
-            <div class="username flex">{{name}}</div>
+            <div class="username">{{name}}Tanmay Arsania</div>
+            <a href=""><button class="edit-profile-button">
+                    Edit profile
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span></button></a>
         </div>
         <div class="user-mode-switch grid">
             <button class="user-actions user-actions-active" id="myscans_button">

@@ -2,13 +2,14 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from  django.contrib import messages
 from backend.models import bookmarked_files, file_likes, file_upload, reported_file, searched_file, user_details,contact_us
-from django.template.loader import render_to_string 
+from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import EmailMultiAlternatives
 import random
 from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 from django.core.mail import send_mail
+
 
 
 
@@ -19,23 +20,21 @@ def Context(request):
     user_is_admin = False
     name = "User"
     if username != None:
-        user_detail = user_details.objects.get(Q(pk = user_id))
+        user_detail = user_details.objects.get(Q(pk=user_id))
         user_is_admin = user_detail.is_admin
-        name = user_detail.first_name +" "+ user_detail.last_name
-        
+        name = user_detail.first_name + " " + user_detail.last_name
+
     context = {
         'current_user': user_id,
         'username': username,
         'is_admin': user_is_admin,
-        'name':name
+        'name': name
     }
 
-    return context
-
-
-
+    return context 
+    
 def home(request):
-    return render(request,'pages/home/index.html',Context(request))
+    return render(request, 'pages/home/index.html', Context(request))
 
 
 def profile(request):
@@ -43,11 +42,11 @@ def profile(request):
     user_id = request.session.get("user_unique_id")
     username = request.session.get("username")
     if username != None:
-        user_detail = user_details.objects.get(Q(pk = user_id))
-        total_likes = file_likes.objects.filter(Q(user_id = user_id)).count()
-        uploaded_files = file_upload.objects.filter(Q(user_id = user_id))
+        user_detail = user_details.objects.get(Q(pk=user_id))
+        total_likes = file_likes.objects.filter(Q(user_id=user_id)).count()
+        uploaded_files = file_upload.objects.filter(Q(user_id=user_id))
         total_uploads = uploaded_files.count()
-        bookmarked_file = bookmarked_files.objects.filter(Q(user_id = user_id))
+        bookmarked_file = bookmarked_files.objects.filter(Q(user_id=user_id))
         total_bookmarked_file = bookmarked_file.count()
         print(uploaded_files.count())
         user_is_admin = user_detail.is_admin
@@ -57,44 +56,48 @@ def profile(request):
         context['uploaded_files'] = uploaded_files
         context['bookmarked_file'] = bookmarked_file
         context['user_bio'] = user_detail.user_bio
-        return render(request,'pages/profile/user_profile.html',context)
+        return render(request, 'pages/profile/user_profile.html', context)
     else:
-        return HttpResponse("404 page not found")
+        return render(request, 'pages/profile/user_profile.html')
+        # return HttpResponse("404 page not found")
+
 
 def faq(request):
-    context =Context(request)
-    return render(request,'pages/other/FAQ/faq.html',context)
+    context = Context(request)
+    return render(request, 'pages/other/FAQ/faq.html', context)
 
 
 def loginpage(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-        print(username,password)
+        print(username, password)
         try:
-            validate_userid = user_details.objects.get((Q(username__iexact = username) or Q(username__iexact = username)),Q(password = password))
+            validate_userid = user_details.objects.get(
+                Q(username=username), Q(password=password))
             user_unique_id = validate_userid.pk
             print(validate_userid)
             user_is_active = validate_userid.is_active
-            if(user_is_active):
-                request.session['user_unique_id'] = user_unique_id
-                request.session['username'] = username
-                return redirect("/",args=Context(request))
+            request.session['user_unique_id'] = user_unique_id
+            request.session['username'] = username
+            context = {
+                'username': username,
+                'user_unique_id': user_unique_id
+            }
+            if (user_is_active):
+                return redirect("/", args=context)
             else:
                 try:
-                    print(validate_userid)
-                    mailer(request,"Verify your account","send otp",[validate_userid.mail])
-                    request.session["new_user"] = username
-                    request.session["new_user_id"] = user_unique_id
-                    return redirect(otp_page)
+                    mailer("Verify your account", "send otp",
+                           [validate_userid.mail])
+                    return redirect("/otp_page")
                 except Exception as e:
                     print(e)
         except:
-            messages.error(request,"Invalid credentials")
-    return render(request,'pages/login_page/login_page.html')
+            messages.error(request, "Invalid credentials")
+    return render(request, 'pages/login_page/login_page.html')
 
 def forgetPassword(request):
-
     user_credentials = request.GET.get('user_credentials',None)
     print(user_credentials)
     try:
@@ -110,7 +113,7 @@ def forgetPassword(request):
 
 def mailer(request,subject,content,mail_to):
     if content == 'send otp':
-        random_num = random.randint(1000,9999)
+        random_num = random.randint(1000, 9999)
         request.session['new_otp'] = random_num
         content = str(random_num)
         send_mail(
@@ -133,8 +136,6 @@ def mailer(request,subject,content,mail_to):
         return mail_to
 
 
-
-
 # def registration(request):
 #     return render(request,'pages/loginandsignup/reg_page.html')
 
@@ -145,18 +146,18 @@ def about(request):
     user_is_admin = ''
     name = ''
     if username != None:
-        user_detail = user_details.objects.get(Q(pk = user_id))
+        user_detail = user_details.objects.get(Q(pk=user_id))
         user_is_admin = user_detail.is_admin
-        name = user_detail.first_name 
-        
+        name = user_detail.first_name
 
     context = {
         'current_user': user_id,
         'username': username,
-        'user_is_admin':user_is_admin,      
-        'name':name,
-    }   
-    return render(request,'pages/other/about/aboutus.html',context)
+        'user_is_admin': user_is_admin,
+        'name': name,
+    }
+    return render(request, 'pages/other/about/aboutus.html', context)
+
 
 def team(request):
     return render(request, "pages/other/about/team.html",Context(request))
@@ -166,22 +167,6 @@ def contact(request):
     context = {
         'current_user': user_id
     }
-    if request.method == "POST":
-        name = request.POST['name']
-        email = request.POST['email']
-        message = request.POST['message']
-        try:
-            contact_me = contact_us.objects.create(
-                name=name,
-                email=email,
-                message=message
-            )
-            contact_me.save()
-            messages.success(request,"Message sent successfully! You will be replied soon.")
-
-        except Exception as err:
-            messages.error(request,"Unable to send message, try again later")
-            print(err)
     return render(request, 'pages/other/contact/contact.html', context)
 
 
@@ -191,41 +176,43 @@ def signuppage(request):
     if request.method == "POST":
         first_name = request.POST['firstname']
         last_name = request.POST['lastname']
-        gender = request.POST['gender'] 
+        gender = request.POST['gender']
         dob = request.POST['dob']
-        mail = request.POST['mail'] 
-        phone = request.POST['phone'] 
-        username = request.POST['username'] 
-        password = request.POST['password'] 
+        mail = request.POST['mail']
+        phone = request.POST['phone']
+        username = request.POST['username']
+        password = request.POST['password']
         print(username)
 
-        exists_username = user_details.objects.filter(username = username).count()
-        exists_email = user_details.objects.filter(mail = mail).count()
+        exists_username = user_details.objects.filter(
+            username=username).count()
+        exists_email = user_details.objects.filter(mail=mail).count()
 
         if exists_username > 0:
             print("username error")
-            messages.error(request,"Username Exist")
-            
+            messages.error(request, "Username Exist")
+
         elif exists_email > 0:
             print("email error")
-            messages.error(request,"Email Exist")
+            messages.error(request, "Email Exist")
         else:
             users = user_details.objects.create(
                 first_name=first_name,
                 last_name=last_name,
-                gender = gender,
-                dob = dob,
-                mail = mail,
-                phone = phone,
-                username = username,
-                password = password,
-                )
+                gender=gender,
+                dob=dob,
+                mail=mail,
+                phone=phone,
+                username=username,
+                password=password,
+            )
             users.save()
             print("User Created")
             # We will load the html content first
-            random_num = random.randint(1000,9999)
+            random_num = random.randint(1000, 9999)
 
-            html_content = render_to_string("pages/other/mail_template/emailtemplate.html", {'name': first_name ,'otp':random_num })
+            html_content = render_to_string(
+                "pages/other/mail_template/emailtemplate.html", {'name': first_name, 'otp': random_num})
 
             # html content jo load karenge usme se HTML tags nikal denge
             text_content = strip_tags(html_content)
@@ -245,25 +232,27 @@ def signuppage(request):
             mail.send()
             request.session["new_user"] = username
             request.session["new_user_id"] = users.unique_id
-            request.session["new_otp"] = random_num 
+            request.session["new_otp"] = random_num
             return redirect(otp_page)
 
-    return render(request,'pages/reg_page/reg_page.html')
+    return render(request, 'pages/reg_page/reg_page.html')
 
 
 def otp_page(request):
     if request.method == "POST":
         input_otp = request.POST['otp_input']
         if input_otp == str(request.session.get('new_otp')):
-            set_active = user_details.objects.get(username = request.session.get("new_user"))
+            set_active = user_details.objects.get(
+                username=request.session.get("new_user"))
             set_active.is_active = True
             set_active.save()
             request.session['username'] = request.session.get("new_user")
-            request.session['user_unique_id'] = request.session.get("new_user_id")
+            request.session['user_unique_id'] = request.session.get(
+                "new_user_id")
             return redirect(home)
         else:
-            messages.error(request,"Invalid OTP")
-    return render(request,"pages/other/otp/otp_page.html")
+            messages.error(request, "Invalid OTP")
+    return render(request, "pages/other/otp/otp_page.html")
 
 
 def searchPage(request):
@@ -277,71 +266,73 @@ def searchPage(request):
     print("searched Query:",query)
     name = ''
     if username != None:
-        user_detail = user_details.objects.get(Q(pk = user_id))
+        user_detail = user_details.objects.get(Q(pk=user_id))
         user_is_admin = user_detail.is_admin
-        name = user_detail.first_name 
+        name = user_detail.first_name
 
-        #initializing variable
-        resources = ""
+    context = Context(request)
 
-        if category != '' and query != 'None':
-            resources = file_upload.objects.filter(Q(description__iexact = query) | Q(file_title__iexact = query))
-            context['resultFor'] = "Search Result for: "+ str(query)
-            print(resources)
-        else:
-            searched_file_query = searched_file.objects.filter(Q(user_id = user_id))[0:3]
-            if searched_file_query.count() != 0:
-                context['resultFor'] = "Recomended"
-                searched_file_name = []
-                for file in searched_file_query:
-                    searched_file_name.append(file.query)
-                    print(searched_file_name)
-                resources = file_upload.objects.filter( Q(description__in = searched_file_name) | Q(file_title__in = searched_file_name) )
-            else:
-                context['resultFor'] = "Nothing to show"
-        liked_resources = file_likes.objects.filter(Q(user = user_id),Q(file__in = resources))
-        liked_by_user = []
-        for dataset in liked_resources:
-            if dataset.pk not in liked_by_user:
-                liked_by_user.append(dataset.file.pk)
-        bookmarked_resources = bookmarked_files.objects.filter(Q(user = user_id),Q(file__in = resources))
-        # creating list of bookmarked files in search result bu user
-        bookmarked_by_user = []
-        for dataset in bookmarked_resources:
-            if dataset.pk not in bookmarked_by_user:
-                bookmarked_by_user.append(dataset.file.pk)
-        context['all_resources'] = resources
-        context['liked_by_user'] = liked_by_user
-        context['bookmarked_by_user'] = bookmarked_by_user
-        print("--",context['all_resources'])
-        return render(request,"pages/search/search_page.html",context)
+    if category != '' and query != '':
+        search_query = query
+        # print(search_query)
+        resources = file_upload.objects.filter(
+            Q(description=search_query) | Q(file_title=search_query))
+        context['resultFor'] = "Search Result for: "+query
+        # creating list of liked files in search result bu user
     else:
-        return redirect(loginpage)
+        context['resultFor'] = "Recomended"
+        searched_file_query = searched_file.objects.filter(Q(user_id=user_id))
+        searched_file_name = []
+        for file in searched_file_query:
+            searched_file_name.append(file.query)
+            print(searched_file_name)
+        resources = file_upload.objects.filter(
+            Q(description__in=searched_file_name) | Q(file_title__in=searched_file_name))
+
+    liked_resources = file_likes.objects.filter(
+        Q(user=user_id), Q(file__in=resources))
+    liked_by_user = []
+    for dataset in liked_resources:
+        if dataset.pk not in liked_by_user:
+            liked_by_user.append(dataset.file.pk)
+
+    bookmarked_resources = bookmarked_files.objects.filter(
+        Q(user=user_id), Q(file__in=resources))
+
+    # creating list of bookmarked files in search result bu user
+    bookmarked_by_user = []
+    for dataset in bookmarked_resources:
+        if dataset.pk not in bookmarked_by_user:
+            bookmarked_by_user.append(dataset.file.pk)
+
+    context['all_resources'] = resources
+    context['liked_by_user'] = liked_by_user
+    context['bookmarked_by_user'] = bookmarked_by_user
+
+    # print("--",context['resources'])
+    return render(request, "pages/search/search_page.html", context)
+
 
 def search_store(request):
     context = Context(request)
-    try:
-        search_file_query = searched_file.objects.create(
-            user_id = user_details.objects.get(unique_id = context['current_user']),
-            query = request.GET['searched_query']
-        )
-        search_file_query.save()
-        return HttpResponse("Search query stored")
-    except Exception as err:
-        print("error storing in db:",err)
-        return HttpResponse("failed...")
+    search_file_query = searched_file.objects.create(
+        user_id=user_details.objects.get(unique_id=context['current_user']),
+        query=request.GET['searched_query']
+    )
+    search_file_query.save()
+    print("Search file stores")
 
 
 def file_like(request):
     user_id = request.session.get("user_unique_id")
     if request.method == "POST":
         try:
-            print(request.GET.get('file_id',None))
-            file_id = request.GET.get('file_id',None)
+            print(request.GET.get('file_id', None))
+            file_id = request.GET.get('file_id', None)
             # print("File_id: ",file_id)
             create_file_like_object = file_likes.objects.create(
-                user = user_details.objects.get(unique_id = user_id),
-                file = file_upload.objects.get(pk = file_id)
+                user=user_details.objects.get(unique_id=user_id),
+                file=file_upload.objects.get(pk=file_id)
             )
             create_file_like_object.save()
 
@@ -359,11 +350,12 @@ def file_unlike(request):
     user_id = request.session.get("user_unique_id")
     if request.method == "POST":
         try:
-            file_id = request.GET.get('file_id',None)
+            file_id = request.GET.get('file_id', None)
 
-            get_file_like_object = file_likes.objects.get(Q(file = file_id), Q(user = user_id))
+            get_file_like_object = file_likes.objects.get(
+                Q(file=file_id), Q(user=user_id))
             get_file_like_object.delete()
-            
+
             like_count = count_likes(file_id)
 
             return HttpResponse('Success,'+str(like_count))
@@ -373,12 +365,11 @@ def file_unlike(request):
 
 
 def count_likes(file_id):
-    get_like_db_count = file_likes.objects.filter(Q(file = file_id)).count() 
-    file_db_update = file_upload.objects.get(pk = file_id)
+    get_like_db_count = file_likes.objects.filter(Q(file=file_id)).count()
+    file_db_update = file_upload.objects.get(pk=file_id)
     file_db_update.likes = int(get_like_db_count)
     file_db_update.save()
     return get_like_db_count
-    
 
 
 def add_bookmark(request):
@@ -386,12 +377,12 @@ def add_bookmark(request):
     user_id = request.session.get("user_unique_id")
     if request.method == "POST":
         try:
-            print(request.GET.get('file_id',None))
-            file_id = request.GET.get('file_id',None)
+            print(request.GET.get('file_id', None))
+            file_id = request.GET.get('file_id', None)
             # print("File_id: ",file_id)
             create_bookmark_file_object = bookmarked_files.objects.create(
-                user = user_details.objects.get(unique_id = user_id),
-                file = file_upload.objects.get(pk = file_id)
+                user=user_details.objects.get(unique_id=user_id),
+                file=file_upload.objects.get(pk=file_id)
             )
             create_bookmark_file_object.save()
 
@@ -406,11 +397,12 @@ def remove_bookmark(request):
     user_id = request.session.get("user_unique_id")
     if request.method == "POST":
         try:
-            file_id = request.GET.get('file_id',None)
+            file_id = request.GET.get('file_id', None)
 
-            bookmark_file_object = bookmarked_files.objects.get(Q(file = file_id), Q(user = user_id))
+            bookmark_file_object = bookmarked_files.objects.get(
+                Q(file=file_id), Q(user=user_id))
             bookmark_file_object.delete()
-            
+
             return HttpResponse("Success")
         except Exception as er:
             return HttpResponse("Error: "+str(er))
@@ -420,25 +412,26 @@ def report_submit(request):
     if request.method == "POST":
         try:
 
-            file_id = request.GET.get('file_id',None)
-            user_reported_issue = request.GET.get('user_reported_issue',None)
-            user_posted = request.GET.get('user_posted',None)
-            report_topic = request.GET.get('report_topic',None)
-            reason_to_report = request.GET.get('reason_to_report',None)
-            
-            file_id = file_upload.objects.get( Q(pk = file_id) )
-            user_reported_issue= user_details.objects.get( Q(pk = user_reported_issue) )
-            user_posted =  user_details.objects.get( Q(pk = user_posted) )
+            file_id = request.GET.get('file_id', None)
+            user_reported_issue = request.GET.get('user_reported_issue', None)
+            user_posted = request.GET.get('user_posted', None)
+            report_topic = request.GET.get('report_topic', None)
+            reason_to_report = request.GET.get('reason_to_report', None)
 
-            print("->",file_id, user_reported_issue, user_posted)
+            file_id = file_upload.objects.get(Q(pk=file_id))
+            user_reported_issue = user_details.objects.get(
+                Q(pk=user_reported_issue))
+            user_posted = user_details.objects.get(Q(pk=user_posted))
+
+            print("->", file_id, user_reported_issue, user_posted)
 
             report_file_objects = reported_file.objects.create(
-                file= file_id, 
-                user_reported_issue = user_reported_issue,
-                user_posted = user_posted,
-                reason = report_topic,
-                reason_message = reason_to_report,
-                )
+                file=file_id,
+                user_reported_issue=user_reported_issue,
+                user_posted=user_posted,
+                reason=report_topic,
+                reason_message=reason_to_report,
+            )
             report_file_objects.save()
             return HttpResponse("Success")
 
@@ -447,21 +440,18 @@ def report_submit(request):
             return HttpResponse("Error: "+str(er))
 
 
-
-
 def upload_page(request):
-    
+
     user_id = request.session.get("user_unique_id")
     username = request.session.get("username")
     context = Context(request)
     if username != None:
-        user_detail = user_details.objects.get(Q(pk = user_id))
+        user_detail = user_details.objects.get(Q(pk=user_id))
         user_is_admin = user_detail.is_admin
-        name = user_detail.first_name 
-        
+        name = user_detail.first_name
 
     if request.method == "POST":
-    
+
         try:
             file = request.FILES['file_data']
             # if file_type == "pdf":
@@ -473,24 +463,27 @@ def upload_page(request):
             print(file_description)
             file_title = request.POST['title']
             tags = request.POST['tags']
-            fs = FileSystemStorage(location= 'files/'+str(request.session['user_unique_id'])+"/"+file_type+"/")
+            fs = FileSystemStorage(
+                location='files/'+str(request.session['user_unique_id'])+"/"+file_type+"/")
             file_details = file_upload.objects.create(
-                file_type = file_type , 
-                file_name = file.name,
-                description = file_description,
-                file_title = file_title,
-                tags = tags,
-                file_url = str(request.session['user_unique_id'])+"/"+file_type+"/"+file.name,
-                user = user_details.objects.get(unique_id = request.session.get("user_unique_id")),
-                likes = 0
-                )
+                file_type=file_type,
+                file_name=file.name,
+                description=file_description,
+                file_title=file_title,
+                tags=tags,
+                file_url=str(
+                    request.session['user_unique_id'])+"/"+file_type+"/"+file.name,
+                user=user_details.objects.get(
+                    unique_id=request.session.get("user_unique_id")),
+                likes=0
+            )
             file_details.save()
-            fs.save(file.name,file)
-            messages.success(request,"File uploaded")
+            fs.save(file.name, file)
+            messages.success(request, "File uploaded")
         except Exception as err:
-            print("error uploading file:",err)
+            print("error uploading file:", err)
 
-    return render(request,"pages/upload/old_upload.html",context)
+    return render(request, "pages/upload/old_upload.html", context)
 
 
 

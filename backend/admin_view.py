@@ -6,8 +6,6 @@ from sqlite3 import Timestamp
 from backend.models import bookmarked_files, file_likes, file_upload, reported_file, user_details
 from django.shortcuts import redirect, render, HttpResponse
 from django.db.models import Q
-from django.core import serializers
-from django.http import JsonResponse
 from .helper_functions import mergeDict
 
 def Context(request):
