@@ -310,6 +310,10 @@
     border-radius: 10px !important;
 }
 
+/* border size */
+.border-none{
+    border: transparent !important;
+}
 
 
 /* Animations */
@@ -416,4 +420,16 @@
 }
 .fmn-bttn-3:hover{
     background-color: var(--bc4);
+}
+
+
+/* cursor styles */
+.cursor-pointer{
+    cursor: pointer;
+}
+.cursor-progress, .cursor-loading{
+    cursor:progress;
+}
+.cursor-not-allowed{
+    cursor: not-allowed;
 }

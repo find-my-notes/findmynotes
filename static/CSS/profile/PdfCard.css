@@ -1,0 +1,70 @@
+
+.pdf-result-container{
+    padding: 3vh 1vw 1vh 1vw;
+}
+.pdf-result{
+    position: relative;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.115);
+    /* border: 0.5px solid black; */
+    border-radius: 3px;
+    padding: 1vh 1vw;
+    display:grid;
+    grid-template-columns: 10% 60% 20%;
+    align-items: center;
+}
+.pdf-icon-container{
+    justify-self: center;
+}
+.fa-file-pdf-o{
+    color: rgb(67, 20, 20)    
+}
+.file-title{
+    font-size:25px;
+    color: black
+}
+.file-description{
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+}
+.button-group{
+    display: flex;
+    white-space: nowrap;
+    justify-self: right;
+    padding: 0 2vw;
+    gap: 1vw;
+}
+button{
+    background-color:transparent;
+    border:transparent;
+    cursor: pointer;
+}
+.fa-floppy-o{
+    color: black
+}
+@media (max-width: 1200px) and (min-width: 768px){
+    .pdf-result{
+        grid-template-columns: 10vw 65vw 20vw;
+    }
+}
+@media (max-width: 768px){
+    .pdf-result{
+        width:100%;
+        grid-template-columns: 12vw 70vw 10vw;
+    }
+    .button-group{
+        display: flex;
+        white-space: nowrap;
+        justify-self: right;
+        flex-direction: column;
+        padding: 0;
+        gap: 0.2vw;
+    }
+}
+@media (max-width: 577px){
+    .pdf-result{
+        width:100%;
+        grid-template-columns: 15vw 60vw 15vw;
+    }
+}

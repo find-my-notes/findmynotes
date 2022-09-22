@@ -82,7 +82,6 @@ DATABASES = {
 #         'PORT':'1433',
 #     }
 # }
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -139,6 +138,3 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "findmynotes2022@gmail.com"
 EMAIL_HOST_PASSWORD = os.getenv("FMN_MAIL_PWD")
 
-
-#page 404 not found handler
-handler404 = 'backend.views.error_404_view'

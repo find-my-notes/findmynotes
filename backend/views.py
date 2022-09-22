@@ -50,6 +50,7 @@ def profile(request):
         total_bookmarked_file = bookmarked_file.count()
         print(uploaded_files.count())
         user_is_admin = user_detail.is_admin
+        context['uploaded_files'] = uploaded_files 
         context['total_likes'] = total_likes
         context['total_uploads'] = total_uploads
         context['total_bookmarked'] = total_bookmarked_file
@@ -58,8 +59,7 @@ def profile(request):
         context['user_bio'] = user_detail.user_bio
         return render(request, 'pages/profile/user_profile.html', context)
     else:
-        return render(request, 'pages/profile/user_profile.html')
-        # return HttpResponse("404 page not found")
+        return redirect(error_404_view)
 
 
 def faq(request):
@@ -259,7 +259,6 @@ def searchPage(request):
     user_id = request.session.get("user_unique_id")
     username = request.session.get("username")
     context= Context(request)
-
     #Get query from url
     category = str(request.GET.get('category'))
     query = str(request.GET.get('search_query'))
@@ -272,16 +271,15 @@ def searchPage(request):
 
     context = Context(request)
 
-    if category != '' and query != '':
+    if category != '' and query != 'None':
         search_query = query
         # print(search_query)
-        resources = file_upload.objects.filter(
-            Q(description=search_query) | Q(file_title=search_query))
+        resources = file_upload.objects.filter((Q(description__icontains = search_query) | Q(file_title__icontains =search_query) | Q(file_name__icontains =search_query) | Q(tags__icontains =search_query)) and (Q(is_verified = True)))
         context['resultFor'] = "Search Result for: "+query
         # creating list of liked files in search result bu user
     else:
         context['resultFor'] = "Recomended"
-        searched_file_query = searched_file.objects.filter(Q(user_id=user_id))
+        searched_file_query = searched_file.objects.filter(Q(user_id=user_id))[0:3]
         searched_file_name = []
         for file in searched_file_query:
             searched_file_name.append(file.query)
@@ -441,54 +439,49 @@ def report_submit(request):
 
 
 def upload_page(request):
-
     user_id = request.session.get("user_unique_id")
     username = request.session.get("username")
     context = Context(request)
     if username != None:
         user_detail = user_details.objects.get(Q(pk=user_id))
         user_is_admin = user_detail.is_admin
+        user_is_faculty = user_detail.is_faculty
+        print(user_is_faculty)
         name = user_detail.first_name
-
     if request.method == "POST":
-
         try:
             file = request.FILES['file_data']
             # if file_type == "pdf":
-            print(type(file))
-            print(type(file.read()))
-            print(type(str(file.read())))
             file_type = request.POST['file_type']
             file_description = request.POST['description']
             print(file_description)
             file_title = request.POST['title']
             tags = request.POST['tags']
-            fs = FileSystemStorage(
-                location='files/'+str(request.session['user_unique_id'])+"/"+file_type+"/")
+            fs = FileSystemStorage(location='files/'+str(request.session['user_unique_id'])+"/"+file_type+"/")
             file_details = file_upload.objects.create(
                 file_type=file_type,
                 file_name=file.name,
                 description=file_description,
                 file_title=file_title,
                 tags=tags,
-                file_url=str(
-                    request.session['user_unique_id'])+"/"+file_type+"/"+file.name,
-                user=user_details.objects.get(
-                    unique_id=request.session.get("user_unique_id")),
-                likes=0
+                file_url=str(request.session['user_unique_id'])+"/"+file_type+"/"+file.name,user=user_details.objects.get(unique_id=request.session.get("user_unique_id")),
+                likes=0,
+                is_verified = user_is_faculty
             )
             file_details.save()
             fs.save(file.name, file)
             messages.success(request, "File uploaded")
         except Exception as err:
             print("error uploading file:", err)
-
     return render(request, "pages/upload/old_upload.html", context)
 
+#Terms and condition page to upload note
+def uploadTC(request):
+    return render(request, "pages/upload/terms_and_condition.html", Context(request))
 
 
 def error_404_view(request, exception):
-    return HttpResponse("404 Not found")
+    return render(request,"pages/other/notfound/notfound.html")
 
 
 def logout(request):

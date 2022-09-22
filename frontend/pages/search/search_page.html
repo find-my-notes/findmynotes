@@ -242,48 +242,20 @@
 {% block scripts %}
 
 <script defer src="{% static 'javascript/search_query.js' %}"></script>
+<script defer src="{% static 'javascript/searchPage.js' %}"></script>
 <script defer src="{% static 'javascript/inputFunctions.js' %}"></script>
 
 <script type="text/javascript">
 
-    function showReportPopup(file_id,user_reported_issue,user_posted){
-        document.getElementById("report_form_overlay").style.display="flex";
-        document.getElementById("reporting_file_id").value = file_id;
-        document.getElementById("user_reported_issue").value = user_reported_issue;
-        document.getElementById("user_posted").value = user_posted;
-        document.body.style.overflow = "hidden";
-    }
-
-    function closeReportPopup(){
-        document.getElementById("report_form_overlay").style.display="none"
-        document.body.style.overflow = "";
-
-        document.getElementById("reason_to_report").value = "" ;
-
-    }
-    function showDescription(that){
-        var description = that.querySelector("#file_description")
-        description.classList.remove("truncate-line-1")
-    }
-    function hideDescription(that){
-        var description = that.querySelector("#file_description")
-        description.classList.add("truncate-line-1")
-    }
     function reportPost(){
-
         file = document.getElementById("reporting_file_id").value ;
         user_posted = document.getElementById("user_posted").value ;
-
         user_reported_issue = document.getElementById("user_reported_issue").value ;
-
         report_topic = document.getElementById("report_topic").value ;
         reason_to_report = document.getElementById("reason_to_report").value ;
-
         try {
             var xhttp = new XMLHttpRequest();
-
             // console.log("ajax request state: "+xhttp.readyState);
-
             xhttp.onreadystatechange = function() {
 
                 if(this.readyState == 4 && this.status == 200){
@@ -294,23 +266,16 @@
                     }
                 }              
             }
-
             file_url = '/report_submit?file_id='+file+'&user_reported_issue='+user_reported_issue+'&user_posted='+user_posted+'&reason_to_report='+reason_to_report+"&report_topic="+report_topic
-
             xhttp.open('POST',file_url,true);
             xhttp.setRequestHeader("X-CSRFToken","{{csrf_token}}")
             xhttp.send();
         } catch (err) {
             console.log("Error: " + err)
         }
-
-
     }
-
     function toggleLikes(file,this_button){
-
         contains_red_heart = this_button.firstElementChild.classList.contains('fa-heart')
-
         if(contains_red_heart == true){
             unlikeFile(file,this_button)
         }
@@ -318,17 +283,12 @@
             likeFile(file,this_button)
         }
     }
-
     function likeFile(file,this_button) {
         console.log("liked:",file);
-        
         try {
             var xhttp = new XMLHttpRequest();
-
             // console.log("ajax request state: "+xhttp.readyState);
-
             xhttp.onreadystatechange = function() {
-
                 if(this.readyState == 4 && this.status == 200){
                     // console.log("Ans:"+ typeof(this.responseText) +" | "+ this.responseText.split(",")[1] )
                     if (this.responseText.split(",")[0] == "Success") {
@@ -339,45 +299,31 @@
                     }
                 }              
             }
-
             file_url = '/file_like?file_id='+file
-
             xhttp.open('POST',file_url,true);
             xhttp.setRequestHeader("X-CSRFToken","{{csrf_token}}")
             xhttp.send();
         } catch (err) {
             console.log("Error: " + err)
         }
-
-
     }
     function unlikeFile(file,this_button){
         console.log("unliked:",file);
-        
         try {
             var xhttp = new XMLHttpRequest();
-
-
             // console.log("ajax request state: "+xhttp.readyState);
-
             xhttp.onreadystatechange = function() {
-
                 if(this.readyState == 4 && this.status == 200){
                     console.log("Ans:"+this.responseText.split(",")[0]  )
-
                     if (this.responseText.split(",")[0] == "Success" ) {
-
                         this_button.innerHTML = "<i class='fa fa-heart-o fa-2x'></i>";
-
                         like_container = "post_like_count_"+file;
                         console.log(like_container)
                         document.getElementById(like_container).textContent = this.responseText.split(",")[1]
                     }
                 }
             }
-
             file_url = '/file_unlike?file_id='+file
-
             xhttp.open('POST',file_url,true);
             xhttp.setRequestHeader("X-CSRFToken","{{csrf_token}}")
             xhttp.send();
@@ -387,9 +333,6 @@
         }
     }
 
-
-
-    
     function toggleBookmark(file,this_button){
 
         contains_bookmark = this_button.firstElementChild.classList.contains('fa-bookmark')

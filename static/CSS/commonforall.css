@@ -170,3 +170,7 @@ button {
     background: transparent;
     border: transparent;
 }
+button:disabled, input[type=submit]:disabled{
+    opacity: 0.4;
+    cursor: not-allowed;
+}

@@ -2,11 +2,12 @@
     min-height: 90vh;
     background-image: url(../../media/images/Upload/bg.jpg);
     background-repeat: no-repeat;
-    background-size: cover
+    background-size: cover;
+    padding: 20px 0 20px 0; 
 }
 .upload-form-container{
     background-color: var(--white);
-    padding: 2vh 2vw;
+    padding: 10px 30px 15px 30px;
     border-radius: 5px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.144);
 }
@@ -14,6 +15,7 @@
 @media (max-width: 767px) {
     .upload-form-container{ 
         width:90vw;
+        padding: 10px 30px 15px 30px;
     }
 }
 
@@ -24,7 +26,7 @@
     justify-content: center;
 }
 .browse-file-bttn-div{
-    border: 1px dashed var(--black) ;
+    border: 1px dashed var(--bc1) ;
     background-color: white;
     min-height: 20vh;
     display: flex;
@@ -33,15 +35,15 @@
     justify-content: center;
 }
 .browse-file-bttn-div .fa-upload{
-    color:grey;
+    color: var(--bc3);
     font-size: 30px
 }
-.upload-form input{
+.upload-form input:not([type=checkbox]){
     height:40px;
     width:500px;
-    border: 1px solid var(--black);
+    border: 1px solid var(--bc1);
     border-radius: 3px;
-    padding: 0 1vw;
+    padding: 0 15px;
 }
 @media (max-width: 768px) {
     .upload-form input{
@@ -58,9 +60,10 @@
 }
 .upload-form form textarea{
     resize:none;
-    border: 1px solid var(--black);
+    border: 1px solid var(--bc1);
     border-radius: 3px;
+    padding: 10px 15px;
 }
 .head-text{
-    padding: 2vh 0
+    padding: 2vh 0;
 }

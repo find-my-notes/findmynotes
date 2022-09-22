@@ -17,6 +17,7 @@ urlpatterns = [
     path('report_submit', views.report_submit,name="report_submit"),
 
     path('upload_page', views.upload_page,name="upload_page"),
+    path('uploadTC', views.uploadTC,name="uploadTC"),
 
     path('loginpage', views.loginpage , name="loginpage"),
     path('forgetPassword', views.forgetPassword , name="forgetPassword"),

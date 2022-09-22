@@ -4,19 +4,14 @@
 {% block style-links %}
 
 
-
 {% endblock style-links %}
    
-
-
 {% block  content %}
-             
-     
+       
 
 {% endblock content %}
 
-
-
 {% block scripts %}
+
 
 {% endblock scripts %}   

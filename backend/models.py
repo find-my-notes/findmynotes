@@ -114,6 +114,7 @@ class file_upload(models.Model):
     description = models.CharField(max_length=500,default=None)
     uploading_time = models.DateTimeField(auto_now_add=True)
     likes = models.BigIntegerField(null = False,default=None)
+    is_verified = models.BooleanField(default = False,null = False)
     user = models.ForeignKey(user_details,on_delete=models.CASCADE,default=None,verbose_name='user_unique_id')
     class Meta:
         db_table = "file_details"

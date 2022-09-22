@@ -3,7 +3,7 @@
 
 {% block style-links %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'CSS/upload/upload.css' %}?" %}>
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/upload/upload.css' %}" %}>
 
 {% endblock style-links %}
    
@@ -12,53 +12,39 @@
      <div class="upload-form-wrapper flex justify-center">
          <div class="upload-form-container">
              <div class="head-text text-center">
-            <h2>Upload your notes</h2>
+            <h2 class="color-1">Upload your notes</h2>
              </div>
              <div class="upload-form">
                  <form action="" method="POST" enctype="multipart/form-data">
                      {% csrf_token %}
-                     <input type="text" id="" placeholder="Title" name="title">
+                     <input type="text" id="" class="font-size-18" placeholder="Title" name="title">
 
-                    <textarea oninput="wordCounter(this,'500')"  cols="30" rows="10" maxlength="500" minlength="30" placeholder="Description" name="description"></textarea>
+                    <textarea oninput="wordCounter(this,'500')" class="font-size-18" cols="30" rows="10" maxlength="500" minlength="30" placeholder="Description" name="description"></textarea>
                     <div class="input-length-counter-div">
                         <p class="input-length-counter"><span  id="input_length_counter">0</span>/500</p>
                     </div>
-                     <input type="text" id="" placeholder="Tags" name="tags">
+                     <input type="text" id="" class="font-size-18" placeholder="Tags" name="tags">
                      <div class="browse-file-bttn-div">
-                         <i class="fa fa-upload"></i><br>
-
+                         <i class="fa fa-upload"  onclick="browse_file_bttn()"></i><br>
                          <div class="hidden">
                              <input accept="application/pdf" id="file_to_upload" onchange="get_file_data()" type="file" name="file_data">
                              <input type="hidden" name="file_type" id="file_type">
                          </div>
-
-                         <a href="#" onclick="browse_file_bttn()">Browse File</a>
+                         <a href="#"  onclick="browse_file_bttn()">Browse File</a>
                          <p><small id="file_name"></small></p>
-                       
                          <p class="imp-field"><small>Accepted file type: .pdf</small></p>
                          <script>
-                            function browse_file_bttn(){
-                                document.getElementById("file_to_upload").click();
-                            }
-                            function get_file_data(){
-
-                                var fileName = document.getElementById("file_to_upload").value;
-                                document.getElementById("file_name").innerHTML = fileName;
-
-                                extension = fileName.substring(fileName.lastIndexOf('.') + 1);
-                                let FileType;
-                                if(extension == 'jpg' || extension == "png" || extension == "jpeg" || extension == "jfif"){
-                                    FileType = "image"
-                                }
-                                if(extension == "pdf"){
-                                    FileType = "pdf"
-                                }
-                                document.querySelector('#file_type').value = FileType;
-
-                            }
+                           
                         </script>
                      </div>
-                     <input type="submit" class="simple-bttn-2" value="Upload">
+                     <div>
+                         <span><input type="checkbox" onchange="validateTAndC(this)" id="tandc_checkbox"></span>
+                         <span>I agree to the <a href="/uploadTC" target="_blank" class="underline color-1">terms and condition</a> as set out by the user agreement</span>
+                         <script>
+                            
+                         </script>
+                     </div>
+                     <input type="submit" class="fmn-bttn-3 border-none" disabled id="upload_bbtn" value="Upload">
                  </form>
              </div>
          </div>
@@ -70,5 +56,6 @@
 
 {% block scripts %}
 <script src="{% static 'javascript/inputFunctions.js' %}"></script>
+<script src="{% static 'javascript/uploadPage.js' %}"></script>
 
 {% endblock scripts %}   

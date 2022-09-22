@@ -1,0 +1,56 @@
+<!-- 'file' is used as queryset which has file_url, file_title, description, uploading_time, user(foriegn key for user details), -->
+<div class="pdf-result-container">
+    <div class="pdf-result">
+        <span class="pdf-icon-container">
+            <i class="fa fa-file-pdf-o fa-3x"></i>
+        </span>
+        <span>
+            <div>
+                <a class="file-title" href="/media/{{file.file_url}}" target="_blank">{{file.file_title}}</a>
+            </div>
+            <div>
+                <p class="file-description" title="{{file.description}}"><small><i class="fa fa-heart"></i> 
+                    <span id="post_like_count_{{file.pk}}"> {{file.likes}}</span></small> | <small>{{file.description}}</small></p>
+
+                <div  class="card-flex-row color-1">
+                    <P><small>{{file.user.username}} | {{file.uploading_time}}
+                        {% if username == file.user.username %}
+                            <br><a href="" class="color-1 underline">edit</a>
+                        {% else %}
+                        | <a class="report-bttn" onclick="showReportPopup('{{file.pk}}','{{current_user}}','{{file.user.pk}}')">Report</a></small></P>
+                        {% endif %}
+                </div>
+                <div >
+                    <p><small>{{file.tags}}</small></p>
+                </div>
+            </div>
+        </span>
+        <div class="button-group">
+            <!-- Like button -->
+            {% if file.pk in liked_by_user %}
+            <button title="Unlike" onclick="toggleLikes('{{file.pk}}',this)" >
+                <i class="fa fa-heart fa-2x"></i>
+            </button>
+            {% else %}
+            <button title="Like" onclick="toggleLikes('{{file.pk}}',this)" >
+                <i class="fa fa-heart-o fa-2x"></i>
+            </button>
+            {% endif %}
+            <!-- Bookmark button -->
+            {% if file.pk in bookmarked_by_user %}
+            <button title="Remove Bookmark"  onclick="toggleBookmark('{{file.pk}}',this)" >
+                <i class="fa fa-bookmark fa-2x"></i>
+            </button>
+            {% else %}
+            <button title="Add Bookmark"  onclick="toggleBookmark('{{file.pk}}',this)" >
+                <i class="fa fa-bookmark-o fa-2x"></i>
+            </button>
+            {% endif %}
+            <!-- Download Button -->
+            <button title="Download">
+                <a href="/media/{{file.file_url}}" download="{{file.file_url}}"><i class="fa fa-floppy-o fa-2x"></i></a>
+            </button>
+        </div>
+
+    </div>
+</div>
