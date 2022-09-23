@@ -261,6 +261,7 @@ def searchPage(request):
     query = str(request.GET.get('search_query'))
     print("searched Query:",query)
     name = ''
+    resources = ""
     if username != None:
         user_detail = user_details.objects.get(Q(pk=user_id))
         user_is_admin = user_detail.is_admin
@@ -283,8 +284,7 @@ def searchPage(request):
                 print(searched_file_name)
                 resources = file_upload.objects.filter((Q(description__icontains = searched_file_name) | Q(file_title__icontains =searched_file_name) | Q(file_name__icontains =searched_file_name) | Q(tags__icontains =searched_file_name)) and (Q(is_verified = True)))
 
-        liked_resources = file_likes.objects.filter(
-            Q(user=user_id), Q(file__in=resources))
+        liked_resources = file_likes.objects.filter(Q(user=user_id), Q(file__in=resources))
         liked_by_user = []
         for dataset in liked_resources:
             if dataset.pk not in liked_by_user:
