@@ -266,42 +266,42 @@ def searchPage(request):
         user_is_admin = user_detail.is_admin
         name = user_detail.first_name
 
-    context = Context(request)
+        context = Context(request)
 
-    if category != '' and query != 'None':
-        search_query = query
-        # print(search_query)
-        resources = file_upload.objects.filter((Q(description__icontains = search_query) | Q(file_title__icontains =search_query) | Q(file_name__icontains =search_query) | Q(tags__icontains =search_query)) and (Q(is_verified = True)))
-        context['resultFor'] = "Search Result for: "+query
-        # creating list of liked files in search result bu user
-    else:
-        context['resultFor'] = "Recomended"
-        searched_file_query = searched_file.objects.filter(Q(user_id=user_id))[0:3]
-        searched_file_name = []
-        for file in searched_file_query:
-            searched_file_name.append(file.query)
-            print(searched_file_name)
-            resources = file_upload.objects.filter((Q(description__icontains = searched_file_name) | Q(file_title__icontains =searched_file_name) | Q(file_name__icontains =searched_file_name) | Q(tags__icontains =searched_file_name)) and (Q(is_verified = True)))
+        if category != '' and query != 'None':
+            search_query = query
+            # print(search_query)
+            resources = file_upload.objects.filter((Q(description__icontains = search_query) | Q(file_title__icontains =search_query) | Q(file_name__icontains =search_query) | Q(tags__icontains =search_query)) and (Q(is_verified = True)))
+            context['resultFor'] = "Search Result for: "+query
+            # creating list of liked files in search result bu user
+        else:
+            context['resultFor'] = "Recomended"
+            searched_file_query = searched_file.objects.filter(Q(user_id=user_id))[0:3]
+            searched_file_name = []
+            for file in searched_file_query:
+                searched_file_name.append(file.query)
+                print(searched_file_name)
+                resources = file_upload.objects.filter((Q(description__icontains = searched_file_name) | Q(file_title__icontains =searched_file_name) | Q(file_name__icontains =searched_file_name) | Q(tags__icontains =searched_file_name)) and (Q(is_verified = True)))
 
-    liked_resources = file_likes.objects.filter(
-        Q(user=user_id), Q(file__in=resources))
-    liked_by_user = []
-    for dataset in liked_resources:
-        if dataset.pk not in liked_by_user:
-            liked_by_user.append(dataset.file.pk)
+        liked_resources = file_likes.objects.filter(
+            Q(user=user_id), Q(file__in=resources))
+        liked_by_user = []
+        for dataset in liked_resources:
+            if dataset.pk not in liked_by_user:
+                liked_by_user.append(dataset.file.pk)
 
-    bookmarked_resources = bookmarked_files.objects.filter(
-        Q(user=user_id), Q(file__in=resources))
+        bookmarked_resources = bookmarked_files.objects.filter(
+            Q(user=user_id), Q(file__in=resources))
 
-    # creating list of bookmarked files in search result bu user
-    bookmarked_by_user = []
-    for dataset in bookmarked_resources:
-        if dataset.pk not in bookmarked_by_user:
-            bookmarked_by_user.append(dataset.file.pk)
+        # creating list of bookmarked files in search result bu user
+        bookmarked_by_user = []
+        for dataset in bookmarked_resources:
+            if dataset.pk not in bookmarked_by_user:
+                bookmarked_by_user.append(dataset.file.pk)
 
-    context['all_resources'] = resources
-    context['liked_by_user'] = liked_by_user
-    context['bookmarked_by_user'] = bookmarked_by_user
+        context['all_resources'] = resources
+        context['liked_by_user'] = liked_by_user
+        context['bookmarked_by_user'] = bookmarked_by_user
 
     # print("--",context['resources'])
     return render(request, "pages/search/search_page.html", context)
