@@ -49,6 +49,8 @@ class user_details(AbstractBaseUser):
     gender = models.CharField(max_length=6,null = False)
     dob = models.DateField()
 
+    total_uploads = models.IntegerField()
+
     mail = models.CharField(max_length=50,null = False,unique=True)
     phone = models.BigIntegerField(null = False,default=None)
 

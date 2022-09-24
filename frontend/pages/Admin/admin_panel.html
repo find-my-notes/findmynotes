@@ -121,10 +121,10 @@
 
 <div class="user-details-table">
     
-    <div class="table-search-box">
+    <div class="text-center bold font-size-25">Total Active Users</div>
+    <div class="table-search-box justify-center">
 		<input type="text" name="search" id="searchTable" placeholder="Search..."/>
 	</div>   
-
 	<div class="table-body">
 	<table class="table">
      <thead>
@@ -152,7 +152,7 @@
       	    <td data-label="Gender">{{user.gender}}</td>
      	  	<td data-label="Mail_ID">{{user.mail}}</td>
      	  	<td data-label="Phone Number">{{user.phone}}</td>
-			<td data-label="Uploads">100</td>
+			<td data-label="Uploads">{{user.total_uploads}}</td>
 			<td data-label="Date">{{user.timestamp}}</td>
 			<td data-label="Action">
                 <button class="perm ban-user-bttn" onclick="banUser('{{user.pk}}','{{user.username}}')" >Ban User</button></td>

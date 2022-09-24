@@ -8,6 +8,7 @@
 }
 .table-search-box{
     margin:  0 10px;;
+	display: flex;
 }
 .table-search-box #searchTable{
 	width: 50%;
@@ -20,7 +21,11 @@
 	color: black;
 	padding: 6px 10px;
 	background-color: #ffffff;
-	z-index: 50;
+}
+@media (max-width: 768px) {
+	.table-search-box #searchTable{
+		width: 90%;
+	}
 }
 .table{
 	width: 100%;

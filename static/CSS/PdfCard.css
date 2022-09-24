@@ -31,9 +31,9 @@
 .button-group{
     display: flex;
     white-space: nowrap;
+    justify-content: right;
     justify-self: right;
-    padding: 0 2vw;
-    gap: 1vw;
+    gap: 3%;
 }
 button{
     background-color:transparent;
@@ -45,26 +45,26 @@ button{
 }
 @media (max-width: 1200px) and (min-width: 768px){
     .pdf-result{
-        grid-template-columns: 10vw 65vw 20vw;
+        grid-template-columns: 10% 65% 20%;
     }
 }
 @media (max-width: 768px){
     .pdf-result{
         width:100%;
-        grid-template-columns: 12vw 70vw 10vw;
+        grid-template-columns: 12% 70% 10%;
     }
     .button-group{
         display: flex;
         white-space: nowrap;
-        justify-self: right;
+        justify-content: right;
         flex-direction: column;
         padding: 0;
-        gap: 0.2vw;
+        gap: 1%;
     }
 }
 @media (max-width: 577px){
     .pdf-result{
         width:100%;
-        grid-template-columns: 15vw 60vw 15vw;
+        grid-template-columns: 15% 60% 15%;
     }
 }

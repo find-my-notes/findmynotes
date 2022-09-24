@@ -13,11 +13,12 @@ from django.core.mail import send_mail
 def Context(request):
     user_id = request.session.get("user_unique_id")
     username = request.session.get("username")
-
     user_is_admin = False
-    name = "User"
+    name = "user"
+    print(user_id)
     if username != None:
         user_detail = user_details.objects.get(Q(pk=user_id))
+        print(user_detail)
         user_is_admin = user_detail.is_admin
         name = user_detail.first_name + " " + user_detail.last_name
 
@@ -58,6 +59,10 @@ def profile(request):
     else:
         return redirect(error_404_view)
 
+def uploadCountUpdate(user_id, upload_count):
+    user_detail = user_details.objects.get(Q(pk = user_id))
+    user_detail.total_uploads = int(upload_count)
+    user_detail.save()
 
 def faq(request):
     context = Context(request)
@@ -70,23 +75,23 @@ def loginpage(request):
         password = request.POST['password']
         print(username, password)
         try:
-            validate_userid = user_details.objects.get(
-                Q(username=username), Q(password=password))
-            user_unique_id = validate_userid.pk
-            print(validate_userid)
+            validate_userid = user_details.objects.get((Q(username__iexact =username)|Q(mail__iexact  = username)), Q(password=password))
+            user_unique_id = validate_userid.unique_id
             user_is_active = validate_userid.is_active
-            request.session['user_unique_id'] = user_unique_id
-            request.session['username'] = username
-            context = {
-                'username': username,
-                'user_unique_id': user_unique_id
-            }
             if (user_is_active):
+                request.session['user_unique_id'] = user_unique_id
+                request.session['username'] = username
+                context = {
+                    'username': username,
+                    'user_unique_id': user_unique_id
+                }
                 return redirect("/", args=context)
             else:
                 try:
-                    mailer("Verify your account", "send otp",
-                           [validate_userid.mail])
+                    request.session['new_user'] = username
+                    request.session['new_user_id'] = validate_userid.unique_id
+                    print(request.session.get('new_user_id'))
+                    mailer(request,"Verify your account", "send otp",[validate_userid.mail])
                     return redirect("/otp_page")
                 except Exception as e:
                     print(e)
@@ -239,13 +244,12 @@ def otp_page(request):
     if request.method == "POST":
         input_otp = request.POST['otp_input']
         if input_otp == str(request.session.get('new_otp')):
-            set_active = user_details.objects.get(
-                username=request.session.get("new_user"))
+            set_active = user_details.objects.get(username=request.session.get("new_user"))
             set_active.is_active = True
             set_active.save()
             request.session['username'] = request.session.get("new_user")
-            request.session['user_unique_id'] = request.session.get(
-                "new_user_id")
+            request.session['user_unique_id'] = request.session.get("new_user_id")
+            print(request.session.get('username'))
             return redirect(home)
         else:
             messages.error(request, "Invalid OTP")
@@ -266,13 +270,11 @@ def searchPage(request):
         user_detail = user_details.objects.get(Q(pk=user_id))
         user_is_admin = user_detail.is_admin
         name = user_detail.first_name
-
         context = Context(request)
-
         if category != '' and query != 'None':
             search_query = query
             # print(search_query)
-            resources = file_upload.objects.filter((Q(description__icontains = search_query) | Q(file_title__icontains =search_query) | Q(file_name__icontains =search_query) | Q(tags__icontains =search_query)) and (Q(is_verified = True)))
+            resources = file_upload.objects.filter((Q(description__icontains = search_query) | Q(file_title__icontains =search_query) | Q(file_name__icontains =search_query) | Q(tags__icontains =search_query)), (Q(is_verified = True)))
             context['resultFor'] = "Search Result for: "+query
             # creating list of liked files in search result bu user
         else:

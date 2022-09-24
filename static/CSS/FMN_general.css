@@ -362,6 +362,59 @@
 .col-gap-3{
     column-gap: 3px;
 }
+/* ====================  flex and grid  ====================   */
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+.flex-column {
+    flex-flow: column;
+}
+.justify-center{
+    justify-content: center;
+}
+.align-self-center{
+    align-self: center;
+}
+.align-items-center{
+    align-items: center;
+}
+/* ====================  custom input styles  ====================   */
+.input-field {
+    position: relative;
+    padding: 0 0 3vh 0;
+    background-color: transparent;
+}
+
+.input-field input {
+    width: 30vw;
+    border: transparent;
+    border-bottom: solid 1px;
+    background-color: transparent;
+    height: 3vh;
+    z-index: 100;
+}
+
+.input-field .input-field-label {
+    position: absolute;
+    white-space: nowrap;
+    left: 0vw;
+    top: 0;
+    transition: 0.3s;
+    cursor: text;
+    color: var(--theme-dark-1);
+}
+
+.input-field .input-field-focused {
+    top: -2vh;
+    z-index: 0;
+    font-size: 12px;
+}
+
+.input-length-counter-div {
+    text-align: right;
+}
 
 /* Button Styles */
 .simple-bttn {
@@ -393,9 +446,6 @@
 .simple-bttn-2:hover {
     background-color: #555;
 }
-
-
-
 .fmn-bttn-1 {
     background-color: var(--color-3);
     border: 1px solid var(--color-3);

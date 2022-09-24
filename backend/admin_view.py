@@ -1,12 +1,11 @@
-from calendar import month
 from datetime import datetime
 import json
-from pprint import pprint
-from sqlite3 import Timestamp
 from backend.models import bookmarked_files, file_likes, file_upload, reported_file, user_details
-from django.shortcuts import redirect, render, HttpResponse
 from django.db.models import Q
+from .views import error_404_view, uploadCountUpdate
+from django.shortcuts import redirect, render
 from .helper_functions import mergeDict
+
 
 def Context(request):
     user_id = request.session.get("user_unique_id")
@@ -35,7 +34,7 @@ def adminfeed(request):
     context = Context(request)
     if context['is_admin'] == True:
 
-        users = user_details.objects.all().exclude(Q(is_active = False) and Q(is_admin = True) and Q(is_banned = True))
+        users = user_details.objects.all().exclude(Q(is_active = False) | Q(is_admin = True) | Q(is_banned = True))
         user_count = users.count()
 
         banned_users = user_details.objects.filter(Q(is_banned = True))
@@ -43,7 +42,7 @@ def adminfeed(request):
 
         uploads = file_upload.objects.all()
         upload_count = uploads.count()
-
+      
         reports = reported_file.objects.all()
         report_count = reports.count()
 
@@ -78,7 +77,8 @@ def adminfeed(request):
 
         return render(request,'pages/Admin/admin_panel.html',context)
     else:
-        return HttpResponse("404 Error")
+        return redirect(error_404_view)
+
 
 
 def changeRole(request):
