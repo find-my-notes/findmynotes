@@ -34,10 +34,7 @@
 .section-left .section-content{
     font-size: 20px;
 }
-.mission-vision-text{
-    /* text-align: left; */
-    font-size: 22px
-}
+
 .mission-vision-text-head{
     color: var(--color-1);
 }
