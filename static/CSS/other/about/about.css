@@ -1,13 +1,14 @@
 .new-section:nth-child(2n){
-    background-color: var(--color-4);
+  background-color: var(--color-4);
 }
 .new-section{
     display: grid;
     margin-left:auto;
-    padding: 60px 0;
+    padding: 60px 15px;
     width: 100%;
     font-family: bree serif;
     align-items: center;
+    text-align: justify;
 }
 .new-section .section-head{
     color: var(--color-1);
@@ -34,7 +35,9 @@
 .section-left .section-content{
     font-size: 20px;
 }
-
+.mission-vision-text{
+    font-size: 22px;
+}
 .mission-vision-text-head{
     color: var(--color-1);
 }
