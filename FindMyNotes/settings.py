@@ -66,22 +66,22 @@ WSGI_APPLICATION = 'FindMyNotes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3'
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'findmynotes',
-        'USER':'fmn',
-        'PASSWORD':'rishadi@1234',
-        'HOST':'103.134.7.137',
-        'PORT':'1433',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3'
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'findmynotes',
+#         'USER':'fmn',
+#         'PASSWORD':'rishadi@1234',
+#         'HOST':'103.134.7.137',
+#         'PORT':'1433',
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
