@@ -1,11 +1,5 @@
-import datetime
-from sqlite3 import Timestamp
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
-
-
-
-
 class register_user_manager(BaseUserManager):
     def create_user(self,username,mail,first_name,mid_name,last_name,gender,password=None):
         # if not mail:
@@ -116,8 +110,8 @@ class file_upload(models.Model):
     description = models.CharField(max_length=500,default=None)
     uploading_time = models.DateTimeField(auto_now_add=True)
     likes = models.BigIntegerField(null = False,default=None)
-    is_verified = models.BooleanField(default = False,null = False)
-    user = models.ForeignKey(user_details,on_delete=models.CASCADE,default=None,verbose_name='user_unique_id')
+    is_verified = models.BooleanField(default = False)
+    user = models.ForeignKey(user_details,on_delete=models.CASCADE,verbose_name='user_unique_id')
     class Meta:
         db_table = "file_details"
 
@@ -155,7 +149,7 @@ class contact_us(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30,null=False)
     email = models.CharField(max_length=50,null = False)
-    message = models.CharField(max_length=30,null=False,default=None)
+    message = models.CharField(max_length=30,null=False)
     timestamp = models.DateTimeField(auto_now_add=True)
     class Meta:
         db_table = "contact_us"

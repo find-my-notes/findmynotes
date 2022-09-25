@@ -42,7 +42,9 @@ def adminfeed(request):
 
         uploads = file_upload.objects.all()
         upload_count = uploads.count()
-      
+        for file in uploads:
+            uploadCountUpdate(file.user.pk, int(file.user.total_uploads)+1)
+
         reports = reported_file.objects.all()
         report_count = reports.count()
 

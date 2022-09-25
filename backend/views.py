@@ -100,17 +100,29 @@ def loginpage(request):
     return render(request, 'pages/login_page/login_page.html')
 
 def forgetPassword(request):
-    user_credentials = request.GET.get('user_credentials',None)
+    user_credentials = request.GET['user_credentials']  
     print(user_credentials)
     try:
-        getUserCred = user_details.objects.get(Q(username__iexact = user_credentials) or Q(mail = user_credentials))
+        getUserCred = user_details.objects.get(Q(username__iexact = user_credentials) or Q(mail__iexact = user_credentials))
         user_mail = getUserCred.mail
+        user_name = getUserCred.first_name 
         password = getUserCred.password
-        mailer(request,"Your password",password,[user_mail])
-        messages.error(request,"Please check your mail")
+        # messages.success(request,"Please check your mail")
+        print("sending mail")
+        html_content = render_to_string("pages/other/mail_template/email_con.html", {'name': user_name, 'password': password})
+        text_content = strip_tags(html_content)
+        send_mail(
+            "FindMyNotes Password requested",
+            text_content,
+            'FindMyNotes',
+            [user_mail],
+            fail_silently=False,
+        )
+        return HttpResponse("Please check your mail")
     except Exception as err:
         print("user not found:",err)
-        messages.error(request,"Please enter valid username or email")
+        # messages.error(request,"Please enter valid username or email")
+        return HttpResponse("Please enter valid username or email")
     return redirect(loginpage)
 
 def mailer(request,subject,content,mail_to):
@@ -127,14 +139,7 @@ def mailer(request,subject,content,mail_to):
         )
         return random_num
     else:
-        print("sending mail")
-        send_mail(
-            subject,
-            content,
-            'FindMyNotes',
-            mail_to,
-            fail_silently=False,
-        )
+
         return mail_to
 
 
@@ -166,10 +171,8 @@ def team(request):
 
 def contact(request):
     user_id = request.session.get("user_unique_id")
-    context = {
-        'current_user': user_id
-    }
-    return render(request, 'pages/other/contact/contact.html', context)
+
+    return render(request, 'pages/other/contact/contact.html', Context(request))
 
 
 # login & signup backend
@@ -207,6 +210,7 @@ def signuppage(request):
                 phone=phone,
                 username=username,
                 password=password,
+                total_uploads = 0,
             )
             users.save()
             print("User Created")

@@ -33,7 +33,12 @@
                             <input class="check" onclick="showPass(this)" type="checkbox">
                             Show Password
                         </p>
-                        <p><a onclick="forgetPass()">Forgot password?</a></p></div>
+                        <span>
+                            <button type="button" class="cursor-pointer" id="forget_pass" onclick="forgetPass()">Forgot password?
+                            </button>
+                            <span id="forget_password_element" class="align-items-center font-size-14"></span>    
+                        </span>
+                    </div>
                     </div>
                     <div class="button">
                         <input type="submit" value="LOGIN">
@@ -93,24 +98,48 @@
     }
     function forgetPass(){
         token = document.getElementById("csrftoken").value;
-        try {
-            user_cred = document.getElementById("user_cred").value
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if(this.readyState == 4 && this.status == 200){
-                        alert("Please check your email!")
-                        document.body.style.cursor = "auto"
-                }             
+        user_cred = document.getElementById("user_cred").value
+        if(user_cred.includes("@vcet.edu.in") || user_cred.length >= 3){
+            try {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200){
+                            alert(this.responseText)
+                            document.body.style.cursor = "auto"
+                    }             
+                }
+                file_url = '/forgetPassword?user_credentials='+user_cred
+                xhttp.open('GET',file_url,true);
+                document.body.style.cursor = "progress"
+                xhttp.setRequestHeader("X-CSRFToken",token)
+                xhttp.send();
+                document.getElementById("forget_pass").disabled = true
+                timer("forget_password_element","forget_pass",60)
+            } 
+            catch (err) {
+                // console.log("Error: " + err)
             }
-            file_url = '/forgetPassword?user_credentials='+user_cred
-            xhttp.open('GET',file_url,true);
-            document.body.style.cursor = "progress"
-            xhttp.setRequestHeader("X-CSRFToken",token)
-            xhttp.send();
-        } 
-        catch (err) {
-            alert("Error: " + err)
         }
+        else{
+            alert("Enter valid username or email")
+        }
+    }
+    function timer(elementId,elementToEnable, second){
+        seconds = second
+        window.setInterval(function(){
+            seconds -= 1
+            if (seconds >= 0) {
+                theTimer = "00:"+seconds;
+                document.getElementById(elementId).innerHTML = theTimer ;
+            }
+            else{
+                window.clearInterval()
+                document.getElementById(elementToEnable).disabled = false
+                document.getElementById(elementId).textContent = ""
+            }
+        },
+        1000
+        )
     }
 </script>
 {% endblock scripts %}   
