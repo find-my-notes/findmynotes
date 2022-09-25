@@ -45,13 +45,13 @@
     padding: 0 15px;
 }
 @media (max-width: 768px) {
-    .upload-form input{
+    .upload-form input:not([type=checkbox]){
         /* width: 95vw; */
         max-width: 500px
     }
 }
 @media (max-width: 480px) {
-    .upload-form input, .upload-form textarea{
+    .upload-form input:not([type=checkbox]), .upload-form textarea{
         width: 85vw;
         max-width: 500px;
     }
@@ -65,4 +65,29 @@
 }
 .head-text{
     padding: 2vh 0;
+}
+button[type=submit]{
+    height: 40px;
+}
+
+
+.load {
+	width: 100px;
+	height: 100px;
+	margin: 110px auto 0;
+	border:solid 10px #8822aa;
+	border-radius: 50%;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	 -webkit-transition: all 0.5s ease-in;
+    -webkit-animation-name:             rotate; 
+    -webkit-animation-duration:         1.0s; 
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+    	
+    	 transition: all 0.5s ease-in;
+    animation-name:             rotate; 
+    animation-duration:         1.0s; 
+    animation-iteration-count:  infinite;
+    animation-timing-function: linear; 
 }

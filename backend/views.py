@@ -1,3 +1,4 @@
+from re import T
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from  django.contrib import messages
@@ -450,6 +451,7 @@ def upload_page(request):
         user_is_faculty = user_detail.is_faculty
         print(user_is_faculty)
         name = user_detail.first_name
+        context['uploaded'] = "Upload"
     if request.method == "POST":
         try:
             file = request.FILES['file_data']
@@ -473,8 +475,10 @@ def upload_page(request):
             file_details.save()
             fs.save(file.name, file)
             messages.success(request, "File uploaded")
+            context['uploaded'] = "Upload another"
         except Exception as err:
             print("error uploading file:", err)
+            messages.success(request, "Error uploading file")
     return render(request, "pages/upload/old_upload.html", context)
 
 #Terms and condition page to upload note

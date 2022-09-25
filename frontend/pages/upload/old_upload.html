@@ -14,37 +14,35 @@
              <div class="head-text text-center">
             <h2 class="color-1">Upload your notes</h2>
              </div>
-             <div class="upload-form">
-                 <form action="" method="POST" enctype="multipart/form-data">
+             <div class="upload-form position-relative">
+                 <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadAnimation()">
                      {% csrf_token %}
-                     <input type="text" id="" class="font-size-18" placeholder="Title" name="title">
+                     <input required type="text" id="" class="font-size-18" placeholder="Title" name="title">
 
                     <textarea oninput="wordCounter(this,'500')" class="font-size-18" cols="30" rows="10" maxlength="500" minlength="30" placeholder="Description" name="description"></textarea>
                     <div class="input-length-counter-div">
                         <p class="input-length-counter"><span  id="input_length_counter">0</span>/500</p>
                     </div>
-                     <input type="text" id="" class="font-size-18" placeholder="Tags" name="tags">
+                     <input required type="text" id="" class="font-size-18" placeholder="Tags" name="tags">
                      <div class="browse-file-bttn-div">
-                         <i class="fa fa-upload"  onclick="browse_file_bttn()"></i><br>
+                         <i class="fa fa-upload cursor-pointer"  onclick="browse_file_bttn()"></i><br>
                          <div class="hidden">
-                             <input accept="application/pdf" id="file_to_upload" onchange="get_file_data()" type="file" name="file_data">
-                             <input type="hidden" name="file_type" id="file_type">
+                             <input required accept="application/pdf" id="file_to_upload" onchange="get_file_data()" type="file" name="file_data">
+                             <input required type="hidden" name="file_type" id="file_type">
                          </div>
-                         <a href="#"  onclick="browse_file_bttn()">Browse File</a>
-                         <p><small id="file_name"></small></p>
+                         <a href="#"  id="file_name"  onclick="browse_file_bttn()">Browse File</a>
                          <p class="imp-field"><small>Accepted file type: .pdf</small></p>
                          <script>
                            
                         </script>
                      </div>
-                     <div>
-                         <span><input type="checkbox" onchange="validateTAndC(this)" id="tandc_checkbox"></span>
+                     <div class="grid grid-2">
+                         <span><input required type="checkbox" onchange="validateTAndC(this)" id="tandc_checkbox"></span>
                          <span>I agree to the <a href="/uploadTC" target="_blank" class="underline color-1">terms and condition</a> as set out by the user agreement</span>
-                         <script>
-                            
-                         </script>
                      </div>
-                     <input type="submit" class="fmn-bttn-3 border-none" disabled id="upload_bbtn" value="Upload">
+                     <button required type="submit" class="fmn-bttn-3 border-none" disabled id="upload_bbtn">
+                        {{uploaded}}
+                     </button>
                  </form>
              </div>
          </div>
