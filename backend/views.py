@@ -149,22 +149,7 @@ def mailer(request,subject,content,mail_to):
 
 
 def about(request):
-    user_id = request.session.get("user_unique_id")
-    username = request.session.get("username")
-    user_is_admin = ''
-    name = ''
-    if username != None:
-        user_detail = user_details.objects.get(Q(pk=user_id))
-        user_is_admin = user_detail.is_admin
-        name = user_detail.first_name
-
-    context = {
-        'current_user': user_id,
-        'username': username,
-        'user_is_admin': user_is_admin,
-        'name': name,
-    }
-    return render(request, 'pages/other/about/aboutus.html', context)
+    return render(request, 'pages/other/about/aboutus.html', Context(request))
 
 
 def team(request):
@@ -172,7 +157,6 @@ def team(request):
 
 def contact(request):
     user_id = request.session.get("user_unique_id")
-
     return render(request, 'pages/other/contact/contact.html', Context(request))
 
 

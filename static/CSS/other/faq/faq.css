@@ -10,8 +10,9 @@
     flex-direction: column;
     align-items: center;
   }
+
   .title {
-    font-size: 3rem;
+    font-size: 20px;
     margin: 2rem 0rem;
   }
   .faq {
@@ -22,23 +23,33 @@
     border-bottom: 2px solid #1c1c1c;
     cursor: pointer;
   }
+  @media (max-width:786px) {
+    section{
+      width: 100%;
+    }
+
+    .faq {
+      width: 85%;
+    }
+  }
   .question {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .question h3 {
-    font-size: 1.8rem;
+    font-size: 20px;
   }
   .answer{
+    font-size: 20px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 1.4s ease;
   }
   .answer p {
-    padding-top: 1rem;
+    padding-top: 20px;
     line-height: 1.6;
-    font-size: 1.4rem;
+    font-size: 20px;
   }
   .faq.active .answer {
     max-height: 300px;
