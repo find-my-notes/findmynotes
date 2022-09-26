@@ -1,4 +1,3 @@
-from re import T
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from  django.contrib import messages
@@ -63,6 +62,7 @@ def profile(request):
 def uploadCountUpdate(user_id, upload_count):
     user_detail = user_details.objects.get(Q(pk = user_id))
     user_detail.total_uploads = int(upload_count)
+    print("Saving count..")
     user_detail.save()
 
 def faq(request):
@@ -278,8 +278,8 @@ def searchPage(request):
         context = Context(request)
         if category != '' and query != 'None':
             search_query = query
-            # print(search_query)
-            resources = file_upload.objects.filter((Q(description__icontains = search_query) | Q(file_title__icontains =search_query) | Q(file_name__icontains =search_query) | Q(tags__icontains =search_query)), (Q(is_verified = True)))
+            print(search_query)
+            resources = file_upload.objects.filter((Q(description__contains = search_query) | Q(file_title__contains =search_query) | Q(file_name__contains =search_query) | Q(tags__contains =search_query)), (Q(is_verified = True)))
             context['resultFor'] = "Search Result for: "+query
             # creating list of liked files in search result bu user
         else:
@@ -289,8 +289,8 @@ def searchPage(request):
             for file in searched_file_query:
                 searched_file_name.append(file.query)
                 print(searched_file_name)
-                resources = file_upload.objects.filter((Q(description__icontains = searched_file_name) | Q(file_title__icontains =searched_file_name) | Q(file_name__icontains =searched_file_name) | Q(tags__icontains =searched_file_name)) and (Q(is_verified = True)))
-
+                resources = file_upload.objects.filter((Q(description__contains = searched_file_name) | Q(file_title__contains =searched_file_name) | Q(file_name__contains =searched_file_name) | Q(tags__contains =searched_file_name)), (Q(is_verified = True)))
+        print(resources)
         liked_resources = file_likes.objects.filter(Q(user=user_id), Q(file__in=resources))
         liked_by_user = []
         for dataset in liked_resources:
@@ -316,13 +316,17 @@ def searchPage(request):
 
 def search_store(request):
     context = Context(request)
-    search_file_query = searched_file.objects.create(
-        user_id=user_details.objects.get(unique_id=context['current_user']),
-        query=request.GET['searched_query']
-    )
-    search_file_query.save()
-    print("Search file stores")
-
+    try:
+        search_file_query = searched_file.objects.create(
+            user_id=user_details.objects.get(unique_id=context['current_user']),
+            query=request.GET['searched_query']
+        )
+        search_file_query.save()
+        print("Search file stores")
+        return HttpResponse(request,"1")
+    except:
+        print("Error storing search ")
+        return HttpResponse(request,"0")
 
 def file_like(request):
     user_id = request.session.get("user_unique_id")
@@ -472,9 +476,15 @@ def upload_page(request):
                 likes=0,
                 is_verified = user_is_faculty
             )
+            success_message = "Notes Uploaded"
+            if user_is_faculty:
+                success_message = "Your notes are uploaded and available to everyone"
+            else:
+                success_message = "Your notes will get public after verification by our team"
+
             file_details.save()
             fs.save(file.name, file)
-            messages.success(request, "File uploaded")
+            messages.success(request, success_message)
             context['uploaded'] = "Upload another"
         except Exception as err:
             print("error uploading file:", err)
