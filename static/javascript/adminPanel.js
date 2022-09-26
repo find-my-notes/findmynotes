@@ -1,86 +1,101 @@
 // Ajax function to change User Role
 
 function changeUserRole(select_role_element){
-    row_data = select_role_element.parentElement.parentElement.querySelector("#userID").textContent
-    role = select_role_element.value
-    change_role_confirmation = confirm("Are you sure ?")
-    token = document.getElementById("token").value; 
-    if(change_role_confirmation == true){
+row_data = select_role_element.parentElement.parentElement.querySelector("#userID").textContent
+role = select_role_element.value
+change_role_confirmation = confirm("Are you sure ?")
+token = document.getElementById("token").value; 
+if(change_role_confirmation == true){
 
-            try {
-                var xhttp = new XMLHttpRequest();
-        
-                // console.log("ajax request state: "+xhttp.readyState);
-        
-                xhttp.onreadystatechange = function() {
-        
-                    if(this.readyState == 4 && this.status == 200){
-                            console.log("User changed to", role)
-                    }             
-                }
-        
-                file_url = '/changeRole?user_id='+row_data+"&role="+role
-                
-                
-                xhttp.open('POST',file_url,true);
-                
-                xhttp.setRequestHeader("X-CSRFToken",token)
-                
-                xhttp.send();
-            } 
-            catch (err) {
-                console.log("Error: " + err)
+        try {
+            var xhttp = new XMLHttpRequest();
+    
+            // console.log("ajax request state: "+xhttp.readyState);
+    
+            xhttp.onreadystatechange = function() {
+    
+                if(this.readyState == 4 && this.status == 200){
+                        console.log("User changed to", role)
+                }             
             }
-        
+    
+            file_url = '/changeRole?user_id='+row_data+"&role="+role
+            
+            
+            xhttp.open('POST',file_url,true);
+            
+            xhttp.setRequestHeader("X-CSRFToken",token)
+            
+            xhttp.send();
+        } 
+        catch (err) {
+            console.log("Error: " + err)
         }
+    
+    }
+}
+
+function banUser(userId, username){
+ban_user_confirmation = confirm(username + " will be banned, are you sure ?")
+token = document.getElementById("token").value; 
+if(ban_user_confirmation == true){
+    try {
+        var xhttp = new XMLHttpRequest();
+        // console.log("ajax request state: "+xhttp.readyState);
+        xhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200){
+                    console.log("User banned",userId)
+                    alert("user with username: "+username+" & user id: "+userId+" is banned")
+            }             
+        }
+        file_url = '/banUser?user_to_ban='+userId
+        xhttp.open('POST',file_url,true);
+        xhttp.setRequestHeader("X-CSRFToken",token)
+        xhttp.send();
+    } 
+    catch (err) {
+        console.log("Error: " + err)
     }
 
-    function banUser(userId, username){
-        ban_user_confirmation = confirm(username + " will be banned, are you sure ?")
-        token = document.getElementById("token").value; 
-        if(ban_user_confirmation == true){
-    
-                try {
-                    var xhttp = new XMLHttpRequest();
-            
-                    // console.log("ajax request state: "+xhttp.readyState);
-            
-                    xhttp.onreadystatechange = function() {
-            
-                        if(this.readyState == 4 && this.status == 200){
-                                console.log("User banned",userId)
-                                alert("user with username: "+username+" & user id: "+userId+" is banned")
-                        }             
-                    }
-            
-                    file_url = '/banUser?user_to_ban='+userId
-                    
-                    
-                    xhttp.open('POST',file_url,true);
-                    
-                    xhttp.setRequestHeader("X-CSRFToken",token)
-                    
-                    xhttp.send();
-                } 
-                catch (err) {
-                    console.log("Error: " + err)
-                }
-            
+}
+}
+function unBanUser(userId, username){
+    ban_user_confirmation = confirm(username + " will be banned, are you sure ?")
+    token = document.getElementById("token").value; 
+    if(ban_user_confirmation == true){
+        try {
+            var xhttp = new XMLHttpRequest();
+            // console.log("ajax request state: "+xhttp.readyState);
+            xhttp.onreadystatechange = function() {
+                if(this.readyState == 4 && this.status == 200){
+                        console.log("User banned",userId)
+                        alert("user with username: "+username+" & user id: "+userId+" is unbanned")
+                }             
             }
+            file_url = '/unBanUser?user_to_ban='+userId
+            xhttp.open('POST',file_url,true);
+            xhttp.setRequestHeader("X-CSRFToken",token)
+            xhttp.send();
+        } 
+        catch (err) {
+            console.log("Error: " + err)
         }
     
+    }
+    }
+
 
 
 
 let searchInput = document.getElementById("searchTable");
 let rows = document.querySelectorAll("tbody tr");
 searchInput.addEventListener("keyup",
-    function(event){
-        let q = event.target.value.toLowerCase();
-        rows.forEach((row)=>{
-                row.querySelector("#username").textContent.toLowerCase().startsWith(q)?(row.style.display=""):(row.style.display="none");
-        })
-    })
+function(event){
+let q = event.target.value.toLowerCase();
+rows.forEach((row)=>{
+        row.querySelector("#username").textContent.toLowerCase().startsWith(q)?(row.style.display=""):(row.style.display="none");
+})
+})
 
   /**
 * Sorts a HTML table.

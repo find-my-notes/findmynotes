@@ -30,21 +30,14 @@ def Context(request):
 
 # admin pages where he can approve and decline uploaded contents   
 def adminfeed(request):
-   
     context = Context(request)
     if context['is_admin'] == True:
-
         users = user_details.objects.all().exclude(Q(is_active = False) | Q(is_admin = True) | Q(is_banned = True))
-
-
         user_count = users.count()
-
         banned_users = user_details.objects.filter(Q(is_banned = True))
         banned_users_count = banned_users.count()
-
         uploads = file_upload.objects.all()
         upload_count = uploads.count()
-        
         # For getting total upload and storing in database 
         # -->>
         # for user in users:
@@ -52,16 +45,12 @@ def adminfeed(request):
         #     print(getFileDetails)
         #     uploadCountUpdate(user.pk, getFileDetails)
         # <<--
-
         reports = reported_file.objects.all()
         report_count = reports.count()
-
         bookmarked = bookmarked_files.objects.all()
         bookmarked_count = bookmarked.count()
-
         likes = file_likes.objects.all()
         likes_count = likes.count()
-
         user_id = request.session.get("user_unique_id")
         username = request.session.get("username")
         if username != None:
@@ -70,6 +59,7 @@ def adminfeed(request):
             name = user_detail.first_name
         chart_data = json.dumps(chartData())
         # print(type(json.dumps(chart_data)))
+            
         context2 = {
             'current_user': user_id,
             'user_count':user_count,
@@ -77,6 +67,7 @@ def adminfeed(request):
             'report_count':report_count,
             'file_count':upload_count,
             'list_of_users':users,
+            'list_of_banned_users':banned_users,
             'list_of_reports':reports,
             'list_of_uploads':uploads,
             'username':username,
@@ -139,7 +130,13 @@ def banUser(request):
     get_user.save()
     return redirect(adminfeed)
 
-
+def unBanUser(request):
+    user_to_ban = int(request.GET['user_to_ban'])
+    print("backend ban user",user_to_ban)
+    get_user = user_details.objects.get(Q(unique_id = user_to_ban))
+    get_user.is_banned = False
+    get_user.save()
+    return redirect(adminfeed)
 
 user_Joined_data_for_chart = {}
 

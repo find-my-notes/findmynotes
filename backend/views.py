@@ -79,23 +79,27 @@ def loginpage(request):
             validate_userid = user_details.objects.get((Q(username__iexact =username)|Q(mail__iexact  = username)), Q(password=password))
             user_unique_id = validate_userid.unique_id
             user_is_active = validate_userid.is_active
-            if (user_is_active):
-                request.session['user_unique_id'] = user_unique_id
-                request.session['username'] = username
-                context = {
-                    'username': username,
-                    'user_unique_id': user_unique_id
-                }
-                return redirect("/", args=context)
+            user_is_banned = validate_userid.is_banned
+            if user_is_banned == False:
+                if user_is_active:
+                    request.session['user_unique_id'] = user_unique_id
+                    request.session['username'] = username
+                    context = {
+                        'username': username,
+                        'user_unique_id': user_unique_id
+                    }
+                    return redirect("/", args=context)
+                else:
+                    try:
+                        request.session['new_user'] = username
+                        request.session['new_user_id'] = validate_userid.unique_id
+                        print(request.session.get('new_user_id'))
+                        mailer(request,"Verify your account", "send otp",[validate_userid.mail])
+                        return redirect("/otp_page")
+                    except Exception as e:
+                        print(e)
             else:
-                try:
-                    request.session['new_user'] = username
-                    request.session['new_user_id'] = validate_userid.unique_id
-                    print(request.session.get('new_user_id'))
-                    mailer(request,"Verify your account", "send otp",[validate_userid.mail])
-                    return redirect("/otp_page")
-                except Exception as e:
-                    print(e)
+                messages.error(request, "Your account has been banned, if you think this is mistake please contact us!")
         except:
             messages.error(request, "Invalid credentials")
     return render(request, 'pages/login_page/login_page.html')

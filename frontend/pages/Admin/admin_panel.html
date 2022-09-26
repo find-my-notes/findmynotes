@@ -58,14 +58,10 @@
                     <h4>Total uploads</h4>
                 </div>
                 <div class="right-arrow">
-                    <a><i class="fa fa-angle-right fa-2x"></i></a>
+                    <a href="#user_table"><i class="fa fa-angle-right fa-2x"></i></a>
                 </div>
             </div>
         </div>
-
-
-
-        
         <div class="analytic-count-container no-of-uploads">
             <div class="container-head flex-container">
                 <div class="count-container">
@@ -87,11 +83,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-        
         <div class="analytic-count-container no-of-uploads">
             <div class="container-head flex-container">
                 <div class="count-container">
@@ -100,7 +91,7 @@
                     </div>
                 </div>
                 <div class="icon">
-                    <i class="fa fa-ban "></i>
+                        <i class="fa fa-ban"></i>
                 </div>
             </div>
             <br>
@@ -109,24 +100,21 @@
                     <h4>Total Banned Users</h4>
                 </div>
                 <div class="right-arrow">
-                    <a><i class="fa fa-angle-right fa-2x"></i></a>
+                    <a href="#banned_user"><i class="fa fa-angle-right fa-2x"></i></a>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
 
 
 <div class="user-details-table">
-    
-    <div class="text-center bold font-size-25">Total Active Users</div>
     <div class="table-search-box justify-center">
 		<input type="text" name="search" id="searchTable" placeholder="Search..."/>
 	</div>   
+    <div class="text-center bold font-size-25">Total Users</div>
 	<div class="table-body">
-	<table class="table">
+	<table class="table"  id="user_table">
      <thead>
      	<tr>
         <th>User_ID</th>
@@ -167,24 +155,53 @@
                 </select>
             </td>
      	</tr>
-
-
          {% endfor %}
-
      </tbody>
    </table>
 </div>
+<div ></div>
+<div id="banned_user" class="user-details-table">
+    <div class="text-center bold font-size-25">Total Banned Users</div>
+	<div class="table-body">
+	<table class="table">
+     <thead>
+     	<tr>
+        <th>User_ID</th>
+		 <th>Username</th>
+         <th>Name</th>
+     	 <th class="sort">Gender</th>
+     	 <th>Mail_ID</th>
+     	 <th>Phone Number</th>
+		 <th>No of uploads</th>
+		 <th>Date</th>
+		 <th>Action</th>
+     	</tr>
+     </thead>
+     <tbody>
+
+
+        {% for user in list_of_banned_users %}
+     	<tr>
+            <td data-label="User_ID" id="userID">{{user.pk}}</td>
+     	    <td data-label="Username" id="username"><a href="#">{{user.username}}</a></td>
+     	    <td data-label="Name" id="name">{{user.first_name}} {{user.last_name}}</td>
+      	    <td data-label="Gender">{{user.gender}}</td>
+     	  	<td data-label="Mail_ID">{{user.mail}}</td>
+     	  	<td data-label="Phone Number">{{user.phone}}</td>
+			<td data-label="Uploads">{{user.total_uploads}}</td>
+			<td data-label="Date">{{user.timestamp}}</td>
+			<td data-label="Action">
+                <button class="perm ban-user-bttn" onclick="unBanUser('{{user.pk}}','{{user.username}}')" >Unban User</button>
+            </td>
+     	</tr>
+         {% endfor %}
+     </tbody>
+   </table>
+
 
 {% endblock content %}
 
-
-
 {% block scripts %}
-
-    <script>
-        chart_user_data = (document.querySelector("#chart_user_data").value)
-        console.log(JSON.parse(chart_user_data))
-    </script>
     <script src="{% static 'javascript/adminPanel.js' %}" ></script>
 
 {% endblock scripts %}   
