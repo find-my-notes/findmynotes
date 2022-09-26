@@ -35,6 +35,8 @@ def adminfeed(request):
     if context['is_admin'] == True:
 
         users = user_details.objects.all().exclude(Q(is_active = False) | Q(is_admin = True) | Q(is_banned = True))
+
+
         user_count = users.count()
 
         banned_users = user_details.objects.filter(Q(is_banned = True))
@@ -42,14 +44,14 @@ def adminfeed(request):
 
         uploads = file_upload.objects.all()
         upload_count = uploads.count()
-
-        for user in users:
-            getFileDetails = file_upload.objects.all().exclude( Q(user = user.pk) )
-
-            for fileDetails in getFileDetails:
-                print(fileDetails.user_id, fileDetails.user.username)
-                print("counting uploads...")
-                uploadCountUpdate(fileDetails.user.pk, int(fileDetails.user.total_uploads)+1)
+        
+        # For getting total upload and storing in database 
+        # -->>
+        # for user in users:
+        #     getFileDetails = file_upload.objects.filter( Q(user = user.pk) ).count()
+        #     print(getFileDetails)
+        #     uploadCountUpdate(user.pk, getFileDetails)
+        # <<--
 
         reports = reported_file.objects.all()
         report_count = reports.count()
@@ -86,8 +88,6 @@ def adminfeed(request):
         return render(request,'pages/Admin/admin_panel.html',context)
     else:
         return redirect(error_404_view)
-
-
 
 def changeRole(request):
     user_id = request.GET['user_id']

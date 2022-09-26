@@ -24,12 +24,13 @@ function validateTAndC(tandc_checkbox){
     }
     else{
         document.getElementById("upload_bbtn").disabled = true;
+        enableUploadBttn()
     }
 }
 function enableUploadBttn(){
     file_type = document.querySelector('#file_type').value;
-    t_and_c_checkbox = document.querySelector('#tandc_checkbox').value;
-    if(t_and_c_checkbox && file_type == "pdf"){
+    t_and_c_checkbox = document.querySelector('#tandc_checkbox');
+    if(t_and_c_checkbox.checked==true && file_type == "pdf"){
         document.getElementById("upload_bbtn").disabled = false;
     }
     else{

@@ -77,9 +77,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'findmynotes',
         'USER':'fmn',
-        'PASSWORD':'rishadi@1234',
-        'HOST':'103.134.7.137',
-        'PORT':'1433',
+        'PASSWORD':os.getenv('fmn_college_mysql_password'),
+        'HOST':os.getenv('fmn_college_mysql_host'),
+        'PORT':os.getenv('fmn_college_mysql_port'),
     }
 }
 # Password validation

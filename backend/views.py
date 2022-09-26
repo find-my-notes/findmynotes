@@ -62,7 +62,7 @@ def profile(request):
 def uploadCountUpdate(user_id, upload_count):
     user_detail = user_details.objects.get(Q(pk = user_id))
     user_detail.total_uploads = int(upload_count)
-    print("Saving count..")
+    print(upload_count)
     user_detail.save()
 
 def faq(request):
@@ -455,40 +455,47 @@ def upload_page(request):
         user_is_faculty = user_detail.is_faculty
         print(user_is_faculty)
         name = user_detail.first_name
-        context['uploaded'] = "Upload"
-    if request.method == "POST":
-        try:
-            file = request.FILES['file_data']
-            # if file_type == "pdf":
-            file_type = request.POST['file_type']
-            file_description = request.POST['description']
-            print(file_description)
-            file_title = request.POST['title']
-            tags = request.POST['tags']
-            fs = FileSystemStorage(location='files/'+str(request.session['user_unique_id'])+"/"+file_type+"/")
-            file_details = file_upload.objects.create(
-                file_type=file_type,
-                file_name=file.name,
-                description=file_description,
-                file_title=file_title,
-                tags=tags,
-                file_url=str(request.session['user_unique_id'])+"/"+file_type+"/"+file.name,user=user_details.objects.get(unique_id=request.session.get("user_unique_id")),
-                likes=0,
-                is_verified = user_is_faculty
-            )
-            success_message = "Notes Uploaded"
-            if user_is_faculty:
-                success_message = "Your notes are uploaded and available to everyone"
-            else:
-                success_message = "Your notes will get public after verification by our team"
 
-            file_details.save()
-            fs.save(file.name, file)
-            messages.success(request, success_message)
-            context['uploaded'] = "Upload another"
-        except Exception as err:
-            print("error uploading file:", err)
-            messages.success(request, "Error uploading file")
+        context['uploaded'] = "Upload"
+
+        if request.method == "POST":
+            try:
+                file = request.FILES['file_data']
+                # if file_type == "pdf":
+                file_type = request.POST['file_type']
+                file_description = request.POST['description']
+                print(file_description)
+                file_title = request.POST['title']
+                tags = request.POST['tags']
+                fs = FileSystemStorage(location='files/'+str(request.session['user_unique_id'])+"/"+file_type+"/")
+                file_details = file_upload.objects.create(
+                    file_type=file_type,
+                    file_name=file.name,
+                    description=file_description,
+                    file_title=file_title,
+                    tags=tags,
+                    file_url=str(request.session['user_unique_id'])+"/"+file_type+"/"+file.name,user=user_details.objects.get(unique_id=request.session.get("user_unique_id")),
+                    likes=0,
+                    is_verified = user_is_faculty
+                )
+                success_message = "Notes Uploaded"
+                if user_is_faculty:
+                    success_message = "Your notes are uploaded and available to everyone"
+                else:
+                    success_message = "Your notes will get public after verification by our team"
+
+                file_details.save()
+                
+                fs.save(file.name, file)
+
+                messages.success(request, success_message)
+
+                user_detail.total_uploads += 1 
+                user_detail.save()
+                context['uploaded'] = "Upload another"
+            except Exception as err:
+                print("error uploading file:", err)
+                messages.success(request, "Error uploading file")
     return render(request, "pages/upload/old_upload.html", context)
 
 #Terms and condition page to upload note
