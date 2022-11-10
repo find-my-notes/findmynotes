@@ -22,15 +22,19 @@ def Context(request):
         user_is_admin = user_detail.is_admin
         name = user_detail.first_name + " " + user_detail.last_name
 
-    context = {
-        'current_user': user_id,
-        'username': username,
-        'is_admin': user_is_admin,
-        'name': name
-    }
+        context = {
+            'current_user': user_id,
+            'username': username,
+            'is_admin': user_is_admin,
+            'name': name
+        }
+        return context 
+    else:
+        context = {
+            'current_user':None
+        }
+        return context
 
-    return context 
-    
 def home(request):
     return render(request, 'pages/home/index.html', Context(request))
 
@@ -297,8 +301,8 @@ def searchPage(request):
         context['all_resources'] = resources
         context['liked_by_user'] = liked_by_user
         context['bookmarked_by_user'] = bookmarked_by_user
-
-    # print("--",context['resources'])
+    else:
+        return redirect(loginpage)
     return render(request, "pages/search/search_page.html", context)
 
 
@@ -443,9 +447,7 @@ def upload_page(request):
         user_is_faculty = user_detail.is_faculty
         print(user_is_faculty)
         name = user_detail.first_name
-
         context['uploaded'] = "Upload"
-
         if request.method == "POST":
             try:
                 file = request.FILES['file_data']
@@ -484,6 +486,8 @@ def upload_page(request):
             except Exception as err:
                 print("error uploading file:", err)
                 messages.success(request, "Error uploading file")
+    else:
+        return redirect(loginpage)
     return render(request, "pages/upload/old_upload.html", context)
 
 #Terms and condition page to upload note
