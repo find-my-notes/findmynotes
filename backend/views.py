@@ -271,7 +271,7 @@ def searchPage(request):
         if category != '' and query != 'None':
             search_query = query
             print(search_query)
-            resources = file_upload.objects.filter((Q(description__contains = search_query) | Q(file_title__contains =search_query) | Q(file_name__contains =search_query) | Q(tags__contains =search_query)), (Q(is_verified = True)))
+            resources = file_upload.objects.filter((Q(description__icontains = search_query) | Q(file_title__icontains =search_query) | Q(file_name__icontains =search_query) | Q(tags__icontains =search_query)), (Q(is_verified = True)))
             context['resultFor'] = "Search Result for: "+query
             # creating list of liked files in search result bu user
         else:
@@ -281,7 +281,7 @@ def searchPage(request):
             for file in searched_file_query:
                 searched_file_name.append(file.query)
                 print(searched_file_name)
-                resources = file_upload.objects.filter((Q(description__contains = searched_file_name) | Q(file_title__contains =searched_file_name) | Q(file_name__contains =searched_file_name) | Q(tags__contains =searched_file_name)), (Q(is_verified = True)))
+                resources = file_upload.objects.filter((Q(description__icontains= searched_file_name) | Q(file_title__icontains =searched_file_name) | Q(file_name__icontains =searched_file_name) | Q(tags__icontains =searched_file_name)), (Q(is_verified = True)))
         print(resources)
         liked_resources = file_likes.objects.filter(Q(user=user_id), Q(file__in=resources))
         liked_by_user = []
