@@ -109,7 +109,8 @@
 .team .team-content h2 {
     font-size: 25px;
     font-weight: 400;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    white-space: nowrap;
 }
 
 .team .team-content h3 {

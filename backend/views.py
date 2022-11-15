@@ -5,6 +5,7 @@ from backend.models import bookmarked_files, file_likes, file_upload, reported_f
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
 import random
 from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
@@ -36,6 +37,7 @@ def Context(request):
         return context
 
 def home(request):
+    # mailToNonActiveUsers() # Only use when wants to send mail to users who haven't verified their email id
     return render(request, 'pages/home/index.html', Context(request))
 
 
@@ -151,9 +153,22 @@ def mailer(request,subject,content,mail_to):
 
         return mail_to
 
-
-# def registration(request):
-#     return render(request,'pages/loginandsignup/reg_page.html')
+# def mailToNonActiveUsers():
+#     mailTo = user_details.objects.filter(is_active = 0)
+#     for mails in mailTo: 
+#         print(mails.first_name)
+#         print(mails.mail)
+#         try:
+#             htmly = get_template('./test.html')
+#             contexts = {'name': mails.first_name}
+#             subject, from_email, to = 'Only One step left...','findmynotes2022@gmail.com' ,mails.mail   
+#             text_content = "Your details has been registered successfully. Please complete your registration by verfying your email."
+#             html_content = htmly.render(contexts)
+#             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+#             msg.attach_alternative(html_content, "text/html")
+#             msg.send()
+#         except Exception as err:
+#             print("Error sending mail to", mails.mail,"Error:",err)
 
 
 def about(request):
@@ -270,7 +285,7 @@ def searchPage(request):
         context = Context(request)
         if category != '' and query != 'None':
             search_query = query
-            print(search_query)
+            # print(search_query)
             resources = file_upload.objects.filter((Q(description__icontains = search_query) | Q(file_title__icontains =search_query) | Q(file_name__icontains =search_query) | Q(tags__icontains =search_query)), (Q(is_verified = True)))
             context['resultFor'] = "Search Result for: "+query
             # creating list of liked files in search result bu user
@@ -280,7 +295,7 @@ def searchPage(request):
             searched_file_name = []
             for file in searched_file_query:
                 searched_file_name.append(file.query)
-                print(searched_file_name)
+                # print(searched_file_name)
                 resources = file_upload.objects.filter((Q(description__icontains= searched_file_name) | Q(file_title__icontains =searched_file_name) | Q(file_name__icontains =searched_file_name) | Q(tags__icontains =searched_file_name)), (Q(is_verified = True)))
         print(resources)
         liked_resources = file_likes.objects.filter(Q(user=user_id), Q(file__in=resources))
