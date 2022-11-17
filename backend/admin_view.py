@@ -1,6 +1,6 @@
 from datetime import datetime
 import json
-from backend.models import bookmarked_files, file_likes, file_upload, reported_file, user_details
+from backend.models import bookmarked_files, file_likes, file_upload, reported_file, user_details, searched_file
 from django.db.models import Q
 from .views import error_404_view, uploadCountUpdate
 from django.shortcuts import redirect, render
@@ -138,6 +138,20 @@ def unBanUser(request):
     get_user.save()
     return redirect(adminfeed)
 
+
+def getAllSearches(request):
+    context = Context(request)
+
+
+    if context['is_admin'] == True:
+        searchQuery = searched_file.objects.all()
+        context['searched_file_data'] = searchQuery
+        return render(request,'pages/Admin/getAllSearches.html',context)
+    else:
+        return redirect(error_404_view)
+
+
+
 user_Joined_data_for_chart = {}
 
 def chartData():
@@ -185,3 +199,4 @@ def chartData():
 
 def addDataToUserJoinedDataForChart(year,month_data_dict , count_year):
     user_Joined_data_for_chart[year] = {'month':month_data_dict,'count':count_year}
+

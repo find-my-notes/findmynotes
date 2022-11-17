@@ -1,0 +1,36 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+{% block style-links %}
+
+{% endblock style-links %}
+   
+{% block  content %}
+
+<div class="fmn-table-container py-2px">
+    <table  class="searched-table fmn-table">
+        <tr>
+            <th>SearchID</th>
+            <th>Searched Query</th>
+            <th>UserID</th>
+            <th>Username</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for searched_file in searched_file_data  %}
+        <tr class="text-center">
+            <td>{{searched_file.pk}}</td>
+            <td>{{searched_file.query}}</td>
+            <td>{{searched_file.user_id.pk}}</td>
+            <td>{{searched_file.user_id.username}}</td>
+            <td>{{searched_file.timestamp}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+
+{% endblock scripts %}   

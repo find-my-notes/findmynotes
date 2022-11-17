@@ -492,3 +492,25 @@
 .cursor-not-allowed{
     cursor: not-allowed;
 }
+
+/* table */
+.fmn-table-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fmn-table{
+    width: 75%;
+}
+.fmn-table th, .fmn-table td{
+    padding: 15px 0;
+}
+.fmn-table th{
+    background-color: var(--t9);
+}
+.fmn-table tr:nth-child(2n){
+    background-color: var(--p2);
+}
+.fmn-table tr:nth-child(2n+1){
+    background-color: var(--p3);
+}
