@@ -58,12 +58,18 @@
         width: 90%;
         display: grid;
         grid-template-columns: auto;
-        padding: 20px 0 ;
+        padding: 10px 0;
+        justify-content: center;
         /* border: 1px solid; */
     }
     .congrats-text{
+        padding: 10px;
         text-align: center;
         font-family: Poppins;
         font-size: 30px;
+    }
+    .greet-description{
+        font-size: 25px;
+        padding: 10px 20px;
     }
 }
