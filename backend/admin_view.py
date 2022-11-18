@@ -1,6 +1,6 @@
 from datetime import datetime
 import json
-from backend.models import bookmarked_files, file_likes, file_upload, reported_file, user_details, searched_file
+from backend.models import bookmarked_files, file_likes, file_upload, reported_file, user_details, searched_file,viewed_notes
 from django.db.models import Q
 from .views import error_404_view, uploadCountUpdate
 from django.shortcuts import redirect, render
@@ -145,10 +145,19 @@ def getAllSearches(request):
 
     if context['is_admin'] == True:
         searchQuery = searched_file.objects.all()
-        context['searched_file_data'] = searchQuery
+        context['clicked_file_data'] = searchQuery
         return render(request,'pages/Admin/getAllSearches.html',context)
     else:
         return redirect(error_404_view)
+
+def getAllClickedFiles(request):
+    context = Context(request)
+    if context['is_admin'] == True:
+        searchQuery = viewed_notes.objects.all()
+        context['clicked_file_data'] = searchQuery
+    return render(request,'pages/Admin/getAllClickedFiles.html',context)
+    # else:
+    #     return redirect(error_404_view)
 
 
 

@@ -500,17 +500,20 @@
     justify-content: center;
 }
 .fmn-table{
-    width: 75%;
+    width: 90%;
 }
 .fmn-table th, .fmn-table td{
-    padding: 15px 0;
+    padding: 15px 10px;
 }
 .fmn-table th{
     background-color: var(--t9);
+    border: solid var(--t9);
 }
 .fmn-table tr:nth-child(2n){
     background-color: var(--p2);
+    border: solid var(--p2);
 }
 .fmn-table tr:nth-child(2n+1){
     background-color: var(--p3);
+    border: solid var(--p3);
 }

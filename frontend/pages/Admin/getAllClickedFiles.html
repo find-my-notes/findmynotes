@@ -1,0 +1,40 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+{% block style-links %}
+
+{% endblock style-links %}
+   
+{% block  content %}
+
+<div class="fmn-table-container py-2px">
+    <table  class="clicked-table fmn-table">
+        <tr>
+            <th>ID</th>
+            <th>File ID</th>
+            <th>File title</th>
+            <th>File URL</th>
+            <th>UserID</th>
+            <th>Username</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for clicked_file in clicked_file_data  %}
+        <tr class="text-center">
+            <td>{{clicked_file.pk}}</td>
+            <td>{{clicked_file.file.pk}}</td>
+            <td>{{clicked_file.file.file_title}}</td>
+            <td><a href="{{clicked_file.file.file_url}}">{{clicked_file.file.file_url}}</a></td>
+            <td>{{clicked_file.user_clicked.pk}}</td>
+            <td>{{clicked_file.user_clicked.username}}</td>
+            <td>{{clicked_file.timestamp}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+
+{% endblock scripts %}   
