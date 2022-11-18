@@ -48,7 +48,12 @@
     padding: 0 50px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 900px) {
+    .greeting-image{
+        width: 150px;
+        height: 150px;
+        border-radius: 150px;
+    }
     .greeting-content{
         width: 90%;
         display: grid;
@@ -59,7 +64,6 @@
     .congrats-text{
         text-align: center;
         font-family: Poppins;
-        font-size: 50px;
-        padding: 30px;
+        font-size: 30px;
     }
 }
