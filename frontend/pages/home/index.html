@@ -7,9 +7,10 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Redressed&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
-
+   
       
       <link rel="stylesheet" type="text/css" href="{% static 'CSS/home/index.css' %}" >
+      <link rel="stylesheet" type="text/css" href="{% static 'CSS/components/greetings.css' %}" >
 
 {% endblock style-links %}
 
@@ -78,6 +79,10 @@
       </div> -->
 
 
+      <!-- Greeting card -->
+      {% include 'components/greeting_card.html' %}
+      
+      
       <!-- everything you need to know section  -->
       <div class="center-div-everything-yk">
          <div class="everything-you-need grid-align-center">

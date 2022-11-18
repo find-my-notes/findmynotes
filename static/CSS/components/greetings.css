@@ -1,0 +1,65 @@
+.greeting-container{   
+    background-image: url('../../media/images/home/crown.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* border: 1px solid; */
+}
+.greeting-conatiner-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba(8, 8, 8, 0.736);
+}
+.greeting-content{
+    color: white;
+    width: 90%;
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 90px ;
+    /* border: 1px solid; */
+}
+
+.greeting-image-container{
+    display: flex;
+    justify-content: center;
+}
+.greeting-image{
+    width: 300px;
+    height: 300px;
+    border-radius: 300px;
+    box-shadow: 10px 5px 20px rgba(0, 0, 0, 0.48) ;
+}
+.greeting-text{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+.congrats-text{
+    text-align: center;
+    font-family: Poppins;
+    font-size: 40px;
+    padding: 0 50px;
+}
+.greet-description{
+    text-align: justify;
+    font-family: var(--font-4);
+    font-size: 30px;
+    padding: 0 50px;
+}
+
+@media (max-width: 1200px) {
+    .greeting-content{
+        width: 90%;
+        display: grid;
+        grid-template-columns: auto;
+        padding: 20px 0 ;
+        /* border: 1px solid; */
+    }
+    .congrats-text{
+        text-align: center;
+        font-family: Poppins;
+        font-size: 50px;
+        padding: 30px;
+    }
+}
