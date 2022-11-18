@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from  django.contrib import messages
-from backend.models import bookmarked_files, file_likes, file_upload, reported_file, searched_file, user_details,contact_us
+from backend.models import bookmarked_files, file_likes, file_upload, reported_file, searched_file, user_details,contact_us ,viewed_notes
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import EmailMultiAlternatives
@@ -338,6 +338,21 @@ def search_store(request):
     except:
         print("Error storing search ")
         return HttpResponse(request,"0")
+
+def searchClickInsert(request):
+    user_id = request.session.get("user_unique_id")
+    file_id = request.GET.get("file_id",None)
+    print(file_id)
+    try:
+        storeClickedFileDetails = viewed_notes.objects.create(
+            user_clicked=user_details.objects.get(unique_id=user_id),
+            file=file_upload.objects.get(pk=file_id)
+        )
+        storeClickedFileDetails.save()
+        return HttpResponse('Success')
+    except Exception as er:
+        print(er)
+        return HttpResponse("Error: "+str(er))
 
 def file_like(request):
     user_id = request.session.get("user_unique_id")
