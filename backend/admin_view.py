@@ -141,11 +141,9 @@ def unBanUser(request):
 
 def getAllSearches(request):
     context = Context(request)
-
-
     if context['is_admin'] == True:
         searchQuery = searched_file.objects.all()
-        context['clicked_file_data'] = searchQuery
+        context['searched_file_data'] = searchQuery
         return render(request,'pages/Admin/getAllSearches.html',context)
     else:
         return redirect(error_404_view)
@@ -155,9 +153,9 @@ def getAllClickedFiles(request):
     if context['is_admin'] == True:
         searchQuery = viewed_notes.objects.all()
         context['clicked_file_data'] = searchQuery
-    return render(request,'pages/Admin/getAllClickedFiles.html',context)
-    # else:
-    #     return redirect(error_404_view)
+        return render(request,'pages/Admin/getAllClickedFiles.html',context)
+    else:
+        return redirect(error_404_view)
 
 
 
