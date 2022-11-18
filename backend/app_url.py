@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.home,name="home"),
     
     path('searchPage', views.searchPage,name="search_page"),
+    path('displayPDF/<int:file_id>', views.displayPDF,name="displayPDF"),
     path('search_store', views.search_store,name="search_store"),
 
     path('file_like', views.file_like,name="file_like"),

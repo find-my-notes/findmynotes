@@ -325,6 +325,17 @@ def searchPage(request):
     return render(request, "pages/search/search_page.html", context)
 
 
+def displayPDF(request,file_id):
+    context= Context(request)
+    if context['current_user'] != None:
+        print(context)
+        getPDF = file_upload.objects.get(pk = file_id)
+        context['pdf_url'] = getPDF.file_url
+        return render(request, "pages/search/display_pdf.html", context)
+    else:
+        return redirect(loginpage)
+
+
 def search_store(request):
     context = Context(request)
     try:
