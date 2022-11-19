@@ -61,7 +61,7 @@
 	-webkit-box-pack: center;
 	-ms-flex-pack: center;
 	justify-content: center;
-	height: 80vh;
+	height: 80vh;z
 	/* opacity: 0; */
 	/* filter: blur(5px);	 */
 }
