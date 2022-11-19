@@ -40,7 +40,10 @@
                         <option value="Female">Female</option>
                         <option value="Others">Others</option>
                     </select>
-                    <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="input_date" onchange="dateLimits()" name="dob" pattern="^\S+$" placeholder="Date Of Birth" max="01-01-2000" style="width: 48%;"  required>
+                    <div style="width: 48%;" class="flex">
+
+                        DOB:<input type="date" id="input_date" onchange="dateLimits()" name="dob" pattern="^\S+$" placeholder="Date Of Birth" max="01-01-2000"   required>
+                    </div>
                 </div>
                 <div class="input-box">
                     <input type="text" name="mail" minlength="24" id="email_input" onchange="getEmail(this)" placeholder="Email" required>
