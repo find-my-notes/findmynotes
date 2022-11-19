@@ -161,6 +161,6 @@ class viewed_notes(models.Model):
     file = models.ForeignKey(file_upload,on_delete=models.CASCADE,default=None,verbose_name='file_id_for_view_notes',related_name='file_id_for_view_notes')
     user_clicked = models.ForeignKey(user_details,on_delete=models.CASCADE,default=None,verbose_name='user_id_for_view_notes',related_name='user_id_for_view_notes')
     timestamp = models.DateTimeField(auto_now_add=True)
+    is_from = models.CharField(max_length=50,default="clicked")
     class Meta:
         db_table = "viewed_notes"
-        unique_together = ('file','user_clicked')

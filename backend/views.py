@@ -328,6 +328,15 @@ def searchPage(request):
 def displayPDF(request,file_id):
     context= Context(request)
     if context['current_user'] != None:
+        try:
+            storeClickedFileDetails = viewed_notes.objects.create(
+                user_clicked = user_details.objects.get(unique_id=context['current_user']),
+                file = file_upload.objects.get(pk=file_id),
+                is_from = "Direct link"
+            )
+            storeClickedFileDetails.save()
+        except Exception as er:
+            print(er)
         print(context)
         getPDF = file_upload.objects.get(pk = file_id)
         context['pdf_url'] = getPDF.file_url
@@ -357,7 +366,8 @@ def searchClickInsert(request):
     try:
         storeClickedFileDetails = viewed_notes.objects.create(
             user_clicked=user_details.objects.get(unique_id=user_id),
-            file=file_upload.objects.get(pk=file_id)
+            file=file_upload.objects.get(pk=file_id),
+            is_from = "clicked"
         )
         storeClickedFileDetails.save()
         return HttpResponse('Success')
