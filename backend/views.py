@@ -359,22 +359,6 @@ def search_store(request):
         print("Error storing search ")
         return HttpResponse(request,"0")
 
-def searchClickInsert(request):
-    user_id = request.session.get("user_unique_id")
-    file_id = request.GET.get("file_id",None)
-    print(file_id)
-    try:
-        storeClickedFileDetails = viewed_notes.objects.create(
-            user_clicked=user_details.objects.get(unique_id=user_id),
-            file=file_upload.objects.get(pk=file_id),
-            is_from = "clicked"
-        )
-        storeClickedFileDetails.save()
-        return HttpResponse('Success')
-    except Exception as er:
-        print(er)
-        return HttpResponse("Error: "+str(er))
-
 def file_like(request):
     user_id = request.session.get("user_unique_id")
     if request.method == "POST":

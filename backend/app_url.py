@@ -16,7 +16,6 @@ urlpatterns = [
     path('add_bookmark', views.add_bookmark,name="add_bookmark"),
     path('remove_bookmark', views.remove_bookmark,name="remove_bookmark"),
     path('report_submit', views.report_submit,name="report_submit"),
-    path('searchClickInsert', views.searchClickInsert,name="searchClickInsert"),
 
     path('upload_page', views.upload_page,name="upload_page"),
     path('uploadTC', views.uploadTC,name="uploadTC"),

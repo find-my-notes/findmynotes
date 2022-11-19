@@ -44,7 +44,7 @@
 
                         <span>
                             <div>
-                                <a class="file-title" onclick="saveClickedFiles('{{file.pk}}')" href="displayPDF/{{file.pk}}" target="_blank">{{file.file_title}}</a>
+                                <a class="file-title" href="displayPDF/{{file.pk}}" target="_blank">{{file.file_title}}</a>
                             </div>
                             <div>
                                 
@@ -251,21 +251,7 @@
 <script defer src="{% static 'javascript/inputFunctions.js' %}"></script>
 
 <script type="text/javascript">
-    async function saveClickedFiles(file_id){
-        try {
-            var xhttp = new XMLHttpRequest();
-            // console.log("ajax request state: "+xhttp.readyState);
-            xhttp.onreadystatechange = await function() {
-                console.log("Opened file:", file_id);
-            }
-            file_url = '/searchClickInsert?file_id='+file_id
-            xhttp.open('POST',file_url,true);
-            xhttp.setRequestHeader("X-CSRFToken","{{csrf_token}}")
-            xhttp.send();
-        } catch (err) {
-            console.log("Error: " + err)
-        }
-    }
+   
     function reportPost(){
         file = document.getElementById("reporting_file_id").value ;
         user_posted = document.getElementById("user_posted").value ;
