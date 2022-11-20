@@ -159,18 +159,18 @@ def mailer(request,subject,content,mail_to):
 #     for mails in mailTo: 
 #         # print(mails.first_name)
 #         print(mails.mail)
-#         # try:
-#         #     htmly = get_template('./non_active_mail.html')
-#         #     contexts = {'name': mails.first_name}
-#         #     subject, from_email, to = 'Only One step left...','findmynotes2022@gmail.com' ,mails.mail   
-#         #     text_content = "Your details has been registered successfully. Please complete your registration by verfying your email."
-#         #     html_content = htmly.render(contexts)
-#         #     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-#         #     msg.attach_alternative(html_content, "text/html")
-#         #     msg.send()
-#         #     count += 1
-#         # except Exception as err:
-#         #     print("Error sending mail to", mails.mail,"Error:",err)
+#         try:
+#             htmly = get_template('./pages/other/mail_template/non_active_mail.html')
+#             contexts = {'name': mails.first_name}
+#             subject, from_email, to = 'Only One step left...','findmynotes2022@gmail.com' , mails.mail  
+#             text_content = "Your details has been registered successfully. Please complete your registration by verfying your email."
+#             html_content = htmly.render(contexts)
+#             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+#             msg.attach_alternative(html_content, "text/html")
+#             msg.send()
+#             count += 1
+#         except Exception as err:
+#             print("Error sending mail to", mails.mail,"Error:",err)
 #     print(count,"mails sent")
 
 
