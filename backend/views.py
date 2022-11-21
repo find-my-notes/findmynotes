@@ -324,10 +324,31 @@ def searchPage(request):
         return redirect(loginpage)
     return render(request, "pages/search/search_page.html", context)
 
+def verify_user(request,username):
+    try:
+        validate_userid = user_details.objects.get(Q(username__iexact =username))
+        user_unique_id = validate_userid.unique_id
+        user_is_active = validate_userid.is_active
+        user_is_banned = validate_userid.is_banned
+        if user_is_banned == False:
+            if user_is_active:
+                return True
+            else:
+                return redirect(loginpage)
+        else:
+            logout(request)
+            messages.error(request, "Please LogIn again")
+            return False
+    except:
+        messages.error(request, "Invalid credentials")
+        logout(request)
+        return False
+
 
 def displayPDF(request,file_id):
     context= Context(request)
     if context['current_user'] != None:
+        print("Validity check",verify_user(request,context['username']))
         try:
             storeClickedFileDetails = viewed_notes.objects.create(
                 user_clicked = user_details.objects.get(unique_id=context['current_user']),
