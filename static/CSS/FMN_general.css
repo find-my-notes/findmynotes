@@ -51,7 +51,33 @@
 .bg-3 {
     background-color: var(--bg-3) !important;
 }
-
+.bg-4 {
+    background-color: var(--bc1) !important;
+}
+.bg-5 {
+    background-color: var(--bc2) !important;
+}
+.bg-6 {
+    background-color: var(--bc3) !important;
+}
+.bg-7 {
+    background-color: var(--bc4) !important;
+}
+.bg-8{
+    background-color: var(--bc5) !important;
+}
+.bg-9 {
+    background-color: var(--bc6) !important;
+}
+.bg-10 {
+    background-color: var(--bc7) !important;
+}
+.bg-11{
+    background-color: var(--bc8) !important;
+}
+.bg-12 {
+    background-color: var(--bc9) !important;
+}
 /* Padding in px */
 
 /* 5px */

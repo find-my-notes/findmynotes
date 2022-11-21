@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 import json
 from backend.models import bookmarked_files, file_likes, file_upload, reported_file, user_details, searched_file,viewed_notes
 from django.db.models import Q
@@ -151,7 +151,9 @@ def getAllSearches(request):
 def getAllClickedFiles(request):
     context = Context(request)
     if context['is_admin'] == True:
-        searchQuery = viewed_notes.objects.all()
+        start_date = datetime.date(2022, 11, 21)
+        print(datetime.date.today())
+        searchQuery = viewed_notes.objects.filter(timestamp__gte=datetime.date.today())  
         context['clicked_file_data'] = searchQuery
         return render(request,'pages/Admin/getAllClickedFiles.html',context)
     return render(request,'pages/Admin/getAllClickedFiles.html',context)
