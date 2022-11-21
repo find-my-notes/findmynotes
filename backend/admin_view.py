@@ -157,8 +157,8 @@ def getAllClickedFiles(request):
         context['clicked_file_data'] = searchQuery
         return render(request,'pages/Admin/getAllClickedFiles.html',context)
     return render(request,'pages/Admin/getAllClickedFiles.html',context)
-    # else:
-    #     return redirect(error_404_view)
+    else:
+        return redirect(error_404_view)
 
 
 
