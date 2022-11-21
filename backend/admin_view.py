@@ -139,15 +139,6 @@ def unBanUser(request):
     return redirect(adminfeed)
 
 
-def getAllSearches(request):
-    context = Context(request)
-    if context['is_admin'] == True:
-        searchQuery = searched_file.objects.all()
-        context['searched_file_data'] = searchQuery
-        return render(request,'pages/Admin/getAllSearches.html',context)
-    else:
-        return redirect(error_404_view)
-
 def getAllClickedFiles(request):
     context = Context(request)
     if context['is_admin'] == True:
@@ -157,54 +148,4 @@ def getAllClickedFiles(request):
     return render(request,'pages/Admin/getAllClickedFiles.html',context)
     # else:
     #     return redirect(error_404_view)
-
-
-
-user_Joined_data_for_chart = {}
-
-def chartData():
-    users = user_details.objects.all().exclude(Q(is_active = False) and Q(is_admin = True) and Q(is_banned = True)).order_by('-timestamp')
-
-    count_year = 0
-    count_month = 0
-
-    secondary_year = datetime.now().date().year
-    secondary_month = datetime.now().date().month
-    month_data_dict = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,12:0}
-
-    for user in users:
-        user_joining_date = user.timestamp.date()
-        primary_year = user_joining_date.year
-        primary_month = user_joining_date.month
-        # print(user.unique_id,user.timestamp)
-        # print(user.timestamp.date().day, " " ,user.timestamp.date().month , user.timestamp.date())
-
-        if primary_year == secondary_year:
-            if count_year == 0:
-                user_Joined_data_for_chart[primary_year] = {'count':0}
-            count_year += 1
-            if primary_month == secondary_month:
-                count_month +=1
-                month_data_dict[primary_month] = count_month
-            else:
-                secondary_month = primary_month
-                count_month = 1
-                month_data_dict[primary_month] = count_month
-            addDataToUserJoinedDataForChart(primary_year,month_data_dict,count_year)
-        else:
-            count_year = 1
-            count_month = 0
-            month_data_dict = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,12:0}
-            if primary_month == secondary_month:
-                count_month +=1
-                month_data_dict[primary_month] = count_month
-            else:
-                secondary_month = primary_month
-                count_month = 1
-                month_data_dict[primary_month] = count_month
-            addDataToUserJoinedDataForChart(primary_year,month_data_dict,count_year)
-    return user_Joined_data_for_chart
-
-def addDataToUserJoinedDataForChart(year,month_data_dict , count_year):
-    user_Joined_data_for_chart[year] = {'month':month_data_dict,'count':count_year}
 
