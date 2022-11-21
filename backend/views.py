@@ -348,7 +348,7 @@ def verify_user(request,username):
 def displayPDF(request,file_id):
     context= Context(request)
     if context['current_user'] != None:
-        print("Validity check",verify_user(request,context['username']))
+        # print("Validity check",verify_user(request,context['username']))
         try:
             storeClickedFileDetails = viewed_notes.objects.create(
                 user_clicked = user_details.objects.get(unique_id=context['current_user']),
