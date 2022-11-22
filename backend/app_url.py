@@ -38,6 +38,7 @@ urlpatterns = [
     # path('getAllSearches', admin_view.getAllSearches , name="getAllSearches"),
     path('getAllClickedFiles', admin_view.getAllClickedFiles , name="getAllClickedFiles"),
     path('getOpenedFiles', admin_view.getOpenedFiles , name="getOpenedFiles"),
+    path('getUserDetails', admin_view.getUserDetails , name="getUserDetails"),
     path('changeRole', admin_view.changeRole , name="changeRole"),
     path('banUser', admin_view.banUser , name="banUser"),
     path('unBanUser', admin_view.unBanUser , name="unBanUser"),

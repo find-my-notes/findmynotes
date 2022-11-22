@@ -184,7 +184,18 @@ def getOpenedFiles(request):
         return JsonResponse(searchQuery, safe= False)
     return HttpResponse("Error")
 
-
+def getUserDetails(request):
+    context = Context(request)
+    file_id = request.GET.get('file') 
+    user_uniq_id = request.GET.get('user') 
+    print(file_id)
+    if context['is_admin'] == True:
+        if user_uniq_id != None:
+            searchQuery = user_details.objects.get(pk = user_uniq_id)
+        else:
+            searchQuery = list(user_details.objects.all().defer('password').values())
+        return JsonResponse(searchQuery, safe= False)
+    return HttpResponse("You are not authorized user")
 
 
 user_Joined_data_for_chart = {}
