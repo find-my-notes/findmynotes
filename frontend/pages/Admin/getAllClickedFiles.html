@@ -7,7 +7,7 @@
    
 {% block  content %}
 
-<div class="fmn-table-container py-2px">
+{% comment %} <div class="fmn-table-container py-2px">
     <table  class="clicked-table fmn-table">
         <tr>
             <th>ID</th>
@@ -30,11 +30,37 @@
         </tr>
         {% endfor %}
     </table>
-</div>
-
+</div> {% endcomment %}
+<div id="rawData"></div>
 {% endblock content %}
 
 {% block scripts %}
 
+<script>
+     function getOpenedFiles(){
+        console.log("Getting data");
+        try {
+            var xhttp = new XMLHttpRequest();
+            console.log("ajax request state: "+xhttp.readyState);
+            xhttp.onreadystatechange = function() {
+                if(this.readyState == 4 && this.status == 200){
+                    console.log("Ans:<br>"+this.responseText)
+                    document.getElementById("rawData").innerHTML = this.responseText
+
+                }
+            }
+            file_url = '/getOpenedFiles'
+
+            xhttp.open('POST',file_url,true);
+            xhttp.setRequestHeader("X-CSRFToken","{{csrf_token}}")
+            xhttp.send();
+
+        } catch (err) {
+            console.log("Error: " + err)
+        }
+    }
+
+    getOpenedFiles()
+</script>
 
 {% endblock scripts %}   

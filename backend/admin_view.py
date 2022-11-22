@@ -1,3 +1,5 @@
+from django.http import HttpResponse, JsonResponse
+from django.core import serializers
 from datetime import datetime
 import json
 from backend.models import bookmarked_files, file_likes, file_upload, reported_file, user_details, searched_file,viewed_notes
@@ -155,14 +157,21 @@ def unBanUser(request):
 @sync_to_async
 def getAllClickedFiles(request):
     context = Context(request)
-    if context['is_admin'] == True:
-        searchQuery = viewed_notes.objects.all()
-        context['clicked_file_data'] = searchQuery
-        return render(request,'pages/Admin/getAllClickedFiles.html',context)
+    # if context['is_admin'] == True:
+    #     searchQuery = viewed_notes.objects.all()
+    #     context['clicked_file_data'] = searchQuery
+    #     return render(request,'pages/Admin/getAllClickedFiles.html',context)
     return render(request,'pages/Admin/getAllClickedFiles.html',context)
     # else:
     #     return redirect(error_404_view)
-
+def getOpenedFiles(request):
+    context = Context(request)
+    if context['is_admin'] == True:
+        searchQuery = viewed_notes.objects.all()
+        # context['clicked_file_data'] = searchQuery
+        serialized_queryset = serializers.serialize('json', searchQuery)
+        return HttpResponse(serialized_queryset)
+    return HttpResponse("Error")
 
 user_Joined_data_for_chart = {}
 
