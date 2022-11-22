@@ -166,12 +166,26 @@ def getAllClickedFiles(request):
     #     return redirect(error_404_view)
 def getOpenedFiles(request):
     context = Context(request)
+    file_id = request.GET.get('file') 
+    user_uniq_id = request.GET.get('user') 
+    print(file_id)
     if context['is_admin'] == True:
-        searchQuery = viewed_notes.objects.all()
+        if file_id != None:
+            if user_uniq_id != None:
+                searchQuery = list(viewed_notes.objects.filter(file = file_id,user_clicked = user_uniq_id).values())
+            else:
+                searchQuery = list(viewed_notes.objects.filter(file = file_id).values())
+        elif user_uniq_id != None:
+            searchQuery = list(viewed_notes.objects.filter(user_clicked = user_uniq_id).values())
+        else:
+            searchQuery = list(viewed_notes.objects.all().values())
         # context['clicked_file_data'] = searchQuery
-        serialized_queryset = serializers.serialize('json', searchQuery)
-        return HttpResponse(serialized_queryset)
+        # serialized_queryset = serializers.serialize('json', searchQuery)
+        return JsonResponse(searchQuery, safe= False)
     return HttpResponse("Error")
+
+
+
 
 user_Joined_data_for_chart = {}
 
