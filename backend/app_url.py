@@ -35,7 +35,7 @@ urlpatterns = [
     path('faq', views.faq,name="faq"),
 
     path('adminsite', admin_view.adminfeed , name="adminfeed"),
-    # path('getAllSearches', admin_view.getAllSearches , name="getAllSearches"),
+    path('getAllSearches', admin_view.getAllSearches , name="getAllSearches"),
     path('getAllClickedFiles', admin_view.getAllClickedFiles , name="getAllClickedFiles"),
     path('getOpenedFiles', admin_view.getOpenedFiles , name="getOpenedFiles"),
     path('getUserDetails', admin_view.getUserDetails , name="getUserDetails"),

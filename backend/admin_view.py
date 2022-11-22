@@ -143,14 +143,13 @@ def unBanUser(request):
     return redirect(adminfeed)
 
 
-# def getAllSearches(request):
-#     context = Context(request)
-#     if context['is_admin'] == True:
-#         searchQuery = searched_file.objects.all()
-#         context['searched_file_data'] = searchQuery
-#         return render(request,'pages/Admin/getAllSearches.html',context)
-#     else:
-#         return redirect(error_404_view)
+def getAllSearches(request):
+    context = Context(request)
+    if context['is_admin'] == True:
+        searchQuery = list(searched_file.objects.all().values())
+        return JsonResponse(searchQuery, safe= False)
+    else:
+        return redirect(error_404_view)
 
 
 
@@ -164,6 +163,7 @@ def getAllClickedFiles(request):
     return render(request,'pages/Admin/getAllClickedFiles.html',context)
     # else:
     #     return redirect(error_404_view)
+
 def getOpenedFiles(request):
     context = Context(request)
     file_id = request.GET.get('file') 
