@@ -114,7 +114,7 @@ def forgetPassword(request):
     user_credentials = request.GET['user_credentials']  
     print(user_credentials)
     try:
-        getUserCred = user_details.objects.get(Q(username__iexact = user_credentials) or Q(mail__iexact = user_credentials))
+        getUserCred = user_details.objects.get(Q(username__iexact = user_credentials) | Q(mail__iexact = user_credentials))
         user_mail = getUserCred.mail
         user_name = getUserCred.first_name 
         password = getUserCred.password
