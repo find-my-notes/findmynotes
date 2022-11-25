@@ -11,12 +11,15 @@ from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 from django.core.mail import send_mail
 
+
+
 def Context(request):
     user_id = request.session.get("user_unique_id")
     username = request.session.get("username")
     user_is_admin = False
     name = "user"
-    print(user_id)
+    print("Redirecting: ",request.session.get("login_redirect_to"))
+    print("User id:",user_id)
     if username != None:
         user_detail = user_details.objects.get(Q(pk=user_id))
         print(user_detail)
@@ -94,7 +97,11 @@ def loginpage(request):
                         'username': username,
                         'user_unique_id': user_unique_id
                     }
-                    return redirect("/", args=context)
+   
+                    if  request.session.get('login_redirect_to') == None:
+                        return redirect("/", args=context)
+                    else:
+                        return redirect(request.session.get("login_redirect_to"), args=context)
                 else:
                     try:
                         request.session['new_user'] = username
@@ -353,7 +360,7 @@ def displayPDF(request,file_id):
             storeClickedFileDetails = viewed_notes.objects.create(
                 user_clicked = user_details.objects.get(unique_id=context['current_user']),
                 file = file_upload.objects.get(pk=file_id),
-                is_from = "Direct link"
+                is_from = "Opened"
             )
             storeClickedFileDetails.save()
         except Exception as er:
@@ -363,6 +370,8 @@ def displayPDF(request,file_id):
         context['pdf_url'] = getPDF.file_url
         return render(request, "pages/search/display_pdf.html", context)
     else:
+        request.session['login_redirect_to'] = "/displayPDF/"+str(file_id)
+        print(request.session.get("login_redirect_to"))
         return redirect(loginpage)
 
 
