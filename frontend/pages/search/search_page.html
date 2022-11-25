@@ -32,9 +32,6 @@
     {% endif %}
     {% for file in all_resources %}
         {% if file.file_type == "pdf" %}
-            
-            {% comment %} <span>
-            </span> {% endcomment %}
                 <div class="pdf-result-container">
                     <div class="pdf-result">
 
@@ -43,7 +40,7 @@
                         </span>
 
                         <span>
-                            <div>
+                            <div class="truncate-line-1">
                                 <a class="file-title" href="displayPDF/{{file.pk}}" target="_blank">{{file.file_title}}</a>
                             </div>
                             <div>

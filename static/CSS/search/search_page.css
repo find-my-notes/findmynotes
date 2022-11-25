@@ -91,12 +91,12 @@
 
 
 .pdf-result-container{
-    padding: 3vh 1vw 1vh 1vw;
+    padding: 1vh 1vw 1vh 1vw;
 }
 .pdf-result{
     position: relative;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.115);
-    /* border: 0.5px solid black; */
+    /* box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.115); */
+    border: 1px solid rgba(0, 0, 0, 0.231);
     border-radius: 3px;
     padding: 1vh 1vw;
     display:grid;
@@ -111,7 +111,9 @@
 }
 .file-title{
     font-size:25px;
-    color: black
+    position: relative;
+    color: black;
+    white-space: nowrap;
 }
 .file-description{
     white-space:nowrap;
