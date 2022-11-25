@@ -18,7 +18,7 @@ def Context(request):
     username = request.session.get("username")
     user_is_admin = False
     name = "user"
-    print("Redirecting: ",request.session.get("login_redirect_to"))
+    print("Redirecting link: ",request.session.get("login_redirect_to"))
     print("User id:",user_id)
     if username != None:
         user_detail = user_details.objects.get(Q(pk=user_id))
