@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@filae!@p#_l3b7m$7gu)*w8pdr)+req@xinx$$bt_je^&k8@g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -67,22 +67,22 @@ WSGI_APPLICATION = 'FindMyNotes.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db_backup.sqlite3'
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'findmynotes',
-        'USER':'fmn',
-        'PASSWORD':os.getenv('fmn_college_mysql_password'),
-        'HOST':os.getenv('fmn_college_mysql_host'),
-        'PORT':os.getenv('fmn_college_mysql_port'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db_backup.sqlite3'
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'findmynotes',
+#         'USER':'fmn',
+#         'PASSWORD':os.getenv('fmn_college_mysql_password'),
+#         'HOST':os.getenv('fmn_college_mysql_host'),
+#         'PORT':os.getenv('fmn_college_mysql_port'),
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
