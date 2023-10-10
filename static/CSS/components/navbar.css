@@ -118,7 +118,25 @@ nav .nav-links-container {
 .height-0 {
     height: 0;
 }
-
+.nav-links-container .nav-link-text{
+    font-size: 12px;
+    position: absolute;
+    bottom: -20px;
+    background-color: var(--color-2);
+    padding: 5px 10px;
+    color: white;
+    border-radius: 5px;
+    opacity: 0;
+}
+.nav-links-container .nav-links:hover > .nav-link-text{
+    opacity: 1;
+}
+.nav-links-container .nav-links{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .nav-links-container .user-profile .dropdown-links .link {
     padding: 12px 15px;
 }

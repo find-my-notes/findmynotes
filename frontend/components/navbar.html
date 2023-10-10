@@ -41,15 +41,32 @@
         <div class="nav-links-container">
 
             <div class="user-links flex ">
-                    <div class="nav-links hide-on-small-screen" title="Home"><a href="/"><img class="nav-img" src="{% static 'media/svg/icons/home.svg' %}" /></a></div>
+                    <div class="nav-links hide-on-small-screen" title="Home">
+                        <a href="/"><img class="nav-img" src="{% static 'media/svg/icons/home.svg' %}" /></a>
+                        <span class="nav-link-text">Home</span>
+                    </div>
                 {% if current_user == None %}
-                    <div class="nav-links hide-on-small-screen" title="About"><a href="/about"><img class="nav-img" src="{% static 'media/svg/icons/info_black.svg' %}" /></i></a></div>
-                    <div class="nav-links hide-on-small-screen" title="Contact"><a href="/contact"><i class="fa fa-headset"></i></a></div>
+                    <div class="nav-links hide-on-small-screen" title="About">
+                        <a href="/about"><img class="nav-img" src="{% static 'media/svg/icons/info_black.svg' %}" /></i></a>
+                        <span class="nav-link-text">About</span>
+                    </div>
+                    <div class="nav-links hide-on-small-screen" title="Contact">
+                        <a href="/contact"><i class="fa fa-headset"></i></a>
+                        <span class="nav-link-text">Contact</span>
+                    </div>
                 {% else %}
                     <!-- <div class="nav-links"><a href=""><i class="fa fa-bell"></i></a></div> -->
-                    <div class="nav-links hide-on-small-screen"><a href="/upload_page"><img class="nav-img" src="{% static 'media/svg/icons/publish.svg' %}" /></i></a></div>
-                    <div class="nav-links hide-on-small-screen"><a href="/searchPage"><img class="nav-img" src="{% static 'media/svg/icons/search.svg' %}" /></i></a></div>
-                    <div class="nav-links display-on-small-screen"><a href="/logout"><img class="nav-img" src="{% static 'media/svg/icons/logout.svg' %}" /></a></div>
+                    <div class="nav-links hide-on-small-screen">
+                        <a href="/upload_page"><img class="nav-img" src="{% static 'media/svg/icons/publish.svg' %}" /></i></a>
+                        <span class="nav-link-text">Upload</span>
+                    </div>
+                    <div class="nav-links hide-on-small-screen">
+                        <a href="/searchPage"><img class="nav-img" src="{% static 'media/svg/icons/search.svg' %}" /></i></a>
+                        <span class="nav-link-text">search</span>
+                    </div>
+                    <div class="nav-links display-on-small-screen"><a href="/logout"><img class="nav-img" src="{% static 'media/svg/icons/logout.svg' %}" /></a>
+                        <span class="nav-link-text">Log out</span>
+                    </div>
                 {% endif %}
             </div>
             {% if current_user == None %}
