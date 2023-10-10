@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',   
     'backend',
-    # 'livereload',
 ]
 
 MIDDLEWARE = [
@@ -67,22 +66,22 @@ WSGI_APPLICATION = 'FindMyNotes.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db_backup.sqlite3'
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'findmynotes',
-        'USER':'fmn',
-        'PASSWORD':os.getenv('fmn_college_mysql_password'),
-        'HOST':os.getenv('fmn_college_mysql_host'),
-        'PORT':os.getenv('fmn_college_mysql_port'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db_backup.sqlite3'
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'findmynotes',
+#         'USER':'fmn',
+#         'PASSWORD':os.getenv('fmn_college_mysql_password'),
+#         'HOST':os.getenv('fmn_college_mysql_host'),
+#         'PORT':os.getenv('fmn_college_mysql_port'),
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -117,12 +116,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    'static',
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+#     'static',
+# ]
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/files/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'files/')
